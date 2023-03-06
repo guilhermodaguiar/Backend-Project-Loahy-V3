@@ -12,12 +12,22 @@ public class User {
     @Id
     @Column(nullable = false, unique = true)
     private String userEmail;
-
-    @Column(nullable = false)
+    @Column(nullable = false, length = 40)
     private String password;
+    @Column(nullable = false)
+    private  Long id;
+    @Column
+    private String firstName;
+    @Column
+    private String lastName;
 
-    @OneToOne
-    Customer customer;
+    @Column
+    private boolean enabled = true;
+
+    @Column
+    private  String apikey;
+
+
 
     @OneToMany(
             targetEntity = Authority.class,
@@ -30,21 +40,6 @@ public class User {
     @OneToOne
     Wishlist wishlist;
 
-
-
-    public User(String userEmail, String password, Customer customer, Set<Authority> authorities,
-                Wishlist wishlist) {
-        this.userEmail = userEmail;
-        this.password = password;
-        this.customer = customer;
-        this.authorities = authorities;
-        this.wishlist = wishlist;
-    }
-
-    public User() {
-
-    }
-
     public String getUserEmail() {
         return userEmail;
     }
@@ -53,27 +48,34 @@ public class User {
         this.userEmail = userEmail;
     }
 
-    public String getUserPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.password = userPassword;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
 
     public Set<Authority> getAuthorities() {
         return authorities;
     }
-
-    public void addAuthority(Authority authority) {
-        this.authorities.add(authority);
-    }
-
-    public void removeAuthority(Authority authority) {
-        this.authorities.remove(authority);
-    }
-
 
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
@@ -87,21 +89,37 @@ public class User {
         this.wishlist = wishlist;
     }
 
-
-    public String getPassword() {
-        return password;
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public String getApikey() {
+        return apikey;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setApikey(String apikey) {
+        this.apikey = apikey;
+    }
+
+
+    public void addAuthority(Authority authority) {
+        this.authorities.add(authority);
+    }
+
+    public void removeAuthority(Authority authority) {
+        this.authorities.remove(authority);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
 

@@ -3,6 +3,7 @@ package nl.novi.loahy_v3.services;
 
 import nl.novi.loahy_v3.dtos.ProductDto;
 import nl.novi.loahy_v3.dtos.ProductInputDto;
+import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
 import nl.novi.loahy_v3.models.FileUploadResponse;
 import nl.novi.loahy_v3.models.Product;
 import nl.novi.loahy_v3.repositories.FileUploadRepository;
@@ -44,7 +45,7 @@ public class ProductService {
         if (product.isPresent()) {
             productDto = transferToDto(product.get());
         } else {
-            throw new ProductNotFoundException(productId);
+            throw new RecordNotFoundException("Product niet gevonden");
         }
         return productDto;
     }
@@ -71,7 +72,7 @@ public class ProductService {
 
             return transferToDto(product1);
         } else {
-            throw new ProductNotFoundException(productId);
+            throw new RecordNotFoundException("Product niet gevonden");
         }
     }
 

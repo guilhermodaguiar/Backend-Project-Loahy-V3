@@ -1,7 +1,7 @@
 package nl.novi.loahy_v3.controllers;
 
 import nl.novi.loahy_v3.dtos.OrderDto;
-import nl.novi.loahy_v3.dtos.OrderDtoInput;
+import nl.novi.loahy_v3.dtos.OrderInputDto;
 import nl.novi.loahy_v3.models.Order;
 import nl.novi.loahy_v3.services.OrderService;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +23,7 @@ public class OrderController {
     }
 
 
-    @GetMapping("/all")
+    @GetMapping(value = "/all")
     public List<OrderDto> getDeliveryRequests() {
 
         var dtos = new ArrayList<OrderDto>();
@@ -39,8 +39,8 @@ public class OrderController {
 
 
 
-    @PostMapping("/create")
-    public Order createOrder(@RequestBody OrderDtoInput dto){
+    @PostMapping(value = "/create")
+    public Order createOrder(@RequestBody OrderInputDto dto){
 
         return orderService.createOrder(dto);
     }

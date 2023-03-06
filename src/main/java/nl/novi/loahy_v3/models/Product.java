@@ -26,15 +26,15 @@ public class Product {
             }
     )
     @Column(name = "product_id")
-    private Integer productId;
+    public Integer productId;
     @Column(name = "product_name")
-    private String productName;
+    public String productName;
     @Column(name = "product_description",
             columnDefinition = "TEXT")
     @Size(max = 150)
-    private String productDescription;
+    public String productDescription;
     @Column(name = "product_price")
-    private Double productPrice;
+    public Double productPrice;
 
     @OneToOne
     FileUploadResponse image;
@@ -43,22 +43,6 @@ public class Product {
     @JsonIgnore
     List<WishlistProduct> wishlistProducts;
 
-
-    public Product(
-            Integer productId,
-            String productName,
-            String productDescription,
-            Double productPrice, FileUploadResponse image) {
-        this.productId = productId;
-        this.productName = productName;
-        this.productDescription = productDescription;
-        this.productPrice = productPrice;
-        this.image = image;
-    }
-
-    public Product() {
-
-    }
 
 
     public Integer getProductId() {

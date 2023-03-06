@@ -1,15 +1,17 @@
 package nl.novi.loahy_v3.dtos;
 
-import nl.novi.loahy_v3.models.Order;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-import java.util.Map;
+import java.util.List;
 
-public class OrderDto {
-    private Integer id;
 
-    private Map<Integer, String> productList;
+public class OrderInputDto {
 
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+    private List<Integer> productList;
     private String comment;
+
+    private Long customer;
 
     private String orderDate;
 
@@ -21,45 +23,28 @@ public class OrderDto {
     public Long phone;
 
 
-
-
-    public static OrderDto fromOrder(Order order) {
-
-        var dto = new OrderDto();
-
-        dto.setId(order.getId());
-
-        dto.setProductList(order.getProductList());
-
-        dto.setComment(order.getComment());
-
-        dto.setOrderDate(order.getOrderDate());
-
-        return dto;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Map<Integer, String> getProductList() {
+    public List<Integer> getProductList() {
         return productList;
-    }
-
-    public void setProductList(Map<Integer, String> productList) {
-        this.productList = productList;
     }
 
     public String getComment() {
         return comment;
     }
 
+    public Long getCustomer() {
+        return customer;
+    }
+
+    public void setProductList(List<Integer> productList) {
+        this.productList = productList;
+    }
+
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public void setCustomer(Long customer) {
+        this.customer = customer;
     }
 
     public String getOrderDate() {

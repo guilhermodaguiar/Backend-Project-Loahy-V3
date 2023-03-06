@@ -31,15 +31,6 @@ public class ContactRemarkController {
         return ResponseEntity.ok().body(contactRemarkDtos);
     }
 
-    @GetMapping(value = "/{contactEmail}")
-    public ResponseEntity<ContactRemarkDto> getContact(@PathVariable("contactEmail") String contactEmail) {
-
-        ContactRemarkDto optionalContact = contactRemarkService.getContactByEmail(contactEmail);
-
-
-        return ResponseEntity.ok().body(optionalContact);
-
-    }
 
     @PostMapping(value = "/create")
     public ResponseEntity<ContactRemarkDto> createRemark(@RequestBody ContactRemarkDto contactRemarkDto) {
@@ -53,8 +44,8 @@ public class ContactRemarkController {
     }
 
 
-    @DeleteMapping(value = "/delete/{contact_email}")
-    public ResponseEntity<ContactRemarkDto> deleteContact(@PathVariable("contact_email") String contactEmail) {
+    @DeleteMapping(value = "/delete/{email}")
+    public ResponseEntity<ContactRemarkDto> deleteContact(@PathVariable("email") String contactEmail) {
         contactRemarkService.deleteContact(contactEmail);
         return ResponseEntity.noContent().build();
     }

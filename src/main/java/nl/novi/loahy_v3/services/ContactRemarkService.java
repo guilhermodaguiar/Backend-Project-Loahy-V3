@@ -31,19 +31,6 @@ public class ContactRemarkService {
     }
 
 
-    public ContactRemarkDto getContactByEmail(String contactEmail) {
-        new ContactRemarkDto();
-        ContactRemarkDto contactRemarkDto;
-        Optional<ContactRemark> contact = contactRemarkRepository.findById(contactEmail);
-        if (contact.isPresent()) {
-            contactRemarkDto = fromContact(contact.get());
-        } else {
-            throw new ContactNotFoundException(contactEmail);
-        }
-        return contactRemarkDto;
-    }
-
-
     public String createRemark(ContactRemarkDto contactRemarkDto) {
         ContactRemark newContactRemark = contactRemarkRepository.save(toContact(contactRemarkDto));
         return newContactRemark.getContactName();

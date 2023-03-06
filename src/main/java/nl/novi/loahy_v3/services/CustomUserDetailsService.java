@@ -26,7 +26,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userEmail) {
-        UserDto userDto = userService.getUserByUserEmail(userEmail);
+        UserDto userDto = userService.getUser(userEmail);
 
         String password = userDto.getUserPassword();
 

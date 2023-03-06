@@ -2,6 +2,7 @@ package nl.novi.loahy_v3.services;
 
 
 import nl.novi.loahy_v3.dtos.WishlistDto;
+import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
 import nl.novi.loahy_v3.models.Wishlist;
 import nl.novi.loahy_v3.repositories.WishlistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,7 @@ public class WishlistService {
 
             return transferToWishlistDto(wishlist1);
         } else {
-            throw new WishlistNotFoundException(wishlistId);
+            throw new RecordNotFoundException("wishlist id niet gevonden");
         }
     }
 

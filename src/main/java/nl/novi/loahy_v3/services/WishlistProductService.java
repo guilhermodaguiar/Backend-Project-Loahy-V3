@@ -2,6 +2,7 @@ package nl.novi.loahy_v3.services;
 
 import nl.novi.loahy_v3.dtos.ProductDto;
 import nl.novi.loahy_v3.dtos.WishlistDto;
+import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
 import nl.novi.loahy_v3.models.Product;
 import nl.novi.loahy_v3.models.Wishlist;
 import nl.novi.loahy_v3.models.WishlistProduct;
@@ -68,11 +69,11 @@ public class WishlistProductService {
     public WishlistProductKey addWishlistProduct(Integer wishlistId, Integer productId) {
         var wishlistProduct = new WishlistProduct();
         if (!wishlistRepository.existsById(wishlistId)) {
-            throw new WishlistNotFoundException(wishlistId);
+            throw new RecordNotFoundException("wishlist id niet gevonden");
         }
         Wishlist wishlist = wishlistRepository.findById(wishlistId).orElse(null);
         if (!productRepository.existsById(productId)) {
-            throw new ProductNotFoundException(productId);
+            throw new RecordNotFoundException("product id niet gevonden");
         }
         Product product = productRepository.findById(productId).orElse(null);
         wishlistProduct.setWishlist(wishlist);

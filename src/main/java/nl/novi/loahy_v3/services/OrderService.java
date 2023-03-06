@@ -1,9 +1,8 @@
 package nl.novi.loahy_v3.services;
 
-import nl.novi.loahy_v3.dtos.OrderDtoInput;
+import nl.novi.loahy_v3.dtos.OrderInputDto;
 import nl.novi.loahy_v3.models.Order;
 import nl.novi.loahy_v3.models.Product;
-import nl.novi.loahy_v3.repositories.CustomerRepository;
 import nl.novi.loahy_v3.repositories.OrderRepository;
 import nl.novi.loahy_v3.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
@@ -20,15 +19,13 @@ import java.util.Optional;
 @CrossOrigin
 public class OrderService {
 
-    private final CustomerRepository customerRepository;
+
     private final OrderRepository orderRepository;
     private final ProductRepository productRepository;
 
 
-    public OrderService(CustomerRepository customerRepository,
-                        OrderRepository orderRepository,
+    public OrderService(OrderRepository orderRepository,
                         ProductRepository productRepository) {
-        this.customerRepository = customerRepository;
         this.orderRepository = orderRepository;
         this.productRepository = productRepository;
     }
@@ -40,11 +37,11 @@ public class OrderService {
 
 
 
-    public Order createOrder(OrderDtoInput orderDtoInput) {
+    public Order createOrder(OrderInputDto orderInputDto) {
         Order order = new Order();
 
         Map<Integer, String> productList2 = new HashMap<>();
-        List<Integer> productListLong = orderDtoInput.getProductList();
+        List<Integer> productListLong = orderInputDto.getProductList();
 
         for (Integer productId : productListLong) {
             Optional<Product> optional = productRepository.findById(productId);
@@ -67,9 +64,14 @@ public class OrderService {
             }
         }
         order.setProductList(productList2);
-        order.setComment(orderDtoInput.getComment());
-        order.setCustomer(customerRepository.getReferenceById(orderDtoInput.getCustomer()));
-        order.setOrderDate(orderDtoInput.getOrderDate());
+        order.setComment(orderInputDto.getComment());
+        order.setOrderDate(orderInputDto.getOrderDate());
+        order.setStreetName(orderInputDto.getStreetName());
+        order.setHouseNumber(orderInputDto.getHouseNumber());
+        order.setHouseNumberAddition(orderInputDto.getHouseNumberAddition());
+        order.setZipcode(orderInputDto.getZipcode());
+        order.setCity(orderInputDto.getCity());
+        order.setPhone(orderInputDto.getPhone());
 
         return orderRepository.save(order);
     }

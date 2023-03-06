@@ -1,35 +1,23 @@
 package nl.novi.loahy_v3.controllers;
 
-import nl.novi.loahy_v3.dtos.CustomerDto;
 import nl.novi.loahy_v3.dtos.UserDto;
-import nl.novi.loahy_v3.dtos.WishlistDto;
 import nl.novi.loahy_v3.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Objects;
 
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
 
+    @Autowired
+    private UserService userService;
 
-    private final UserService userService;
-
-    private final CustomerController customerController;
-
-    private final WishlistController wishlistController;
-
-
-    public UserController(UserService userService, CustomerController customerController, WishlistController wishlistController) {
-        this.userService = userService;
-        this.customerController = customerController;
-        this.wishlistController = wishlistController;
-    }
 
     @GetMapping(value = "/all")
     public ResponseEntity<List<UserDto>> getAllUsers() {
@@ -39,10 +27,10 @@ public class UserController {
         return ResponseEntity.ok().body(userDtos);
     }
 
-    @GetMapping(value = "/{user_email}")
-    public ResponseEntity<UserDto> getUserByUserEmail(@PathVariable("user_email") String userEmail) {
+    @GetMapping(value = "/{email}")
+    public ResponseEntity<UserDto> getUserByUserEmail(@PathVariable("email") String userEmail) {
 
-        UserDto optionalUser = userService.getUserByUserEmail(userEmail);
+        UserDto optionalUser = userService.getUser(userEmail);
 
         return ResponseEntity.ok().body(optionalUser);
     }
@@ -53,7 +41,7 @@ public class UserController {
         String newUserEmail = userService.createUser(userDto);
         userService.addAuthority(newUserEmail, "ROLE_USER");
 
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{user-email}/")
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{email}")
                 .buildAndExpand(newUserEmail).toUri();
 
         return ResponseEntity
@@ -61,8 +49,8 @@ public class UserController {
                 .build();
     }
 
-    @PutMapping(value = "/{user_email}")
-    public ResponseEntity<UserDto> updateUser(@PathVariable("user_email") String userEmail, @RequestBody UserDto userDto) {
+    @PutMapping(value = "/{email}")
+    public ResponseEntity<Object> updateUser(@PathVariable("email") String userEmail, @RequestBody UserDto userDto) {
 
         userService.updateUser(userEmail, userDto);
 
@@ -70,39 +58,9 @@ public class UserController {
 
     }
 
-    @DeleteMapping(value = "/delete/{user_email}")
-    public ResponseEntity<UserDto> deleteUser(@PathVariable("user_email") String userEmail) {
+    @DeleteMapping(value = "/delete/{email}")
+    public ResponseEntity<Object> deleteUser(@PathVariable("email") String userEmail) {
         userService.deleteUser(userEmail);
         return ResponseEntity.noContent().build();
     }
-
-    @PutMapping("/{user_email}/{customerId}")
-    public void assignCustomerToUser(@PathVariable("user_email") String userEmail,
-                                   @PathVariable("customerId") Long customerId) {
-
-        userService.assignCustomerToUser(customerId, userEmail);
-
-    }
-
-    @PostMapping("/{user_email}/customer")
-    public void registerCustomerToUser(@PathVariable("user_email") String userEmail,
-                                     @RequestBody CustomerDto Dto) {
-
-        ResponseEntity <CustomerDto> customerData = customerController.createCustomer(Dto);
-
-        assert customerData != null;
-        userService.registerCustomerToUser(Objects.requireNonNull(customerData.getBody()).getCustomerId(), userEmail);
-    }
-
-    @PostMapping("/{user_email}/wishlist")
-    public void addWishlistToUser(@PathVariable("user_email") String userEmail,
-                                       @RequestBody WishlistDto Dto) {
-
-        ResponseEntity <WishlistDto> wishlistData = wishlistController.createWishlist(Dto);
-
-
-        assert wishlistData != null;
-        userService.addWishlistToUser(Objects.requireNonNull(wishlistData.getBody()).getWishlistId(), userEmail);
-    }
-
 }

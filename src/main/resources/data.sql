@@ -33,11 +33,6 @@ INSERT INTO wishlist_product(wishlist_id, product_id) VALUES (201, 1002);
 INSERT INTO wishlist_product(wishlist_id, product_id) VALUES (201, 1005);
 
 
-INSERT INTO users (user_email, password, customer_customer_id, wishlist_wishlist_id) VALUES ('user@test.nl', '$2a$12$mSHdrr1Gpif3Ys2mPnKeaekLH6ub.HhAkM52Pls2hupHhhwiWMgmi', 5001, 200);
-INSERT INTO users (user_email, password, customer_customer_id, wishlist_wishlist_id) VALUES ('admin@test.nl', '$2a$12$kFPBcSnUNJ/Ojs.m8ko//uV44D0ZhGUyOZQVzux36l5y8JFJLXOdG', 5002, 201);
-INSERT INTO users (user_email, password, customer_customer_id) VALUES ('jenfromlomok@test.nl', '$2a$12$BmMv.oCR96Hcw81S7yoW/uNPBGPADmdBI45EZS6I1tlq3FwTv3Ncu', 5003);
-INSERT INTO users (user_email, password, customer_customer_id) VALUES ('Guilfromlombok@test.nl', '$2a$12$v8obCBMrcCq6s9qBRAUEZuWAK9oSWSn1JzceR7/BWt3UnN643QMOW', 5004);
-
 INSERT INTO authorities (user_email, authority) VALUES ('user@test.nl', 'ROLE_USER');
 INSERT INTO authorities (user_email, authority) VALUES ('jenfromlombok@test.nl', 'ROLE_USER');
 INSERT INTO authorities (user_email, authority) VALUES ('admin@test.nl', 'ROLE_ADMIN');
