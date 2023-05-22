@@ -1,6 +1,5 @@
 package nl.novi.loahy_v3.services;
 
-import nl.novi.loahy_v3.controllers.CompanyInfoController;
 import nl.novi.loahy_v3.dtos.CompanyInfoDto;
 import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
 import nl.novi.loahy_v3.models.CompanyInfo;
@@ -27,12 +26,13 @@ public class CompanyInfoService {
         }
     }
 
+
     public void updateCompanyInfo(String name, CompanyInfoDto companyInfoDto) {
         if(!companyInfoRepository.existsById(name)) {
             throw new RecordNotFoundException("No company information found");
         }
         CompanyInfo storeInformation = companyInfoRepository.findCompanyInfoByName(name).orElse(null);
-        storeInformation.setInformation(companyInfoDto.getCompanyInfo());
+        storeInformation.setInformation(companyInfoDto.getInformation());
         companyInfoRepository.save(storeInformation);
     }
 
@@ -40,10 +40,9 @@ public class CompanyInfoService {
         var dto = new CompanyInfoDto();
 
         dto.name = companyInfo.getName();
-        dto.companyInfo = companyInfo.getInformation();
+        dto.information = companyInfo.getInformation();
 
         return dto;
     }
-
 
 }

@@ -4,7 +4,7 @@ public class CompanyInfoDto {
 
     public String name;
 
-    public String companyInfo;
+    public String information;
 
     public CompanyInfoDto() {
 
@@ -18,11 +18,11 @@ public class CompanyInfoDto {
         this.name = name;
     }
 
-    public String getCompanyInfo() {
-        return companyInfo;
+    public String getInformation() {
+        return information;
     }
 
-    public void setCompanyInfo(String companyInfo) {
-        this.companyInfo = companyInfo;
+    public void setInformation(String information) {
+        this.information = information;
     }
 }
