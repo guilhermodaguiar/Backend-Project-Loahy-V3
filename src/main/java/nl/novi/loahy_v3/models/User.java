@@ -10,22 +10,25 @@ import java.util.Set;
 public class User {
 
     @Id
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false,
+            unique = true)
     private String userEmail;
+
     @Column(nullable = false, length = 40)
     private String password;
+
     @Column(nullable = false)
     private  Long id;
+
     @Column
     private String firstName;
+
     @Column
     private String lastName;
 
     @Column
     private boolean enabled = true;
 
-    @Column
-    private  String apikey;
 
 
 
@@ -95,14 +98,6 @@ public class User {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
-    }
-
-    public String getApikey() {
-        return apikey;
-    }
-
-    public void setApikey(String apikey) {
-        this.apikey = apikey;
     }
 
 

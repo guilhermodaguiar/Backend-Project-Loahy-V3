@@ -26,14 +26,30 @@ public class Wishlist {
     @Column(nullable = false, unique = true)
     private Integer wishlistId;
 
-    @Column
-    private String wishlistName;
+    @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
+    @JoinColumn(nullable = false, name = "user_id")
+    private User user;
 
 
-    @OneToMany(mappedBy = "wishlist")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @JsonIgnore
-    Collection<WishlistProduct> wishlistProducts;
+    @ManyToOne()
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
     public Integer getWishlistId() {
         return wishlistId;
@@ -43,21 +59,4 @@ public class Wishlist {
         this.wishlistId = wishlistId;
     }
 
-
-    public Collection<WishlistProduct> getWishlistProducts() {
-        return wishlistProducts;
-    }
-
-    public void setWishlistProducts(Collection<WishlistProduct> wishlistProducts) {
-        this.wishlistProducts = wishlistProducts;
-    }
-
-
-    public String getWishlistName() {
-        return wishlistName;
-    }
-
-    public void setWishlistName(String wishlistName) {
-        this.wishlistName = wishlistName;
-    }
 }

@@ -39,9 +39,9 @@ public class Product {
     @OneToOne
     FileUploadResponse image;
 
-    @OneToMany(mappedBy = "wishlist")
+    @OneToMany(mappedBy = "wishlist", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
-    List<WishlistProduct> wishlistProducts;
+    private List<WishlistProduct> wishlistProducts;
 
 
 
@@ -93,6 +93,9 @@ public class Product {
 
     public void setWishlistProducts(List<WishlistProduct> wishlistProducts) {
         this.wishlistProducts = wishlistProducts;
+    }
+
+    public void setImage() {
     }
 }
 

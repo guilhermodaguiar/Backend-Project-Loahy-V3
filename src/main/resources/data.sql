@@ -11,8 +11,8 @@ INSERT INTO customer (customer_id, customer_first_name, customer_last_name, cust
 INSERT INTO customer (customer_id, customer_first_name, customer_last_name, customer_street_name, customer_house_number, customer_house_number_addition, customer_city, customer_zipcode, customer_phone) VALUES (5004, 'Guil', 'Dag', 'Balitraat', '200', 'bis', 'Utrecht', '1244DD', 0644355490);
 
 
-INSERT INTO wishlists(wishlist_id, wishlist_name) VALUES (200, 'Wishlist van User');
-INSERT INTO wishlists(wishlist_id, wishlist_name) VALUES (201, 'Mijn Hippe Wishlist');
+INSERT INTO wishlists(wishlist_id) VALUES (200);
+INSERT INTO wishlists(wishlist_id) VALUES (201);
 
 
 INSERT INTO products (product_id, product_name, product_description, product_price, image_file_name) VALUES (1000, 'Brikkon - Stad', 'Met de Brikkon World stad bouw je een prachtige stad van hout.', 64.95, 'Brikkon_stad.jpg');

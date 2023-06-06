@@ -88,9 +88,4 @@ public class ProductController {
         productService.assignImageToProduct(productImage.getFileName(), productId);
     }
 
-    @GetMapping(value = "/wishlists/{productId}")
-    public Collection<WishlistDto> getWishlistsByProductId(@PathVariable("productId") Integer productId){
-        return wishlistProductService.getWishlistProductsByProductId(productId);
-    }
-
 }

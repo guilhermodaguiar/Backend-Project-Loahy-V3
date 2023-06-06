@@ -7,8 +7,6 @@ public class WishlistDto {
 
     public Integer wishlistId;
 
-    public String wishlistName;
-
     public ProductDto productDto;
 
     public WishlistProduct wishlistProduct;
@@ -19,7 +17,6 @@ public class WishlistDto {
         var wishlistDto = new WishlistDto();
 
         wishlistDto.wishlistId = wishlist.getWishlistId();
-        wishlistDto.wishlistName = wishlist.getWishlistName();
 
 
         return wishlistDto;
@@ -40,14 +37,6 @@ public class WishlistDto {
 
     public void setProductDto(ProductDto productDto) {
         this.productDto = productDto;
-    }
-
-    public String getWishlistName() {
-        return wishlistName;
-    }
-
-    public void setWishlistName(String wishlistName) {
-        this.wishlistName = wishlistName;
     }
 
     public WishlistProduct getWishlistProduct() {

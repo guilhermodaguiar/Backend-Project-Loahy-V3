@@ -38,7 +38,6 @@ public class WishlistService {
             Wishlist wishlist = wishlistRepository.findById(wishlistId).get();
 
             Wishlist wishlist1 = transferToWishlist(wishlistDto);
-            wishlist1.setWishlistName(wishlist.getWishlistName());
 
             wishlistRepository.save(wishlist1);
 
@@ -60,7 +59,6 @@ public class WishlistService {
         var wishlist = new Wishlist();
 
         wishlist.setWishlistId(Dto.getWishlistId());
-        wishlist.setWishlistName(Dto.getWishlistName());
         return wishlist;
     }
 

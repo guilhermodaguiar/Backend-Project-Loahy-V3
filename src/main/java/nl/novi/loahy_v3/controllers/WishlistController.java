@@ -2,6 +2,7 @@ package nl.novi.loahy_v3.controllers;
 
 import nl.novi.loahy_v3.dtos.ProductDto;
 import nl.novi.loahy_v3.dtos.WishlistDto;
+import nl.novi.loahy_v3.models.Product;
 import nl.novi.loahy_v3.services.WishlistProductService;
 import nl.novi.loahy_v3.services.WishlistService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +46,11 @@ public class WishlistController {
     }
 
 
+    //what is this?
+    //kan gebruikt worden bij op toe zoeken welk producten in een wishlistId behoren.
     @GetMapping("/products/{wishlistId}")
     public Collection<ProductDto> getProductsByWishlistId(@PathVariable("wishlistId") Integer wishlistId) {
         return wishlistProductService.getWishlistProductsByWishlistId(wishlistId);
     }
+
 }
