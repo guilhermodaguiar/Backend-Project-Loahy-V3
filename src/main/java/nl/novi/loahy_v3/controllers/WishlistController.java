@@ -29,9 +29,9 @@ public class WishlistController {
 
     //hier moet een get request komen om alle producten te krijgen dat is opgeslagen in een bepaalde wishlist.
 
-    @GetMapping("/products/{wishlistId}")
-    public Collection<ProductDto> getProductsByWishlistId(@PathVariable("wishlistId") Integer wishlistId) {
-        return wishlistService.getWishlistProductsByWishlistId(wishlistId);
-    }
+//    @GetMapping("/products/{wishlistId}")
+//    public Collection<ProductDto> getProductsByWishlistId(@PathVariable("wishlistId") Integer wishlistId) {
+//        return wishlistService.getWishlistProductsByWishlistId(wishlistId);
+//    }
 
 }
