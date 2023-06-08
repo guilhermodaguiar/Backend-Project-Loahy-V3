@@ -39,10 +39,9 @@ public class Product {
     @OneToOne
     FileUploadResponse image;
 
-    @OneToMany(mappedBy = "wishlist", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
-    private List<WishlistProduct> wishlistProducts;
-
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name ="wishlist_id")
+    Wishlist wishlist;
 
 
     public Integer getProductId() {
@@ -86,16 +85,11 @@ public class Product {
         this.image = image;
     }
 
-
-    public List<WishlistProduct> getWishlistProducts() {
-        return wishlistProducts;
-    }
-
-    public void setWishlistProducts(List<WishlistProduct> wishlistProducts) {
-        this.wishlistProducts = wishlistProducts;
-    }
-
     public void setImage() {
+    }
+
+    public void setWishlist(Wishlist wishlist) {
+        this.wishlist = wishlist;
     }
 }
 

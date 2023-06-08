@@ -46,7 +46,6 @@ class UserControllerTest {
         userDto.setPassword("test123!");
 
         userDto.setEnabled(true);
-        userDto.setApikey("test");
         userDto.setFirstName("test");
         userDto.setLastName("test");
 
@@ -64,7 +63,6 @@ class UserControllerTest {
         userDto.setPassword("test123!");
 
         userDto.setEnabled(true);
-        userDto.setApikey("test");
         userDto.setFirstName("test");
         userDto.setLastName("test");
 
@@ -83,7 +81,6 @@ class UserControllerTest {
         userDto.setPassword("test123!");
 
         userDto.setEnabled(true);
-        userDto.setApikey("test");
 
         userDto.setFirstName("Guily");
         userDto.setLastName("Dagi");
@@ -98,7 +95,6 @@ class UserControllerTest {
         assertEquals("test123!", result.password);
 
         assertEquals(true, result.enabled);
-        assertEquals("test", result.apikey);
 
         assertEquals("true", result.userEmail);
         assertEquals("Guily", result.firstName);

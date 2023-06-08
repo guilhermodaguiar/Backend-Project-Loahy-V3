@@ -1,18 +1,22 @@
 package nl.novi.loahy_v3.services;
 
 
+import nl.novi.loahy_v3.dtos.ProductDto;
 import nl.novi.loahy_v3.dtos.WishlistDto;
-import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
+import nl.novi.loahy_v3.models.Product;
 import nl.novi.loahy_v3.models.Wishlist;
 import nl.novi.loahy_v3.repositories.WishlistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import static nl.novi.loahy_v3.dtos.WishlistDto.transferToWishlistDto;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
 
 @Service
 public class WishlistService {
-    
+
     private final WishlistRepository wishlistRepository;
 
 
@@ -22,44 +26,24 @@ public class WishlistService {
     }
 
 
-
-    public WishlistDto createWishlist(WishlistDto wishlistDto) {
-
-
-        Wishlist newWishlist =  transferToWishlist(wishlistDto);
-        wishlistRepository.save(newWishlist);
-        return transferToWishlistDto(newWishlist);
+    public Wishlist saveWishlist(Wishlist wishlist) {
+        return wishlistRepository.save(wishlist);
     }
 
-
-    public WishlistDto updateWishlist(Integer wishlistId, WishlistDto wishlistDto) {
-        if (wishlistRepository.findById(wishlistId).isPresent()) {
-
-            Wishlist wishlist = wishlistRepository.findById(wishlistId).get();
-
-            Wishlist wishlist1 = transferToWishlist(wishlistDto);
-
-            wishlistRepository.save(wishlist1);
-
-            return transferToWishlistDto(wishlist1);
-        } else {
-            throw new RecordNotFoundException("wishlist id niet gevonden");
-        }
+    public WishlistDto addWishlist(WishlistDto wishlistDto) {
+        wishlistRepository.save(transferToWishlist(wishlistDto));
+        return wishlistDto;
     }
 
-    public void deleteWishlistById( Integer wishlistId) {
+    // hier moet een getProductsByWishlistId komen te staan.
+    //liefs als een list of een collection.
+    //findWishlistId.
 
-        wishlistRepository.deleteById(wishlistId);
-    }
+    public Wishlist transferToWishlist(WishlistDto dto) {
+        Wishlist wishlist = new Wishlist();
 
+        wishlist.setWishlistId(dto.getWishlistId());
 
-
-    public Wishlist transferToWishlist(WishlistDto Dto) {
-
-        var wishlist = new Wishlist();
-
-        wishlist.setWishlistId(Dto.getWishlistId());
         return wishlist;
     }
-
 }

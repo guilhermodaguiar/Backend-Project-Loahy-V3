@@ -3,11 +3,9 @@ package nl.novi.loahy_v3.dtos;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.novi.loahy_v3.models.Authority;
-import nl.novi.loahy_v3.models.User;
+import nl.novi.loahy_v3.models.Customer;
 import nl.novi.loahy_v3.models.Wishlist;
 
-
-import javax.persistence.Column;
 import java.util.Set;
 
 
@@ -15,19 +13,18 @@ public class UserDto {
 
     public String userEmail;
     public String password;
+    public Long userId;
     public Boolean enabled;
-    public String apikey;
-
     public String firstName;
     public String lastName;
 
-
-
+    @JsonSerialize
+    public Customer customer;
 
     @JsonDeserialize
     public Wishlist wishlist;
 
-    @JsonSerialize
+    @JsonDeserialize
     public Set<Authority> authorities;
 
 
@@ -55,13 +52,6 @@ public class UserDto {
         this.userEmail = userEmail;
     }
 
-    public Wishlist getWishlist() {
-        return wishlist;
-    }
-
-    public void setWishlist(Wishlist wishlist) {
-        this.wishlist = wishlist;
-    }
 
     public String getPassword() {
         return password;
@@ -79,13 +69,6 @@ public class UserDto {
         this.enabled = enabled;
     }
 
-    public String getApikey() {
-        return apikey;
-    }
-
-    public void setApikey(String apikey) {
-        this.apikey = apikey;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -101,5 +84,29 @@ public class UserDto {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Wishlist getWishlist() {
+        return wishlist;
+    }
+
+    public void setWishlist(Wishlist wishlist) {
+        this.wishlist = wishlist;
     }
 }

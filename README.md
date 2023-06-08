@@ -44,7 +44,8 @@ Hier zijn alle gebruikte controller layers:
 - ProductController
 - ShoppingCartController/ShoppingCartProductController
 - UserController
-- WishlistController/WishlistProductController
+- WishlistController
+- WishlistProductController
 
 ### Dtos
 - AboutBrandDto/AboutBrandInputDto
@@ -56,14 +57,11 @@ Hier zijn alle gebruikte controller layers:
 - WishlistDto
 
 ### Exceptions
-- AboutBrandNotFoundException
 - BadRequestException
-- ContactNotFoundException
-- OrderNotFoundException
-- ProductNotFoundException
-- ShoppingCartNotFoundException
-- UserNotFoundException
-- WishlistNotFoundException
+- RecordNotFoundException
+- UserEmailNotFoundException
+- UserEmailAlreadyExistException
+
 
 ### Filter
 JwtRequestFilter wordt gebruikt om de authenticatie en de daarmee samenhangende autorisatie af te handelen voordat
@@ -80,7 +78,9 @@ de HTTP request bij de AuthenticationController binnenkomt.
 - ShoppingCartProduct/ShoppingCartKey
 - User
 - Wishlist
-- WishlistProduct/WishlistProductKey
+- WishlistProduct
+- WishlistProductKey
+
 
 ### Payload
 - AuthenticationRequest
@@ -93,10 +93,10 @@ de HTTP request bij de AuthenticationController binnenkomt.
 - OrderRepository
 - ProductRepository
 - ShoppingCartRepository
-- ShopppingCartProductRepository
+- ShoppingCartProductRepository
 - UserRepository
-- WishlistRepository
 - WishlistProductRepository
+- WishlistRepository
 
 ### Service
 
@@ -109,15 +109,14 @@ de HTTP request bij de AuthenticationController binnenkomt.
 - ShoppingCartService
 - ShoppingCartProductService
 - UserService
-- WishlistProductService
-- WishlistService
+
 
 ### Utils
 JwtUtil wordt gebruikt om een *JWT*-token te creëren.
 
 ## Gebruikers & Rollen
 De volgende gebruikers kunnen worden gebruikt om de applicatie te testen. In de database en **data.sql** bestand in de backend zijn nog andere users toegevoegd, maar één rol voor user is voor nu voldoende.
-Een eigen **account** kan gemaakt worden om producten toe te voegen aan een *wishlist* of aan een *shopping cart*.
+
 
 >#### ADMIN_ROLE
 > - gebruikersnaam: admin@test.nl

@@ -2,11 +2,10 @@ package nl.novi.loahy_v3.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.List;
+
 
 @Entity
 @Table(name = "wishlists" )
@@ -23,33 +22,15 @@ public class Wishlist {
                     @org.hibernate.annotations.Parameter(name = "increment_size", value = "1")
             }
     )
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private Integer wishlistId;
 
-    @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
-    @JoinColumn(nullable = false, name = "user_id")
-    private User user;
+    @OneToOne
+    User user;
 
-
-    @ManyToOne()
-    @JoinColumn(name = "product_id")
-    private Product product;
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
+    @OneToMany(mappedBy = "wishlist")
+    @JsonIgnore
+    List<Product> products;
 
     public Integer getWishlistId() {
         return wishlistId;
@@ -59,4 +40,19 @@ public class Wishlist {
         this.wishlistId = wishlistId;
     }
 
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

@@ -1,13 +1,15 @@
 package nl.novi.loahy_v3.services;
 
 import nl.novi.loahy_v3.dtos.UserDto;
+import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
 import nl.novi.loahy_v3.exceptions.UserEmailAlreadyExistException;
 import nl.novi.loahy_v3.exceptions.UserEmailNotFoundException;
 import nl.novi.loahy_v3.models.Authority;
+import nl.novi.loahy_v3.models.Customer;
 import nl.novi.loahy_v3.models.User;
 import nl.novi.loahy_v3.models.Wishlist;
+import nl.novi.loahy_v3.repositories.CustomerRepository;
 import nl.novi.loahy_v3.repositories.UserRepository;
-import nl.novi.loahy_v3.repositories.WishlistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,13 +28,20 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private WishlistRepository wishlistRepository;
+    private final CustomerRepository customerRepository;
+
+    @Autowired
+    private CustomerService customerService;
+
+    @Autowired
+    private WishlistService wishlistService;
 
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, WishlistRepository wishlistRepository) {
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, CustomerRepository customerRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
-        this.wishlistRepository = wishlistRepository;
+        this.customerRepository = customerRepository;
     }
 
     public List<UserDto> getAllUsers() {
@@ -67,9 +76,15 @@ public class UserService {
             throw new UserEmailAlreadyExistException("Username is al in gebruik!");
         }
         User newUser = userRepository.save(toUser(userDto));
-        newUser.getAuthorities().clear();
-        newUser.setId((long) ((getAllUsers().size()) + 1));
+
+        newUser.setUserId((long) ((getAllUsers().size()) + 1));
+        newUser.setUserEmail(userDto.getUserEmail());
         newUser.setPassword(passwordEncoder.encode(userDto.password));
+        newUser.setFirstName(userDto.getFirstName());
+        newUser.setLastName(userDto.getLastName());
+
+        newUser.setCustomer(customerService.saveCustomer(new Customer()));
+        newUser.setWishlist(wishlistService.saveWishlist(new Wishlist()));
 
         userRepository.save(newUser);
         return newUser.getUserEmail();
@@ -97,22 +112,22 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public void assignCustomerToUser(Long customerId, String userEmail) {
 
-    public void addWishlistToUser(Integer wishlistId, String userEmail) {
+        Optional<User> optionalUser = userRepository.findById(userEmail);
+        Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
 
-        Optional<User>optionalUser = userRepository.findUserByUserEmailIs(userEmail);
-        Optional<Wishlist> optionalWishlist = wishlistRepository.findByWishlistId(wishlistId);
-
-        if (optionalWishlist.isPresent() && optionalUser.isPresent()) {
+        if (optionalCustomer.isPresent() && optionalUser.isPresent()) {
             User user = optionalUser.get();
-            Wishlist wishlist = optionalWishlist.get();
+            Customer customer = optionalCustomer.get();
 
-            user.setWishlist(wishlist);
+            user.setCustomer(customer);
             userRepository.save(user);
         } else {
-            throw new UserEmailNotFoundException(userEmail);
+            throw new RecordNotFoundException();
         }
     }
+
 
     public static UserDto fromUser(User user){
 
@@ -121,12 +136,14 @@ public class UserService {
         dto.userEmail = user.getUserEmail();
         dto.password = user.getPassword();
         dto.enabled = user.isEnabled();
-        dto.apikey = user.getApikey();
-
         dto.authorities = user.getAuthorities();
+
         dto.firstName = user.getFirstName();
         dto.lastName = user.getLastName();
+        dto.userId = user.getUserId();
 
+        dto.customer = user.getCustomer();
+        dto.wishlist = user.getWishlist();
 
         return dto;
     }
@@ -138,13 +155,9 @@ public class UserService {
         user.setUserEmail(userDto.getUserEmail());
         user.setPassword(userDto.getPassword());
         user.setEnabled(userDto.getEnabled());
-        user.setApikey(userDto.getApikey());
-
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
 
-
         return user;
     }
-
 }

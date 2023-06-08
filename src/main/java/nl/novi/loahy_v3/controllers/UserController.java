@@ -63,4 +63,12 @@ public class UserController {
         userService.deleteUser(userEmail);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/{user_email}/{customerId}")
+    public void assignCustomerToUser(@PathVariable("user_email") String userEmail,
+                                     @PathVariable("customerId") Long customerId) {
+
+        userService.assignCustomerToUser(customerId, userEmail);
+
+    }
 }

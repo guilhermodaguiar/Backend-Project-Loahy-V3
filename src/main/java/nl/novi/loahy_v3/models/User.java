@@ -1,5 +1,7 @@
 package nl.novi.loahy_v3.models;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -8,17 +10,27 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class User {
-
     @Id
     @Column(nullable = false,
             unique = true)
     private String userEmail;
 
-    @Column(nullable = false, length = 40)
+    @Column(nullable = false,
+            unique = true)
     private String password;
 
     @Column(nullable = false)
-    private  Long id;
+    @GeneratedValue(generator = "sequence-generator")
+    @GenericGenerator(
+            name = "sequence-generator",
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "user_sequence"),
+                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "405"),
+                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "1")
+            }
+    )
+    private Long userId;
 
     @Column
     private String firstName;
@@ -29,7 +41,11 @@ public class User {
     @Column
     private boolean enabled = true;
 
+    @OneToOne
+    Customer customer;
 
+    @OneToOne
+    Wishlist wishlist;
 
 
     @OneToMany(
@@ -40,8 +56,6 @@ public class User {
             fetch = FetchType.EAGER)
     private Set<Authority> authorities = new HashSet<>();
 
-    @OneToOne
-    Wishlist wishlist;
 
     public String getUserEmail() {
         return userEmail;
@@ -84,13 +98,6 @@ public class User {
         this.authorities = authorities;
     }
 
-    public Wishlist getWishlist() {
-        return wishlist;
-    }
-
-    public void setWishlist(Wishlist wishlist) {
-        this.wishlist = wishlist;
-    }
 
     public boolean isEnabled() {
         return enabled;
@@ -109,12 +116,28 @@ public class User {
         this.authorities.remove(authority);
     }
 
-    public Long getId() {
-        return id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserId(Long id) {
+        this.userId = id;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Wishlist getWishlist() {
+        return wishlist;
+    }
+
+    public void setWishlist(Wishlist wishlist) {
+        this.wishlist = wishlist;
     }
 }
 

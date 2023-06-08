@@ -2,11 +2,8 @@ package nl.novi.loahy_v3.controllers;
 
 import nl.novi.loahy_v3.dtos.ProductDto;
 import nl.novi.loahy_v3.dtos.WishlistDto;
-import nl.novi.loahy_v3.models.Product;
-import nl.novi.loahy_v3.services.WishlistProductService;
 import nl.novi.loahy_v3.services.WishlistService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.hibernate.sql.Update;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -18,39 +15,23 @@ public class WishlistController {
 
     private final WishlistService wishlistService;
 
-    private final WishlistProductService wishlistProductService;
 
-    @Autowired
-    public WishlistController(WishlistService wishlistService, WishlistProductService wishlistProductService) {
+    public WishlistController(WishlistService wishlistService) {
         this.wishlistService = wishlistService;
-        this.wishlistProductService = wishlistProductService;
     }
 
 
 
-    @PostMapping(value = "/create")
-    public ResponseEntity<WishlistDto> createWishlist(@RequestBody WishlistDto dto) {
-        WishlistDto dto1 = wishlistService.createWishlist(dto);
-
-        return ResponseEntity.created(null).body((dto1));
+    @PostMapping(value = "/add-wishlist")
+    public WishlistDto addWishlist(@RequestBody WishlistDto dto) {
+        return wishlistService.addWishlist(dto);
     }
 
+    //hier moet een get request komen om alle producten te krijgen dat is opgeslagen in een bepaalde wishlist.
 
-
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Object> deleteWishlist(@PathVariable("id") Integer wishlistId) {
-
-        wishlistService.deleteWishlistById(wishlistId);
-
-        return ResponseEntity.noContent().build();
-    }
-
-
-    //what is this?
-    //kan gebruikt worden bij op toe zoeken welk producten in een wishlistId behoren.
     @GetMapping("/products/{wishlistId}")
     public Collection<ProductDto> getProductsByWishlistId(@PathVariable("wishlistId") Integer wishlistId) {
-        return wishlistProductService.getWishlistProductsByWishlistId(wishlistId);
+        return wishlistService.getWishlistProductsByWishlistId(wishlistId);
     }
 
 }

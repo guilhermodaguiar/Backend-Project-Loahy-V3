@@ -8,6 +8,7 @@ import nl.novi.loahy_v3.models.FileUploadResponse;
 import nl.novi.loahy_v3.models.Product;
 import nl.novi.loahy_v3.repositories.FileUploadRepository;
 import nl.novi.loahy_v3.repositories.ProductRepository;
+import nl.novi.loahy_v3.repositories.WishlistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,10 +24,13 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final FileUploadRepository uploadRepository;
 
+    private final WishlistRepository wishlistRepository;
+
     @Autowired
-    public ProductService(ProductRepository productRepository, FileUploadRepository uploadRepository) {
+    public ProductService(ProductRepository productRepository, FileUploadRepository uploadRepository, WishlistRepository wishlistRepository) {
         this.productRepository = productRepository;
         this.uploadRepository = uploadRepository;
+        this.wishlistRepository = wishlistRepository;
     }
 
     public List<ProductDto> getAllProducts() {
@@ -106,5 +110,19 @@ public class ProductService {
         return product;
     }
 
+    public void assignWishlistToProduct(Integer productId, Integer wishlistId) {
+        var optionalProduct = productRepository.findById(productId);
+        var optionalWishlist = wishlistRepository.findById(wishlistId);
+
+        if(optionalProduct.isPresent() && optionalWishlist.isPresent()) {
+            var product = optionalProduct.get();
+            var wishlist = optionalWishlist.get();
+
+            product.setWishlist(wishlist);
+            productRepository.save(product);
+        } else {
+            throw new RecordNotFoundException();
+        }
+    }
 }
 

@@ -3,17 +3,15 @@ package nl.novi.loahy_v3.controllers;
 
 import nl.novi.loahy_v3.dtos.ProductDto;
 import nl.novi.loahy_v3.dtos.ProductInputDto;
-import nl.novi.loahy_v3.dtos.WishlistDto;
+import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
 import nl.novi.loahy_v3.models.FileUploadResponse;
 import nl.novi.loahy_v3.services.ProductService;
-import nl.novi.loahy_v3.services.WishlistProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
-import java.util.Collection;
 import java.util.List;
 
 @CrossOrigin
@@ -25,17 +23,14 @@ public class ProductController {
     private final ProductService productService;
     private final ImageController imageController;
 
-    private final WishlistProductService wishlistProductService;
 
     @Autowired
-    public ProductController(ProductService productService, ImageController imageController,
-                             WishlistProductService wishlistProductService) {
+    public ProductController(ProductService productService, ImageController imageController) {
         this.productService = productService;
         this.imageController = imageController;
-        this.wishlistProductService = wishlistProductService;
     }
 
-    @GetMapping(value = "")
+    @GetMapping(value = "/all")
     @Transactional
     public ResponseEntity<List<ProductDto>> getAllProducts() {
 
@@ -86,6 +81,15 @@ public class ProductController {
         FileUploadResponse productImage = imageController.singleFileUpload(file);
 
         productService.assignImageToProduct(productImage.getFileName(), productId);
+    }
+
+    //assignProductsToWishlist
+    //hier moet een put request komen dat een list neemt van het aantal producten dat opgeslagen wordt.
+    //deze list moet naar de juiste wishlist gaan.
+
+    @PutMapping("/televisions/{id}/{wishlistId}")
+    public void assignWishlistToProduct(@PathVariable("id") Integer productId, @PathVariable("wishlistId") Integer wishlistId) {
+        productService.assignWishlistToProduct(productId, wishlistId);
     }
 
 }
