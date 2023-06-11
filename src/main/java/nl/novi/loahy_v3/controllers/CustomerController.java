@@ -57,12 +57,6 @@ public class CustomerController {
 
         return ResponseEntity.ok().body(customerDto);
     }
-
-
-    @DeleteMapping(value = "{id}")
-    public void deleteCustomer(@PathVariable("id") Long customerId) {
-        customerService.deleteCustomer(customerId);
-    }
 }
 
 

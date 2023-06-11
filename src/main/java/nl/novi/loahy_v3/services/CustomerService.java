@@ -45,9 +45,6 @@ public class CustomerService {
         return dto;
     }
 
-    public void deleteCustomer(Long customerId) {
-        customerRepository.deleteById(customerId);
-    }
 
     public Customer saveCustomer(Customer customer) {
         return customerRepository.save(customer);

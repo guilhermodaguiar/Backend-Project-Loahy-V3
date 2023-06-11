@@ -22,7 +22,7 @@ public class Wishlist {
                     @org.hibernate.annotations.Parameter(name = "increment_size", value = "1")
             }
     )
-    @Column(unique = true, nullable = false)
+    @Column(unique = true)
     private Integer wishlistId;
 
     @OneToOne
