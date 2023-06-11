@@ -29,7 +29,6 @@ public class UserServiceTest {
 
         userDto.setPassword("test");
         userDto.setEnabled(true);
-        userDto.setApikey("test");
         userDto.setFirstName("test");
         userDto.setLastName("test");
     }

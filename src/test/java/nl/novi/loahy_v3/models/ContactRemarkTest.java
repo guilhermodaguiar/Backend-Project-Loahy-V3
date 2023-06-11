@@ -33,7 +33,7 @@
 //    }
 //
 //    @Test
-//    @DisplayName("Should set the contact phone number")
+//    @DisplayName("Should set the contact phoneNumber number")
 //    void setPhone() {
 //        ContactRemark contactRemark = new ContactRemark();
 //        contactRemark.setContactPhone(6L);

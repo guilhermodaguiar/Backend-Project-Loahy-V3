@@ -64,11 +64,11 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/{user_email}/{customerId}")
-    public void assignCustomerToUser(@PathVariable("user_email") String userEmail,
-                                     @PathVariable("customerId") Long customerId) {
+    @PutMapping("/{user_email}/{addressId}")
+    public void assignAddressToUser(@PathVariable("user_email") String userEmail,
+                                    @PathVariable("addressId") Long addressId) {
 
-        userService.assignCustomerToUser(customerId, userEmail);
+        userService.assignAddressToUser(addressId, userEmail);
 
     }
 }

@@ -11,7 +11,7 @@ public class OrderInputDto {
     private List<Integer> productList;
     private String comment;
 
-    private Long customer;
+    private Long address;
 
     private String orderDate;
 
@@ -20,7 +20,7 @@ public class OrderInputDto {
     public String city;
     public String houseNumberAddition;
     public String zipcode;
-    public Long phone;
+    public Long phoneNumber;
 
 
     public List<Integer> getProductList() {
@@ -32,7 +32,7 @@ public class OrderInputDto {
     }
 
     public Long getCustomer() {
-        return customer;
+        return address;
     }
 
     public void setProductList(List<Integer> productList) {
@@ -43,8 +43,8 @@ public class OrderInputDto {
         this.comment = comment;
     }
 
-    public void setCustomer(Long customer) {
-        this.customer = customer;
+    public void setCustomer(Long address) {
+        this.address = address;
     }
 
     public String getOrderDate() {
@@ -96,10 +96,10 @@ public class OrderInputDto {
     }
 
     public Long getPhone() {
-        return phone;
+        return phoneNumber;
     }
 
     public void setPhone(Long phone) {
-        this.phone = phone;
+        this.phoneNumber = phone;
     }
 }

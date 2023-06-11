@@ -42,7 +42,7 @@ public class User {
     private boolean enabled = true;
 
     @OneToOne
-    Customer customer;
+    Address address;
 
     @OneToOne
     Wishlist wishlist;
@@ -124,12 +124,12 @@ public class User {
         this.userId = id;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public Wishlist getWishlist() {

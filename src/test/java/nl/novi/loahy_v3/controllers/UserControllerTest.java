@@ -15,13 +15,9 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class UserControllerTest {
@@ -35,7 +31,8 @@ class UserControllerTest {
     @InjectMocks
     private UserController userController;
 
-    @Test@DisplayName("Should create a user when the user does not exist")
+    @Test
+    @DisplayName("Should create a user when the user does not exist")
     void createUserWhenUserDoesNotExist() {
 
         MockHttpServletRequest request = new MockHttpServletRequest();
@@ -100,6 +97,4 @@ class UserControllerTest {
         assertEquals("Guily", result.firstName);
         assertEquals("Dagi", result.lastName);
     }
-
-
 }

@@ -5,10 +5,10 @@ import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
 import nl.novi.loahy_v3.exceptions.UserEmailAlreadyExistException;
 import nl.novi.loahy_v3.exceptions.UserEmailNotFoundException;
 import nl.novi.loahy_v3.models.Authority;
-import nl.novi.loahy_v3.models.Customer;
+import nl.novi.loahy_v3.models.Address;
 import nl.novi.loahy_v3.models.User;
 import nl.novi.loahy_v3.models.Wishlist;
-import nl.novi.loahy_v3.repositories.CustomerRepository;
+import nl.novi.loahy_v3.repositories.AddressRepository;
 import nl.novi.loahy_v3.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,20 +28,20 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private final CustomerRepository customerRepository;
+    private final AddressRepository addressRepository;
 
     @Autowired
-    private CustomerService customerService;
+    private AddressService addressService;
 
     @Autowired
     private WishlistService wishlistService;
 
 
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, CustomerRepository customerRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AddressRepository addressRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
-        this.customerRepository = customerRepository;
+        this.addressRepository = addressRepository;
     }
 
     public List<UserDto> getAllUsers() {
@@ -83,7 +83,7 @@ public class UserService {
         newUser.setFirstName(userDto.getFirstName());
         newUser.setLastName(userDto.getLastName());
 
-        newUser.setCustomer(customerService.saveCustomer(new Customer()));
+        newUser.setAddress(addressService.saveAddress(new Address()));
         newUser.setWishlist(wishlistService.saveWishlist(new Wishlist()));
 
         userRepository.save(newUser);
@@ -112,16 +112,16 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void assignCustomerToUser(Long customerId, String userEmail) {
+    public void assignAddressToUser(Long addressId, String userEmail) {
 
         Optional<User> optionalUser = userRepository.findById(userEmail);
-        Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
+        Optional<Address> optionalCustomer = addressRepository.findById(addressId);
 
         if (optionalCustomer.isPresent() && optionalUser.isPresent()) {
             User user = optionalUser.get();
-            Customer customer = optionalCustomer.get();
+            Address address = optionalCustomer.get();
 
-            user.setCustomer(customer);
+            user.setAddress(address);
             userRepository.save(user);
         } else {
             throw new RecordNotFoundException();
@@ -142,7 +142,7 @@ public class UserService {
         dto.lastName = user.getLastName();
         dto.userId = user.getUserId();
 
-        dto.customer = user.getCustomer();
+        dto.address = user.getAddress();
         dto.wishlist = user.getWishlist();
 
         return dto;

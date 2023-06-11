@@ -2,8 +2,8 @@ package nl.novi.loahy_v3.dtos;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import nl.novi.loahy_v3.models.Address;
 import nl.novi.loahy_v3.models.Authority;
-import nl.novi.loahy_v3.models.Customer;
 import nl.novi.loahy_v3.models.Wishlist;
 
 import java.util.Set;
@@ -19,7 +19,7 @@ public class UserDto {
     public String lastName;
 
     @JsonSerialize
-    public Customer customer;
+    public Address address;
 
     @JsonDeserialize
     public Wishlist wishlist;
@@ -86,12 +86,12 @@ public class UserDto {
         this.lastName = lastName;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Address getCustomer() {
+        return address;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomer(Address address) {
+        this.address = address;
     }
 
     public Long getUserId() {
