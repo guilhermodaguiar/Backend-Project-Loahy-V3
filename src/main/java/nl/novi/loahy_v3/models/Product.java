@@ -29,7 +29,7 @@ public class Product {
     public String productName;
     @Column(name = "product_description",
             columnDefinition = "TEXT")
-    @Size(max = 150)
+    @Size(max = 200)
     public String productDescription;
     @Column(name = "product_price")
     public Double productPrice;
@@ -84,6 +84,10 @@ public class Product {
     }
 
     public void setImage() {
+    }
+
+    public Wishlist getWishlist() {
+        return wishlist;
     }
 
     public void setWishlist(Wishlist wishlist) {

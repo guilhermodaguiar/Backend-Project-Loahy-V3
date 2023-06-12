@@ -2,7 +2,6 @@ package nl.novi.loahy_v3.controllers;
 
 
 import nl.novi.loahy_v3.dtos.ContactRemarkDto;
-import nl.novi.loahy_v3.dtos.ProductDto;
 import nl.novi.loahy_v3.models.ContactRemark;
 import nl.novi.loahy_v3.services.ContactRemarkService;
 import org.junit.jupiter.api.DisplayName;
@@ -13,7 +12,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 

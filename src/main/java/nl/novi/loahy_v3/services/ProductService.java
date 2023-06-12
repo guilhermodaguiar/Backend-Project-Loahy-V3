@@ -54,7 +54,6 @@ public class ProductService {
         product.setProductDescription(product.getProductDescription());
         product.setProductPrice(product.getProductPrice());
 
-
         return productRepository.save(product);
     }
 
