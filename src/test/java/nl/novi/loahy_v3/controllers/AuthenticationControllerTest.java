@@ -1,6 +1,5 @@
 package nl.novi.loahy_v3.controllers;
 
-
 import nl.novi.loahy_v3.payload.AuthenticationRequest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

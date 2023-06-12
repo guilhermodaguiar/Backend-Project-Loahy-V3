@@ -1,6 +1,6 @@
 package nl.novi.loahy_v3.services;
 
-import nl.novi.loahy_v3.dtos.UserDto;
+import nl.novi.loahy_v3.models.User;
 import nl.novi.loahy_v3.repositories.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,13 +24,13 @@ public class UserServiceTest {
     @DisplayName("Should save the person when the person is not taken")
     void saveUserWhenUserIsNotTaken() {
 
-        UserDto userDto = new UserDto();
-        userDto.setUserEmail("test@gmail.com");
+        User user = new User();
+        user.setUserEmail("test@gmail.com");
 
-        userDto.setPassword("test");
-        userDto.setEnabled(true);
-        userDto.setFirstName("test");
-        userDto.setLastName("test");
+        user.setPassword("test");
+        user.setEnabled(true);
+        user.setFirstName("test");
+        user.setLastName("test");
     }
 
 }

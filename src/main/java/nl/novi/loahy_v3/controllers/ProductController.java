@@ -5,6 +5,7 @@ import nl.novi.loahy_v3.dtos.ProductDto;
 import nl.novi.loahy_v3.dtos.ProductInputDto;
 import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
 import nl.novi.loahy_v3.models.FileUploadResponse;
+import nl.novi.loahy_v3.models.Product;
 import nl.novi.loahy_v3.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin
@@ -32,37 +34,42 @@ public class ProductController {
 
     @GetMapping(value = "/all")
     @Transactional
-    public ResponseEntity<List<ProductDto>> getAllProducts() {
+    public List<ProductDto> getAllProducts() {
+        var dtos = new ArrayList<ProductDto>();
+        List<Product> productList;
 
-        List<ProductDto> productsDto = productService.getAllProducts();
+        var products = productService.getAllProducts();
+        for (Product product : products) {
+            dtos.add(ProductDto.transferToDto(product));
+        }
 
-        return ResponseEntity.ok().body(productsDto);
+        return dtos;
     }
 
     @GetMapping(value="/{id}")
     @Transactional
-    public ResponseEntity<ProductDto> getProductById(@PathVariable("id") Integer productId) {
+    public ProductDto getProductById(@PathVariable("id") Integer productId) {
 
-        ProductDto optionalProduct = productService.getProduct(productId);
+        var product = productService.getProduct(productId);
 
-        return ResponseEntity.ok().body(optionalProduct);
-
+        return ProductDto.transferToDto(product);
     }
 
-    @PostMapping(value ="/create")
-    public ResponseEntity<Object>createProduct(@RequestBody ProductInputDto inputDto) {
-        ProductDto productDto = productService.createProduct(inputDto);
 
-        return ResponseEntity.created(null).body(productDto);
+    @PostMapping(value ="/create")
+    public ProductDto createProduct(@RequestBody ProductInputDto dto) {
+        var product = productService.createProduct(dto.toProduct());
+
+        return ProductDto.transferToDto(product);
+
     }
 
     @PutMapping(value = "/update/{id}")
-    public ResponseEntity<Object> updateProduct (@PathVariable("id") Integer productId,
-                                                 @RequestBody ProductInputDto inputDto) {
+    public ProductDto updateProduct(@PathVariable("id") Integer productId,
+                                    @RequestBody Product product) {
+        productService.updateProduct(product);
 
-       ProductDto productDto = productService.updateProduct(productId, inputDto);
-
-       return ResponseEntity.ok().body(productDto);
+        return ProductDto.transferToDto(product);
     }
 
     @DeleteMapping(value = "/delete/{id}")

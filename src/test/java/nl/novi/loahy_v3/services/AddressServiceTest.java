@@ -10,8 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -57,7 +56,7 @@ public class AddressServiceTest {
         address1.setZipcode("test");
         address1.setCity("test");
         address1.setPhoneNumber(1L);
-        when(addressRepository.findById(1L)).thenReturn(java.util.Optional.of(address1));
+        when(addressRepository.findById(1L)).thenReturn(Optional.of(address1));
 
         address1.setCity("Amsterdam");
         addressService.updateAddress(1L, address1);

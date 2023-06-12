@@ -33,50 +33,49 @@ public class ProductService {
         this.wishlistRepository = wishlistRepository;
     }
 
-    public List<ProductDto> getAllProducts() {
-        List<ProductDto> collection = new ArrayList<>();
-        List<Product> list = productRepository.findAll();
-        for (Product product : list) {
-            collection.add(transferToDto(product));
-        }
-        return collection;
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
     }
 
-    public ProductDto getProduct(Integer productId) {
-        new ProductDto();
-        ProductDto productDto;
+        public Product getProduct(Integer productId) {
         Optional<Product> product = productRepository.findById(productId);
+
         if (product.isPresent()) {
-            productDto = transferToDto(product.get());
+            return product.get();
         } else {
-            throw new RecordNotFoundException("Product niet gevonden");
+            throw new RecordNotFoundException("Product is niet gevonden");
         }
-        return productDto;
     }
 
-    public ProductDto createProduct(ProductInputDto inputDto) {
+    public Product createProduct(Product product) {
 
-        Product newProduct = transferToProduct(inputDto);
+        product.setProductId(product.getProductId());
+        product.setProductName(product.getProductName());
+        product.setProductDescription(product.getProductDescription());
+        product.setProductPrice(product.getProductPrice());
 
-        productRepository.save(newProduct);
 
-        return transferToDto(newProduct);
+        return productRepository.save(product);
     }
 
 
-    public ProductDto updateProduct(Integer productId, ProductInputDto inputDto) {
-        if (productRepository.findById(productId).isPresent()) {
+    public void updateProduct(Product product) {
 
-            Product product = productRepository.findById(productId).get();
+        Optional<Product> optionalProduct = productRepository.findById(product.getProductId());
 
-            Product product1 = transferToProduct(inputDto);
+        if (optionalProduct.isEmpty()) {
+            throw new RecordNotFoundException("product niet gevonden..");
+        } else {
+
+            Product product1 = optionalProduct.get();
             product1.setProductId(product.getProductId());
+            product1.setProductName(product.getProductName());
+            product1.setProductDescription(product.getProductDescription());
+            product1.setProductPrice(product.getProductPrice());
 
             productRepository.save(product1);
 
-            return transferToDto(product1);
-        } else {
-            throw new RecordNotFoundException("Product niet gevonden");
+
         }
     }
 
@@ -99,14 +98,14 @@ public class ProductService {
         }
     }
 
-    public Product transferToProduct(ProductInputDto productDto) {
+    public Product transferToProduct(ProductDto dto) {
 
         var product = new Product();
 
-        product.setProductName(productDto.getProductName());
-        product.setProductDescription(productDto.getProductInformation());
-        product.setProductPrice(productDto.getProductPrice());
-        product.setImage(productDto.getImage());
+        product.setProductName(dto.getProductName());
+        product.setProductDescription(dto.getProductDescription());
+        product.setProductPrice(dto.getProductPrice());
+        product.setImage(dto.getImage());
         return product;
     }
 

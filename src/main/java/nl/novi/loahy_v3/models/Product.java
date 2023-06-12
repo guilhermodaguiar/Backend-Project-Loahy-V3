@@ -1,13 +1,11 @@
 package nl.novi.loahy_v3.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vladmihalcea.hibernate.type.json.JsonStringType;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -40,7 +38,7 @@ public class Product {
     FileUploadResponse image;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name ="wishlist_id")
+    @JoinColumn(name = "wishlist_id")
     Wishlist wishlist;
 
 

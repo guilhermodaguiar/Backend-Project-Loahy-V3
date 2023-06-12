@@ -1,6 +1,6 @@
 package nl.novi.loahy_v3.controllers;
 
-import nl.novi.loahy_v3.dtos.UserDto;
+import nl.novi.loahy_v3.models.User;
 import nl.novi.loahy_v3.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,25 +20,22 @@ public class UserController {
 
 
     @GetMapping(value = "/all")
-    public ResponseEntity<List<UserDto>> getAllUsers() {
+    public ResponseEntity<Object> getAllUsers() {
 
-        List<UserDto> userDtos = userService.getAllUsers();
-
-        return ResponseEntity.ok().body(userDtos);
+        return ResponseEntity.ok().body(userService.getAllUsers());
     }
 
     @GetMapping(value = "/{email}")
-    public ResponseEntity<UserDto> getUserByUserEmail(@PathVariable("email") String userEmail) {
+    public ResponseEntity<Object> getByUserEmail(@PathVariable("email") String username) {
 
-        UserDto optionalUser = userService.getUser(userEmail);
+        return ResponseEntity.ok().body(userService.getByUserEmail(username));
 
-        return ResponseEntity.ok().body(optionalUser);
     }
 
     @PostMapping(value = "/create")
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
+    public ResponseEntity<User> createUser(@RequestBody User user) {
 
-        String newUserEmail = userService.createUser(userDto);
+        String newUserEmail = userService.createUser(user);
         userService.addAuthority(newUserEmail, "ROLE_USER");
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{email}")
@@ -50,9 +47,9 @@ public class UserController {
     }
 
     @PutMapping(value = "/{email}")
-    public ResponseEntity<Object> updateUser(@PathVariable("email") String userEmail, @RequestBody UserDto userDto) {
+    public ResponseEntity<Object> updateUser(@PathVariable("email") String userEmail, @RequestBody User user) {
 
-        userService.updateUser(userEmail, userDto);
+        userService.updateUser(userEmail, user);
 
         return ResponseEntity.noContent().build();
 

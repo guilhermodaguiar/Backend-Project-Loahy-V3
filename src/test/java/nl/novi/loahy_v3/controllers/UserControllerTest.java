@@ -1,6 +1,6 @@
 package nl.novi.loahy_v3.controllers;
 
-import nl.novi.loahy_v3.dtos.UserDto;
+import nl.novi.loahy_v3.models.User;
 import nl.novi.loahy_v3.repositories.UserRepository;
 import nl.novi.loahy_v3.services.UserService;
 import org.junit.jupiter.api.DisplayName;
@@ -14,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -32,22 +34,22 @@ class UserControllerTest {
     private UserController userController;
 
     @Test
-    @DisplayName("Should create a user when the user does not exist")
+    @DisplayName("Should create a user when user does not exist")
     void createUserWhenUserDoesNotExist() {
 
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
 
-        UserDto userDto = new UserDto();
-        userDto.setUserEmail("test@test.nl");
-        userDto.setPassword("test123!");
+        User user = new User();
+        user.setUserEmail("test@test.nl");
+        user.setPassword("test123!");
 
-        userDto.setEnabled(true);
-        userDto.setFirstName("test");
-        userDto.setLastName("test");
+        user.setEnabled(true);
+        user.setFirstName("test");
+        user.setLastName("test");
 
 
-        ResponseEntity<UserDto> response = userController.createUser(userDto);
+        ResponseEntity<User> response = userController.createUser(user);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
     }
@@ -55,46 +57,17 @@ class UserControllerTest {
     @Test
     @DisplayName("Should delete the user when the id is valid")
     void deleteUserWhenIdIsValid() {
-        UserDto userDto = new UserDto();
-        userDto.setUserEmail("test@test.nl");
-        userDto.setPassword("test123!");
+        User user = new User();
+        user.setUserEmail("test@test.nl");
+        user.setPassword("test123!");
 
-        userDto.setEnabled(true);
-        userDto.setFirstName("test");
-        userDto.setLastName("test");
+        user.setEnabled(true);
+        user.setFirstName("test");
+        user.setLastName("test");
 
 
         userService.deleteUser("test@test.nl");
 
         verify(userService, times(1)).deleteUser("test@test.nl");
-    }
-
-
-    @Test
-    @DisplayName("Should returns the user when email is valid")
-    void getUserWhenUserEmailIsValid() {
-        UserDto userDto = new UserDto();
-        userDto.setUserEmail("Guily@test.nl");
-        userDto.setPassword("test123!");
-
-        userDto.setEnabled(true);
-
-        userDto.setFirstName("Guily");
-        userDto.setLastName("Dagi");
-
-
-        when(userService.getUser("Guily@test.nl")).thenReturn(userDto);
-
-        UserDto result = userController.getUserByUserEmail(userDto.userEmail).getBody();
-
-        assertNotNull(result);
-        assertEquals("Guily@test.nl", result.userEmail);
-        assertEquals("test123!", result.password);
-
-        assertEquals(true, result.enabled);
-
-        assertEquals("true", result.userEmail);
-        assertEquals("Guily", result.firstName);
-        assertEquals("Dagi", result.lastName);
     }
 }

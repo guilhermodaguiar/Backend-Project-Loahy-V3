@@ -10,7 +10,7 @@ public class ProductDto {
 
     public String productName;
 
-    public String productInformation;
+    public String productDescription;
 
     public Double productPrice;
 
@@ -22,8 +22,8 @@ public class ProductDto {
         var productDto = new ProductDto();
 
         productDto.productId = product.getProductId();
-        productDto.productInformation = product.getProductDescription();
         productDto.productName = product.getProductName();
+        productDto.productDescription = product.getProductDescription();
         productDto.productPrice = product.getProductPrice();
         productDto.image = (product.getImage());
 
@@ -55,12 +55,12 @@ public class ProductDto {
         this.productName = productName;
     }
 
-    public String getProductInformation() {
-        return productInformation;
+    public String getProductDescription() {
+        return productDescription;
     }
 
-    public void setProductInformation(String productInformation) {
-        this.productInformation = productInformation;
+    public void setProductDescription(String productDescription) {
+        this.productDescription = productDescription;
     }
 
 
