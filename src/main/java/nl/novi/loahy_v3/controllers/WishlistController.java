@@ -12,6 +12,7 @@ public class WishlistController {
     private final WishlistService wishlistService;
 
 
+
     public WishlistController(WishlistService wishlistService) {
         this.wishlistService = wishlistService;
     }
