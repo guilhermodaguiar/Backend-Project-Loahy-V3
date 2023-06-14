@@ -42,7 +42,6 @@ class UserControllerTest {
         user.setUserEmail("test@test.nl");
         user.setPassword("test123!");
 
-        user.setEnabled(true);
         user.setFirstName("test");
         user.setLastName("test");
 
@@ -59,7 +58,6 @@ class UserControllerTest {
         user.setUserEmail("test@test.nl");
         user.setPassword("test123!");
 
-        user.setEnabled(true);
         user.setFirstName("test");
         user.setLastName("test");
 

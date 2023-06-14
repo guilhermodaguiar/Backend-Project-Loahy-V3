@@ -120,11 +120,11 @@ De volgende gebruikers kunnen worden gebruikt om de applicatie te testen. In de 
 
 >#### ADMIN_ROLE
 > - gebruikersnaam: admin@test.nl
-> - wachtwoord: admin123
+> - wachtwoord: admin123!
 >
 > #### USER_ROLE
 > - gebruikersnaam: user@test.nl
-> - wachtwoord: test123
+> - wachtwoord: test123!
 > - 
 
 

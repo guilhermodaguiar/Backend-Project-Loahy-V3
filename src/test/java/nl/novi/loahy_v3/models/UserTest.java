@@ -17,19 +17,6 @@ class UserTest {
         user = new User();
     }
 
-    @Test
-    @DisplayName("Should set the enabled to true")
-    void setEnabledWhenEnabledIsTrue() {
-        user.setEnabled(true);
-        assertTrue(user.isEnabled());
-    }
-
-    @Test
-    @DisplayName("Should set the enabled to false")
-    void setEnabledWhenEnabledIsFalse() {
-        user.setEnabled(false);
-        assertFalse(user.isEnabled());
-    }
 
     @Test
     @DisplayName("Should return the email of the user")

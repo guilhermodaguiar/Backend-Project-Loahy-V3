@@ -90,13 +90,6 @@ public class ProductController {
         productService.assignImageToProduct(productImage.getFileName(), productId);
     }
 
-    //assignProductsToWishlist
-    //hier moet een put request komen dat een list neemt van het aantal producten dat opgeslagen wordt.
-    //deze list moet naar de juiste wishlist gaan.
-
-    @PutMapping("/televisions/{id}/{wishlistId}")
-    public void assignWishlistToProduct(@PathVariable("id") Integer productId, @PathVariable("wishlistId") Integer wishlistId) {
-        productService.assignWishlistToProduct(productId, wishlistId);
-    }
+    //add products to wishlistId
 
 }

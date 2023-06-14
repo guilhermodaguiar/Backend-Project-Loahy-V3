@@ -1,6 +1,12 @@
 package nl.novi.loahy_v3.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -9,6 +15,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "wishlists" )
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="wishlistId")
 public class Wishlist {
 
     @Id
@@ -18,7 +29,7 @@ public class Wishlist {
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
                     @org.hibernate.annotations.Parameter(name = "sequence_name", value = "wishlist_sequence"),
-                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "202"),
+                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "204"),
                     @org.hibernate.annotations.Parameter(name = "increment_size", value = "1")
             }
     )
@@ -28,31 +39,16 @@ public class Wishlist {
     @OneToOne
     User user;
 
-    @OneToMany(mappedBy = "wishlist")
-    @JsonIgnore
+   @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+   @JoinTable(name = "wishlist_product_table",
+           joinColumns = {
+                   @JoinColumn(name = "wishlist_id", referencedColumnName = "wishlistId")
+           },
+           inverseJoinColumns = {
+                   @JoinColumn(name = "product_id", referencedColumnName = "productId")
+           }
+
+   )
     List<Product> products;
 
-    public Integer getWishlistId() {
-        return wishlistId;
-    }
-
-    public void setWishlistId(Integer wishlistId) {
-        this.wishlistId = wishlistId;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }

@@ -1,14 +1,24 @@
 package nl.novi.loahy_v3.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.vladmihalcea.hibernate.type.json.JsonStringType;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @TypeDef(name = "json", typeClass = JsonStringType.class)
 public class Product {
 
@@ -23,23 +33,21 @@ public class Product {
                     @org.hibernate.annotations.Parameter(name = "increment_size", value = "1")
             }
     )
-    @Column(name = "product_id")
+
     public Integer productId;
-    @Column(name = "product_name")
+
     public String productName;
-    @Column(name = "product_description",
-            columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT")
     @Size(max = 200)
     public String productDescription;
-    @Column(name = "product_price")
+
     public Double productPrice;
 
     @OneToOne
     FileUploadResponse image;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "wishlist_id")
-    Wishlist wishlist;
+    @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
+    private List<Wishlist> wishlist;
 
 
     public Integer getProductId() {
@@ -84,14 +92,6 @@ public class Product {
     }
 
     public void setImage() {
-    }
-
-    public Wishlist getWishlist() {
-        return wishlist;
-    }
-
-    public void setWishlist(Wishlist wishlist) {
-        this.wishlist = wishlist;
     }
 }
 

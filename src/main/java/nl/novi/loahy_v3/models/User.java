@@ -20,16 +20,6 @@ public class User {
     private String password;
 
     @Column(nullable = false)
-    @GeneratedValue(generator = "sequence-generator")
-    @GenericGenerator(
-            name = "sequence-generator",
-            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
-            parameters = {
-                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "user_sequence"),
-                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "405"),
-                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "1")
-            }
-    )
     private Long userId;
 
     @Column
@@ -38,8 +28,6 @@ public class User {
     @Column
     private String lastName;
 
-    @Column
-    private boolean enabled = true;
 
     @OneToOne
     Address address;
@@ -98,14 +86,6 @@ public class User {
         this.authorities = authorities;
     }
 
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
 
 
     public void addAuthority(Authority authority) {

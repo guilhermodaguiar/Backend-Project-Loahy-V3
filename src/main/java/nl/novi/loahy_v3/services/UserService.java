@@ -9,6 +9,7 @@ import nl.novi.loahy_v3.models.Authority;
 import nl.novi.loahy_v3.models.Wishlist;
 import nl.novi.loahy_v3.repositories.AddressRepository;
 import nl.novi.loahy_v3.repositories.UserRepository;
+import nl.novi.loahy_v3.repositories.WishlistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -32,21 +33,23 @@ public class UserService {
     private AddressService addressService;
 
     @Autowired
+    private final WishlistRepository wishlistRepository;
+    @Autowired
     private WishlistService wishlistService;
 
 
-
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AddressRepository addressRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AddressRepository addressRepository, WishlistRepository wishlistRepository, WishlistService wishlistService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.addressRepository = addressRepository;
+        this.wishlistRepository = wishlistRepository;
+        this.wishlistService = wishlistService;
     }
 
 
     public Collection<User> getAllUsers() {
         return userRepository.findAll();
     }
-
 
 
     public Optional<User> getByUserEmail(String username) {
@@ -77,7 +80,8 @@ public class UserService {
         userRepository.save(newUser);
         return newUser.getUserEmail();
     }
-//Hier gebleven
+
+    //Hier gebleven
     public void updateUser(String userEmail, User user) {
         if (!userRepository.existsById(userEmail))
             throw new UserEmailNotFoundException(userEmail);
@@ -102,14 +106,30 @@ public class UserService {
 
     public void assignAddressToUser(Long addressId, String userEmail) {
 
-        Optional<nl.novi.loahy_v3.models.User> optionalUser = userRepository.findById(userEmail);
-        Optional<Address> optionalCustomer = addressRepository.findById(addressId);
+        Optional<User> optionalUser = userRepository.findById(userEmail);
+        Optional<Address> optionalAddress = addressRepository.findById(addressId);
 
-        if (optionalCustomer.isPresent() && optionalUser.isPresent()) {
-            nl.novi.loahy_v3.models.User user = optionalUser.get();
-            Address address = optionalCustomer.get();
+        if (optionalAddress.isPresent() && optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            Address address = optionalAddress.get();
 
             user.setAddress(address);
+            userRepository.save(user);
+        } else {
+            throw new RecordNotFoundException();
+        }
+    }
+
+    public void assignWishlistToUser(Integer wishlistId, String userEmail) {
+
+        Optional<User> optionalUser = userRepository.findById(userEmail);
+        Optional<Wishlist> optionalWishlist = wishlistRepository.findById(wishlistId);
+
+        if (optionalWishlist.isPresent() && optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            Wishlist wishlist = optionalWishlist.get();
+
+            user.setWishlist(wishlist);
             userRepository.save(user);
         } else {
             throw new RecordNotFoundException();

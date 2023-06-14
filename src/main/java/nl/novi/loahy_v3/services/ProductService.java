@@ -107,20 +107,5 @@ public class ProductService {
         product.setImage(dto.getImage());
         return product;
     }
-
-    public void assignWishlistToProduct(Integer productId, Integer wishlistId) {
-        var optionalProduct = productRepository.findById(productId);
-        var optionalWishlist = wishlistRepository.findById(wishlistId);
-
-        if(optionalProduct.isPresent() && optionalWishlist.isPresent()) {
-            var product = optionalProduct.get();
-            var wishlist = optionalWishlist.get();
-
-            product.setWishlist(wishlist);
-            productRepository.save(product);
-        } else {
-            throw new RecordNotFoundException();
-        }
-    }
 }
 

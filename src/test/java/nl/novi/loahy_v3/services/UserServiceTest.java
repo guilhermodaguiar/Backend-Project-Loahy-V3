@@ -28,7 +28,6 @@ public class UserServiceTest {
         user.setUserEmail("test@gmail.com");
 
         user.setPassword("test");
-        user.setEnabled(true);
         user.setFirstName("test");
         user.setLastName("test");
     }
