@@ -4,6 +4,7 @@ import nl.novi.loahy_v3.dtos.OrderDto;
 import nl.novi.loahy_v3.dtos.OrderInputDto;
 import nl.novi.loahy_v3.models.Order;
 import nl.novi.loahy_v3.services.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,9 +16,10 @@ import java.util.List;
 @RequestMapping("/orders")
 public class OrderController {
 
+    @Autowired
     private final OrderService orderService;
 
-
+    @Autowired
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }

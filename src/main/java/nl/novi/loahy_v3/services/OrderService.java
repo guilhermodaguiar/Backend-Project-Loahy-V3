@@ -5,6 +5,7 @@ import nl.novi.loahy_v3.models.Order;
 import nl.novi.loahy_v3.models.Product;
 import nl.novi.loahy_v3.repositories.OrderRepository;
 import nl.novi.loahy_v3.repositories.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -20,10 +21,12 @@ import java.util.Optional;
 public class OrderService {
 
 
+    @Autowired
     private final OrderRepository orderRepository;
+    @Autowired
     private final ProductRepository productRepository;
 
-
+    @Autowired
     public OrderService(OrderRepository orderRepository,
                         ProductRepository productRepository) {
         this.orderRepository = orderRepository;

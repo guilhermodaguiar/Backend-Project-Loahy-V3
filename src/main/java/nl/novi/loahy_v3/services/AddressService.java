@@ -5,6 +5,7 @@ import nl.novi.loahy_v3.dtos.AddressInputDto;
 import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
 import nl.novi.loahy_v3.models.Address;
 import nl.novi.loahy_v3.repositories.AddressRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,9 +18,10 @@ import static nl.novi.loahy_v3.dtos.AddressDto.transferToAddressDto;
 @Service
 public class AddressService {
 
+    @Autowired
     private final AddressRepository addressRepository;
 
-
+    @Autowired
     public AddressService(AddressRepository addressRepository) {
         this.addressRepository = addressRepository;
     }

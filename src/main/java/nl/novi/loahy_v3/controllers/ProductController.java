@@ -3,7 +3,6 @@ package nl.novi.loahy_v3.controllers;
 
 import nl.novi.loahy_v3.dtos.ProductDto;
 import nl.novi.loahy_v3.dtos.ProductInputDto;
-import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
 import nl.novi.loahy_v3.models.FileUploadResponse;
 import nl.novi.loahy_v3.models.Product;
 import nl.novi.loahy_v3.services.ProductService;
@@ -22,7 +21,9 @@ import java.util.List;
 public class ProductController {
 
 
+    @Autowired
     private final ProductService productService;
+    @Autowired
     private final ImageController imageController;
 
 
@@ -90,6 +91,5 @@ public class ProductController {
         productService.assignImageToProduct(productImage.getFileName(), productId);
     }
 
-    //add products to wishlistId
 
 }

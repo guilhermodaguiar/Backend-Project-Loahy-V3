@@ -21,9 +21,11 @@ import static nl.novi.loahy_v3.dtos.ProductDto.transferToDto;
 @Service
 public class ProductService {
 
+    @Autowired
     private final ProductRepository productRepository;
+    @Autowired
     private final FileUploadRepository uploadRepository;
-
+    @Autowired
     private final WishlistRepository wishlistRepository;
 
     @Autowired

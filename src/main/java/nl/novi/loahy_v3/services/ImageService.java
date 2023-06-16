@@ -2,6 +2,7 @@ package nl.novi.loahy_v3.services;
 
 import nl.novi.loahy_v3.models.FileUploadResponse;
 import nl.novi.loahy_v3.repositories.FileUploadRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -21,8 +22,10 @@ import java.util.Objects;
 public class ImageService {
     @Value("${my.upload_location}")
     private Path fileStoragePath;
+
     private final String fileStorageLocation;
 
+    @Autowired
     private final FileUploadRepository fileUploadRepository;
 
     public ImageService(@Value("${my.upload_location}") String fileStorageLocation, FileUploadRepository fileUploadRepository) {

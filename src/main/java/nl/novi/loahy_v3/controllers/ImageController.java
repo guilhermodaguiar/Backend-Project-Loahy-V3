@@ -2,6 +2,7 @@ package nl.novi.loahy_v3.controllers;
 
 import nl.novi.loahy_v3.models.FileUploadResponse;
 import nl.novi.loahy_v3.services.ImageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -18,9 +19,11 @@ import java.util.Objects;
 @CrossOrigin
 @RequestMapping(value = "images")
 public class ImageController {
+
+    @Autowired
     private final ImageService imageService;
 
-
+    @Autowired
     public ImageController(ImageService imageService) {
         this.imageService = imageService;
     }

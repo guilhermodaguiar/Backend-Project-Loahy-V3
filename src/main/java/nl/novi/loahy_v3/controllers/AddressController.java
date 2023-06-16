@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/address")
 public class AddressController {
-
+    @Autowired
     private final AddressService addressService;
 
 

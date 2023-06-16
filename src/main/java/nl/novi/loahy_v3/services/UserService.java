@@ -38,6 +38,7 @@ public class UserService {
     private WishlistService wishlistService;
 
 
+    @Autowired
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AddressRepository addressRepository, WishlistRepository wishlistRepository, WishlistService wishlistService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
@@ -81,7 +82,7 @@ public class UserService {
         return newUser.getUserEmail();
     }
 
-    //Hier gebleven
+
     public void updateUser(String userEmail, User user) {
         if (!userRepository.existsById(userEmail))
             throw new UserEmailNotFoundException(userEmail);

@@ -42,7 +42,7 @@ class ProductServiceTest {
 
         assertEquals(product, result);
     }
-//
+
     @Test
     @DisplayName("Should throw an exception when the product does not exist")
     void getProductWhenProductDoesNotExistThenThrowException() {
