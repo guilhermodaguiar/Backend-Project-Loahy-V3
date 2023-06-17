@@ -49,7 +49,7 @@ public class Product {
     @OneToOne
     FileUploadResponse image;
 
-    @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JsonBackReference
     private Set<Wishlist> wishlist;
 

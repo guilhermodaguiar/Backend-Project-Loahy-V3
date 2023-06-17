@@ -38,7 +38,7 @@ public class Wishlist {
     @OneToOne
     User user;
 
-   @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+   @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL, CascadeType.REMOVE})
    @JoinTable(name = "wishlist_product_table",
            joinColumns = {
                    @JoinColumn(name = "wishlist_id", referencedColumnName = "wishlistId")

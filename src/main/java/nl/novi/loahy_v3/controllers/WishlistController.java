@@ -29,24 +29,20 @@ public class WishlistController {
     }
 
 
-    @GetMapping("/products/{id}")
+    @GetMapping(value = "/products/{id}")
     public Wishlist findWishlistById(@PathVariable("id") Integer wishlistId) {
         return wishlistService.getWishlistById(wishlistId);
     }
 
 
-    // even testen.. beide postmapping en putmapping werken. producten kunnen worden toegevoegd aan wishlist.
-
-    @PostMapping(value = "/{id}/{productId}")
-    public ResponseEntity<Wishlist> addProductToWishlist(@PathVariable("id") Integer wishlistId, @PathVariable Product productId) {
-        return ResponseEntity.ok(wishlistService.addProductToWishlist(wishlistId, productId));
+    @PutMapping(value = "/{wishlistId}/{productId}")
+    public Wishlist assignProductToWishlist(@PathVariable Integer wishlistId, @PathVariable Integer productId) {
+        return wishlistService.assignProductToWishlist(wishlistId, productId);
     }
 
-
-    @PutMapping("/{wishlistId}/{productId}")
-    public Wishlist assignProductToWishlist(@PathVariable Integer wishlistId, @PathVariable Integer productId
-    ){
-        return wishlistService.assignProductToWishlist(wishlistId, productId);
+    @DeleteMapping(value ="/{wishlistId}/{productId}")
+    public Wishlist removeProductFromWishlist(@PathVariable Integer wishlistId, @PathVariable Integer productId) {
+        return wishlistService.removeProductFromWishlist(wishlistId, productId);
     }
 
 }
