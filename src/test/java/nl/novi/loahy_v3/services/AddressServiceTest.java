@@ -56,6 +56,7 @@ public class AddressServiceTest {
         address1.setZipcode("test");
         address1.setCity("test");
         address1.setPhoneNumber(1L);
+
         when(addressRepository.findById(1L)).thenReturn(Optional.of(address1));
 
         address1.setCity("Amsterdam");
@@ -65,7 +66,6 @@ public class AddressServiceTest {
 
         assertThat(address1.getAddressId()).isEqualTo(1);
         assertThat(address1.getCity()).isEqualTo("Amsterdam");
-
     }
 
     @Test

@@ -34,13 +34,11 @@ INSERT INTO remarks (contact_name, contact_email, contact_phone, contact_remark)
 
 
 INSERT INTO users (user_email, password, user_id, first_name, last_name, address_address_id, wishlist_wishlist_id) VALUES ('user@test.nl', '$2a$12$5Opf8AKt28//iIdms4dXZuHzQTPjBmOV92SQSELfGB0g9LdmAWQ9O', 1,  'User', 'Test', 5001, 200);
-INSERT INTO users (user_email, password, user_id, first_name, last_name, address_address_id, wishlist_wishlist_id) VALUES ('admin@test.nl', '$2a$12$72Oo/EFBg2otF1AP0WzNEucuERbmlwzsme6XiyYeok9B5Z.09VbvW', 2,  'Admin', 'Test', 5002, 201);
+INSERT INTO users (user_email, password, user_id, first_name, last_name, address_address_id, wishlist_wishlist_id) VALUES ('admin@test.nl', '$2a$12$lgPKHPD.92GF8Dd8gjH.TeBh9O5SzlmipOpbUiqRHKVbjg7HgZj.S', 2,  'Admin', 'Test', 5002, 203);
 INSERT INTO users (user_email, password, user_id, first_name, last_name, address_address_id, wishlist_wishlist_id) VALUES ('jenfromlomok@test.nl', '$2a$12$BmMv.oCR96Hcw81S7yoW/uNPBGPADmdBI45EZS6I1tlq3FwTv3Ncu', 3, 'Jen', 'van Lombok', 5003, 202);
-INSERT INTO users (user_email, password, user_id, first_name, last_name, address_address_id, wishlist_wishlist_id) VALUES ('Guilfromlombok@test.nl', '$2a$12$v8obCBMrcCq6s9qBRAUEZuWAK9oSWSn1JzceR7/BWt3UnN643QMOW', 4, 'Guil', 'Dag', 5004, 203);
+INSERT INTO users (user_email, password, user_id, first_name, last_name, address_address_id, wishlist_wishlist_id) VALUES ('Guilfromlombok@test.nl', '$2a$12$v8obCBMrcCq6s9qBRAUEZuWAK9oSWSn1JzceR7/BWt3UnN643QMOW', 4, 'Guil', 'Dag', 5004, 201);
 
 INSERT INTO authorities (user_email, authority) VALUES ('user@test.nl', 'ROLE_USER');
 INSERT INTO authorities (user_email, authority) VALUES ('jenfromlombok@test.nl', 'ROLE_USER');
 INSERT INTO authorities (user_email, authority) VALUES ('admin@test.nl', 'ROLE_ADMIN');
 INSERT INTO authorities (user_email, authority) VALUES ('guilfromlombok@test.nl', 'ROLE_USER');
-
-

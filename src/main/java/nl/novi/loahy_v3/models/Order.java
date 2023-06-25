@@ -1,50 +1,56 @@
 package nl.novi.loahy_v3.models;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.util.Map;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    @GeneratedValue(generator = "sequence-generator")
+    @GenericGenerator(
+            name = "sequence-generator",
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "order_sequence"),
+                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "75"),
+                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "1")
+            }
+    )
+    @Column
+    private Long orderId;
 
     @Type(type = "json")
-    private Map<Integer, String> productList;
+    private List<Object> productList;
 
+    @Column
     private String comment;
 
+    @Column
+    public String userEmail;
+
+    @Column
+    public Long addressId;
+    @Column
     public String orderDate;
 
-    private String streetName;
 
-    private String houseNumber;
-
-    private String houseNumberAddition;
-
-    private String zipcode;
-
-    private String city;
-
-    private Long phone;
-
-
-    public Integer getId() {
-        return id;
+    public Long getOrderId() {
+        return orderId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 
-    public Map<Integer, String> getProductList() {
+    public List<Object> getProductList() {
         return productList;
     }
 
-    public void setProductList(Map<Integer, String> productList) {
+    public void setProductList(List<Object> productList) {
         this.productList = productList;
     }
 
@@ -56,7 +62,6 @@ public class Order {
         this.comment = comment;
     }
 
-
     public String getOrderDate() {
         return orderDate;
     }
@@ -65,51 +70,19 @@ public class Order {
         this.orderDate = orderDate;
     }
 
-    public String getStreetName() {
-        return streetName;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setStreetName(String streetName) {
-        this.streetName = streetName;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
-    public String getHouseNumber() {
-        return houseNumber;
+    public Long getAddressId() {
+        return addressId;
     }
 
-    public void setHouseNumber(String houseNumber) {
-        this.houseNumber = houseNumber;
-    }
-
-    public String getHouseNumberAddition() {
-        return houseNumberAddition;
-    }
-
-    public void setHouseNumberAddition(String houseNumberAddition) {
-        this.houseNumberAddition = houseNumberAddition;
-    }
-
-    public String getZipcode() {
-        return zipcode;
-    }
-
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public Long getPhone() {
-        return phone;
-    }
-
-    public void setPhone(Long phone) {
-        this.phone = phone;
+    public void setAddressId(Long addressId) {
+        this.addressId = addressId;
     }
 }

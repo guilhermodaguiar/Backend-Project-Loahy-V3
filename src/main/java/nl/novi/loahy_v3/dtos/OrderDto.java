@@ -1,58 +1,52 @@
 package nl.novi.loahy_v3.dtos;
 
 import nl.novi.loahy_v3.models.Order;
+import nl.novi.loahy_v3.models.User;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 public class OrderDto {
-    private Integer id;
+    private Long orderId;
 
-    private Map<Integer, String> productList;
+    private List<Object> productList;
 
     private String comment;
 
     private String orderDate;
 
-    public String streetName;
-    public String houseNumber;
-    public String city;
-    public String houseNumberAddition;
-    public String zipcode;
-    public Long phone;
+    private String userEmail;
 
-
+    private Long addressId;
 
 
     public static OrderDto fromOrder(Order order) {
 
         var dto = new OrderDto();
 
-        dto.setId(order.getId());
+        dto.setOrderId(order.getOrderId());
 
-        dto.setProductList(order.getProductList());
+        dto.setProductList(Collections.singletonList(order.getProductList()));
 
         dto.setComment(order.getComment());
 
         dto.setOrderDate(order.getOrderDate());
 
+        dto.setUserEmail(order.getUserEmail());
+
         return dto;
     }
 
-    public Integer getId() {
-        return id;
+    public Long getOrderId() {
+        return orderId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 
-    public Map<Integer, String> getProductList() {
-        return productList;
-    }
-
-    public void setProductList(Map<Integer, String> productList) {
-        this.productList = productList;
-    }
 
     public String getComment() {
         return comment;
@@ -70,51 +64,27 @@ public class OrderDto {
         this.orderDate = orderDate;
     }
 
-    public String getStreetName() {
-        return streetName;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setStreetName(String streetName) {
-        this.streetName = streetName;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
-    public String getHouseNumber() {
-        return houseNumber;
+    public List<Object> getProductList() {
+        return productList;
     }
 
-    public void setHouseNumber(String houseNumber) {
-        this.houseNumber = houseNumber;
+    public void setProductList(List<Object> productList) {
+        this.productList = productList;
     }
 
-    public String getCity() {
-        return city;
+    public Long getAddressId() {
+        return addressId;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getHouseNumberAddition() {
-        return houseNumberAddition;
-    }
-
-    public void setHouseNumberAddition(String houseNumberAddition) {
-        this.houseNumberAddition = houseNumberAddition;
-    }
-
-    public String getZipcode() {
-        return zipcode;
-    }
-
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
-    }
-
-    public Long getPhone() {
-        return phone;
-    }
-
-    public void setPhone(Long phone) {
-        this.phone = phone;
+    public void setAddressId(Long addressId) {
+        this.addressId = addressId;
     }
 }

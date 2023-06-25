@@ -29,7 +29,6 @@ public class OrderController {
     public List<OrderDto> getDeliveryRequests() {
 
         var dtos = new ArrayList<OrderDto>();
-        List<Order> orderList;
 
         var orders = orderService.getOrders();
         for (Order order : orders) {
@@ -39,10 +38,8 @@ public class OrderController {
     }
 
 
-
-
     @PostMapping(value = "/create")
-    public Order createOrder(@RequestBody OrderInputDto dto){
+    public Order createOrder(@RequestBody  OrderInputDto dto){
 
         return orderService.createOrder(dto);
     }
