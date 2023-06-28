@@ -42,7 +42,7 @@ public class AddressController {
     }
 
 
-    @PostMapping
+    @PostMapping(value = "/create")
     public AddressDto saveAddress(@RequestBody AddressInputDto dto) {
 
         var address = addressService.saveAddress(dto.toAddress());
@@ -50,7 +50,7 @@ public class AddressController {
         return AddressDto.transferToAddressDto(address);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping(value = "/update/{id}")
     public AddressDto updateAddress(@PathVariable("id") Long addressId,
                                   @RequestBody Address address) {
         addressService.updateAddress(addressId, address);

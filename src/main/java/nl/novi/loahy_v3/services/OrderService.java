@@ -41,8 +41,8 @@ public class OrderService {
     }
 
 
-    public void deleteOrder(Integer id) {
-        orderRepository.deleteById(id);
+    public void deleteOrder(Integer orderId) {
+        orderRepository.deleteById(orderId);
     }
 
 }

@@ -72,7 +72,7 @@ public class WishlistService {
 
         wishlist.getProducts().remove(product);
 
-        return wishlist;
+        return wishlistRepository.save(wishlist);
     }
 }
 

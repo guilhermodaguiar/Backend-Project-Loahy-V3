@@ -1,14 +1,11 @@
 package nl.novi.loahy_v3.dtos;
 
 import nl.novi.loahy_v3.models.Order;
-import nl.novi.loahy_v3.models.User;
 
-import java.util.ArrayList;
-import java.util.Collections;
+
 import java.util.List;
-import java.util.Map;
 
-public class OrderDto {
+public class OrderDto{
     private Long orderId;
 
     private List<Object> productList;
@@ -28,13 +25,15 @@ public class OrderDto {
 
         dto.setOrderId(order.getOrderId());
 
-        dto.setProductList(Collections.singletonList(order.getProductList()));
+        dto.setProductList(order.getProductList());
 
         dto.setComment(order.getComment());
 
         dto.setOrderDate(order.getOrderDate());
 
         dto.setUserEmail(order.getUserEmail());
+
+        dto.setAddressId(order.getAddressId());
 
         return dto;
     }

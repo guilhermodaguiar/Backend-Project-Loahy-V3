@@ -26,7 +26,7 @@ public class OrderController {
 
 
     @GetMapping(value = "/all")
-    public List<OrderDto> getDeliveryRequests() {
+    public List<OrderDto> getOrders() {
 
         var dtos = new ArrayList<OrderDto>();
 
@@ -36,6 +36,8 @@ public class OrderController {
         }
         return dtos;
     }
+
+    //voor de user een id met z'n bestelde producten???
 
 
     @PostMapping(value = "/create")
@@ -47,8 +49,8 @@ public class OrderController {
 
 
     @DeleteMapping(value = "/delete/{id}")
-    public ResponseEntity<?> deleteOrder(@PathVariable("id")Integer id){
-        orderService.deleteOrder(id);
+    public ResponseEntity<?> deleteOrder(@PathVariable("id")Integer orderId){
+        orderService.deleteOrder(orderId);
 
         return ResponseEntity.noContent().build();
     }

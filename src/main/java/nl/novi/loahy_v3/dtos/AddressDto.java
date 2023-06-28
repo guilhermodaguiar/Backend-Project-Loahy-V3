@@ -22,8 +22,8 @@ public class AddressDto {
         dto.streetName = address.getStreetName();
         dto.houseNumber = address.getHouseNumber();
         dto.houseNumberAddition = address.getHouseNumberAddition();
-        dto.city = address.getCity();
         dto.zipcode = address.getZipcode();
+        dto.city = address.getCity();
         dto.phoneNumber = address.getPhoneNumber();
 
         return dto;

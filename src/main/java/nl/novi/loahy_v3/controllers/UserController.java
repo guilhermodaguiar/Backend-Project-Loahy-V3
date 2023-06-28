@@ -60,18 +60,4 @@ public class UserController {
         userService.deleteUser(userEmail);
         return ResponseEntity.noContent().build();
     }
-
-    @PutMapping(value = "/{user_email}/{addressId}")
-    public void assignAddressToUser(@PathVariable("user_email") String userEmail,
-                                    @PathVariable("addressId") Long addressId) {
-
-        userService.assignAddressToUser(addressId, userEmail);
-    }
-
-    @PutMapping(value = "/{user_email}/{wishlistId}")
-    public void assignWishlistToUser(@PathVariable("user_email") String userEmail,
-                                     @PathVariable("wishlistId") Integer wishlistId) {
-
-        userService.assignWishlistToUser(wishlistId, userEmail);
-    }
 }

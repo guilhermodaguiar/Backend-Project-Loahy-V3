@@ -27,24 +27,18 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private final AddressRepository addressRepository;
-
-    @Autowired
     private AddressService addressService;
 
-    @Autowired
-    private final WishlistRepository wishlistRepository;
     @Autowired
     private WishlistService wishlistService;
 
 
     @Autowired
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AddressRepository addressRepository, WishlistRepository wishlistRepository, WishlistService wishlistService) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, WishlistService wishlistService, AddressService addressService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
-        this.addressRepository = addressRepository;
-        this.wishlistRepository = wishlistRepository;
         this.wishlistService = wishlistService;
+        this.addressService = addressService;
     }
 
 
@@ -103,37 +97,5 @@ public class UserService {
         User user = userRepository.findById(userEmail).get();
         user.addAuthority(new Authority(userEmail, authority));
         userRepository.save(user);
-    }
-
-    public void assignAddressToUser(Long addressId, String userEmail) {
-
-        Optional<User> optionalUser = userRepository.findById(userEmail);
-        Optional<Address> optionalAddress = addressRepository.findById(addressId);
-
-        if (optionalAddress.isPresent() && optionalUser.isPresent()) {
-            User user = optionalUser.get();
-            Address address = optionalAddress.get();
-
-            user.setAddress(address);
-            userRepository.save(user);
-        } else {
-            throw new RecordNotFoundException();
-        }
-    }
-
-    public void assignWishlistToUser(Integer wishlistId, String userEmail) {
-
-        Optional<User> optionalUser = userRepository.findById(userEmail);
-        Optional<Wishlist> optionalWishlist = wishlistRepository.findById(wishlistId);
-
-        if (optionalWishlist.isPresent() && optionalUser.isPresent()) {
-            User user = optionalUser.get();
-            Wishlist wishlist = optionalWishlist.get();
-
-            user.setWishlist(wishlist);
-            userRepository.save(user);
-        } else {
-            throw new RecordNotFoundException();
-        }
     }
 }

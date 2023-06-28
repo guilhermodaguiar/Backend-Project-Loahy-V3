@@ -38,8 +38,6 @@ public class Address {
 
 
 
-
-
     public Long getAddressId() {
         return addressId;
     }
