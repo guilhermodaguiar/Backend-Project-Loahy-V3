@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
@@ -49,7 +51,8 @@ public class Product {
     @OneToOne
     FileUploadResponse image;
 
-    @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonBackReference
     private Set<Wishlist> wishlist;
 

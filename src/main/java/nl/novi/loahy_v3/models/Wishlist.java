@@ -7,8 +7,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -38,8 +41,7 @@ public class Wishlist {
     @OneToOne
     User user;
 
-   @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE,
-           CascadeType.REFRESH,CascadeType.REMOVE})
+   @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
    @JoinTable(name = "wishlist_product_table",
            joinColumns = {
                    @JoinColumn(name = "wishlist_id", referencedColumnName = "wishlistId")
@@ -49,5 +51,6 @@ public class Wishlist {
            }
 
    )
-   private Set<Product> products;
+   @OnDelete(action = OnDeleteAction.CASCADE)
+   private Set<Product> products = new HashSet<>();;
 }

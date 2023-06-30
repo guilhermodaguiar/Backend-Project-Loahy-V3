@@ -75,4 +75,3 @@ public class WishlistService {
         return wishlistRepository.save(wishlist);
     }
 }
-
