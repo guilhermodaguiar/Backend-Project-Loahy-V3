@@ -1,10 +1,11 @@
 ![LoahyTree Logo](uploads/Loahy_logo_DEF_dark_RGB_Normaal.png)
 
+
 # Loahy | 2023 | Novi Hogeschool | Eindopdracht Full Stack Developer
 
-|                                            |                                               |
-|--------------------------------------------|-----------------------------------------------|
-| ![Novi-Hogeschool](uploads/logo_novi2.png) | ![Spring-boot](uploads/spring_boot_Klein.png) |
+|                                            |                                           |
+|--------------------------------------------|-------------------------------------------|
+| ![Novi-Hogeschool](uploads/logo_novi2.png) | ![Spring-boot](uploads/spring_boot_2.png) |
 
 > Dit is de Backend voor mijn webapplicatie **Loahy**. Loahy zal als een begin Spring based Application versie zijn voor een hobby/project [LoahyTree](https://www.instagram.com/loahytree/). 
 > [Springboot](https://spring.io/projects/spring-boot) wordt gebruikt voor het bouwen van de backend van de applicative.
