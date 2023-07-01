@@ -38,8 +38,8 @@ public class Wishlist {
     @Column(unique = true)
     private Integer wishlistId;
 
-    @OneToOne
-    User user;
+//    @OneToOne
+//    User user;
 
    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
    @JoinTable(name = "wishlist_product_table",

@@ -1,15 +1,12 @@
 package nl.novi.loahy_v3.services;
 
-import nl.novi.loahy_v3.models.User;
-import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
 import nl.novi.loahy_v3.exceptions.UserEmailAlreadyExistException;
 import nl.novi.loahy_v3.exceptions.UserEmailNotFoundException;
 import nl.novi.loahy_v3.models.Address;
 import nl.novi.loahy_v3.models.Authority;
+import nl.novi.loahy_v3.models.User;
 import nl.novi.loahy_v3.models.Wishlist;
-import nl.novi.loahy_v3.repositories.AddressRepository;
 import nl.novi.loahy_v3.repositories.UserRepository;
-import nl.novi.loahy_v3.repositories.WishlistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -59,7 +56,7 @@ public class UserService {
     public String createUser(User user) {
 
         if (userExist(user.getUserEmail())) {
-            throw new UserEmailAlreadyExistException("Username is al in gebruik!");
+            throw new UserEmailAlreadyExistException("Email is al in gebruik!");
         }
 
         user.setUserId((long) ((getAllUsers().size()) + 1));
