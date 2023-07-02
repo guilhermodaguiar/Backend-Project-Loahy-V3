@@ -1,4 +1,4 @@
-![LoahyTree Logo](uploads/Loahy_logo_DEF_dark_RGB_Normaal.png)
+![LoahyTree Logo](uploads/Loahy_logo_DEF_dark_RGB_Normaal_klein.png)
 
 
 # Loahy | 2023 | Novi Hogeschool | Eindopdracht Full Stack Developer

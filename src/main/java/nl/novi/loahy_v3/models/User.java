@@ -42,6 +42,7 @@ public class User {
     private Set<Authority> authorities = new HashSet<>();
 
 
+
     public String getUserEmail() {
         return userEmail;
     }

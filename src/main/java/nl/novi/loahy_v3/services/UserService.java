@@ -1,5 +1,6 @@
 package nl.novi.loahy_v3.services;
 
+import nl.novi.loahy_v3.dtos.UserDto;
 import nl.novi.loahy_v3.exceptions.UserEmailAlreadyExistException;
 import nl.novi.loahy_v3.exceptions.UserEmailNotFoundException;
 import nl.novi.loahy_v3.models.Address;
@@ -8,10 +9,13 @@ import nl.novi.loahy_v3.models.User;
 import nl.novi.loahy_v3.models.Wishlist;
 import nl.novi.loahy_v3.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -39,14 +43,35 @@ public class UserService {
     }
 
 
-    public Collection<User> getAllUsers() {
-        return userRepository.findAll();
+//    public Collection<User> getAllUsers() {
+//        return userRepository.findAll();
+//    }
+//
+//
+//    public Optional<User> getByUserEmail(String username) {
+//        return userRepository.findById(username);
+//    }
+
+    public List<UserDto> getAllUsers() {
+        List<User> list = userRepository.findAll();
+        List<UserDto> collection = new ArrayList<>();
+        for (User user : list) {
+            collection.add(fromUser(user));
+        }
+        return collection;
     }
 
-
-    public Optional<User> getByUserEmail(String username) {
-        return userRepository.findById(username);
+    public UserDto getByUserEmail(String username) {
+        UserDto dto = new UserDto();
+        Optional<User> user = userRepository.findById(username);
+        if (user.isPresent()){
+            dto = fromUser(user.get());
+        } else {
+            throw new UsernameNotFoundException(username);
+        }
+        return dto;
     }
+
 
     public boolean userExist(String userEmail) {
         return userRepository.existsById(userEmail);
@@ -94,5 +119,19 @@ public class UserService {
         User user = userRepository.findById(userEmail).get();
         user.addAuthority(new Authority(userEmail, authority));
         userRepository.save(user);
+    }
+
+    public static UserDto fromUser(User user){
+
+        var dto = new UserDto();
+
+        dto.userEmail = user.getUserEmail();
+        dto.firstName = user.getFirstName();
+        dto.lastName = user.getLastName();
+        dto.address = user.getAddress();
+        dto.wishlist = user.getWishlist();
+        dto.authorities = user.getAuthorities();
+
+        return dto;
     }
 }
