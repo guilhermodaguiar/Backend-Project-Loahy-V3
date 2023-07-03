@@ -43,15 +43,6 @@ public class UserService {
     }
 
 
-//    public Collection<User> getAllUsers() {
-//        return userRepository.findAll();
-//    }
-//
-//
-//    public Optional<User> getByUserEmail(String username) {
-//        return userRepository.findById(username);
-//    }
-
     public List<UserDto> getAllUsers() {
         List<User> list = userRepository.findAll();
         List<UserDto> collection = new ArrayList<>();
