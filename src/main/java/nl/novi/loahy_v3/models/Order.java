@@ -1,5 +1,6 @@
 package nl.novi.loahy_v3.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -29,14 +30,17 @@ public class Order {
     @Column
     private String comment;
 
-    @Column
-    public String userEmail;
+//    @Column
+//    public String userEmail;
 
     @Column
     public Long addressId;
     @Column
     public String orderDate;
 
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private User userEmail;
 
     public Long getOrderId() {
         return orderId;
@@ -70,13 +74,13 @@ public class Order {
         this.orderDate = orderDate;
     }
 
-    public String getUserEmail() {
-        return userEmail;
-    }
-
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-    }
+//    public String getUserEmail() {
+//        return userEmail;
+//    }
+//
+//    public void setUserEmail(String userEmail) {
+//        this.userEmail = userEmail;
+//    }
 
     public Long getAddressId() {
         return addressId;
@@ -84,5 +88,22 @@ public class Order {
 
     public void setAddressId(Long addressId) {
         this.addressId = addressId;
+    }
+
+//    public User getUserId() {
+//        return userId;
+//    }
+//
+//    public void setUserId(User userId) {
+//        this.userId = userId;
+//    }
+
+
+    public User getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(User userEmail) {
+        this.userEmail = userEmail;
     }
 }

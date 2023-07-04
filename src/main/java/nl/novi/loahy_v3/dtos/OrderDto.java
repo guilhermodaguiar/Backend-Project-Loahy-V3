@@ -14,7 +14,7 @@ public class OrderDto{
 
     private String orderDate;
 
-    private String userEmail;
+    private UserDto userEmail;
 
     private Long addressId;
 
@@ -31,7 +31,7 @@ public class OrderDto{
 
         dto.setOrderDate(order.getOrderDate());
 
-        dto.setUserEmail(order.getUserEmail());
+        dto.setUserEmail(UserDto.fromUser(order.getUserEmail()));
 
         dto.setAddressId(order.getAddressId());
 
@@ -63,11 +63,11 @@ public class OrderDto{
         this.orderDate = orderDate;
     }
 
-    public String getUserEmail() {
+    public UserDto getUserEmail() {
         return userEmail;
     }
 
-    public void setUserEmail(String userEmail) {
+    public void setUserEmail(UserDto userEmail) {
         this.userEmail = userEmail;
     }
 

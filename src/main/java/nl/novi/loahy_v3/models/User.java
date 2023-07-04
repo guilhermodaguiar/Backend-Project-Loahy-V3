@@ -1,7 +1,10 @@
 package nl.novi.loahy_v3.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -42,7 +45,8 @@ public class User {
     private Set<Authority> authorities = new HashSet<>();
 
 
-
+    @OneToMany(mappedBy = "userEmail")
+    List<Order> orders;
     public String getUserEmail() {
         return userEmail;
     }

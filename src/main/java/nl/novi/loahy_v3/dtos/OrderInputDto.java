@@ -2,6 +2,7 @@ package nl.novi.loahy_v3.dtos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import nl.novi.loahy_v3.models.User;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,6 +20,8 @@ public class OrderInputDto implements Serializable {
     private String userEmail;
 
     private Long addressId;
+
+//    private Long userId;
 
 
 
@@ -61,4 +64,12 @@ public class OrderInputDto implements Serializable {
     public void setAddressId(Long addressId) {
         this.addressId = addressId;
     }
+
+//    public Long getUserId() {
+//        return userId;
+//    }
+//
+//    public void setUserId(Long userId) {
+//        this.userId = userId;
+//    }
 }
