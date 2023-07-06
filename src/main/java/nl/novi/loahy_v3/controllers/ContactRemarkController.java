@@ -23,7 +23,7 @@ public class ContactRemarkController {
         this.contactRemarkService = contactRemarkService;
     }
 
-    @GetMapping(value = "/all")
+    @GetMapping
     public ResponseEntity<List<ContactRemarkDto>> getAllContacts() {
 
         List<ContactRemarkDto> contactRemarkDtos = contactRemarkService.getAllContacts();
@@ -32,7 +32,7 @@ public class ContactRemarkController {
     }
 
 
-    @PostMapping(value = "/create")
+    @PostMapping
     public ResponseEntity<ContactRemarkDto> createRemark(@RequestBody ContactRemarkDto contactRemarkDto) {
 
         final String createdContact = contactRemarkService.createRemark(contactRemarkDto);
@@ -44,8 +44,8 @@ public class ContactRemarkController {
     }
 
 
-    @DeleteMapping(value = "/delete/{email}")
-    public ResponseEntity<ContactRemarkDto> deleteContact(@PathVariable("email") String contactEmail) {
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<ContactRemarkDto> deleteContact(@PathVariable("id") String contactEmail) {
         contactRemarkService.deleteContact(contactEmail);
         return ResponseEntity.noContent().build();
     }

@@ -2,6 +2,8 @@ package nl.novi.loahy_v3.services;
 
 
 import nl.novi.loahy_v3.dtos.UserDto;
+import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
+import nl.novi.loahy_v3.exceptions.UserEmailAlreadyExistException;
 import nl.novi.loahy_v3.models.User;
 import nl.novi.loahy_v3.models.Authority;
 import nl.novi.loahy_v3.repositories.UserRepository;
@@ -35,6 +37,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) {
+        if (!userRepository.existsById(username)) {
+            throw new RecordNotFoundException("User met email bestaat niet" );
+        }
         UserDto userDto = userService.getByUserEmail(username);
         Optional<User> user = userRepository.findUserByUserEmailIs(username);
 

@@ -21,7 +21,7 @@ public class WishlistController {
     }
 
 
-    @GetMapping(value = "/products/all")
+    @GetMapping(value = "/products")
     public List<Wishlist> findALlWishlists() {
         return wishlistService.getAllWishlists();
     }

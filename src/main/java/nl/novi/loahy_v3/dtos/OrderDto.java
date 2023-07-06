@@ -1,21 +1,25 @@
 package nl.novi.loahy_v3.dtos;
 
 import nl.novi.loahy_v3.models.Order;
+import org.hibernate.validator.constraints.NotBlank;
 
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class OrderDto{
     private Long orderId;
 
+    @NotNull
     private List<Object> productList;
 
     private String comment;
-
+    @NotNull
     private String orderDate;
 
     private UserDto userEmail;
 
+    @NotNull
     private Long addressId;
 
 
@@ -24,15 +28,10 @@ public class OrderDto{
         var dto = new OrderDto();
 
         dto.setOrderId(order.getOrderId());
-
         dto.setProductList(order.getProductList());
-
         dto.setComment(order.getComment());
-
         dto.setOrderDate(order.getOrderDate());
-
         dto.setUserEmail(UserDto.fromUser(order.getUserEmail()));
-
         dto.setAddressId(order.getAddressId());
 
         return dto;

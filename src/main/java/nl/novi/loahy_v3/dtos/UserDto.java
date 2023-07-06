@@ -1,19 +1,25 @@
 package nl.novi.loahy_v3.dtos;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import nl.novi.loahy_v3.models.Authority;
 import nl.novi.loahy_v3.models.Address;
+import nl.novi.loahy_v3.models.Authority;
 import nl.novi.loahy_v3.models.User;
 import nl.novi.loahy_v3.models.Wishlist;
 
+
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 
 public class UserDto {
 
+    @NotNull
     public String userEmail;
+
+    @NotNull
     public String firstName;
+
+    @NotNull
     public String lastName;
 
     @JsonDeserialize
@@ -85,6 +91,4 @@ public class UserDto {
     public void setWishlist(Wishlist wishlist) {
         this.wishlist = wishlist;
     }
-
-
 }

@@ -49,49 +49,47 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/users/").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/users/all").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/users").permitAll()
-                .antMatchers(HttpMethod.GET, "/users/{user_email}").permitAll()
-                .antMatchers(HttpMethod.POST, "/users/create").permitAll()
-                .antMatchers(HttpMethod.PUT, "/users/{user_email}").permitAll()
-                .antMatchers(HttpMethod.DELETE,"/users/delete/{user_email}").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/users/{id}").permitAll()
+                .antMatchers(HttpMethod.POST, "/users").permitAll()
+                .antMatchers(HttpMethod.PUT, "/users/{id}").permitAll()
+                .antMatchers(HttpMethod.DELETE,"/users/delete/{id}").hasRole("ADMIN")
 
-                .antMatchers(HttpMethod.POST, "/contact-remarks/post").permitAll()
-                .antMatchers(HttpMethod.GET, "/contact-remarks/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/contact-remarks").permitAll()
+                .antMatchers(HttpMethod.GET, "/contact-remarks").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/contact-remarks/**").hasRole("ADMIN")
 
                 .antMatchers(HttpMethod.GET,"images/download/{id}").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST,"images/upload").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE,"images/delete").hasRole("ADMIN")
 
                 .antMatchers(HttpMethod.GET, "/products").permitAll()
                 .antMatchers(HttpMethod.GET, "/products/{id}").permitAll()
-                .antMatchers(HttpMethod.PUT, "/products/update/{id}").hasRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/products/delete/{id}").hasRole("ADMIN")
-                .antMatchers(HttpMethod.POST, "/products/{id}/picture").hasRole("ADMIN")
-                .antMatchers(HttpMethod.PUT, "/products/{id}/picture").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/products").hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT, "/products/{id}").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/products/{id}").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/products/{id}/image").hasRole("ADMIN")
 
-                .antMatchers(HttpMethod.GET, "/orders/{id}").permitAll()
-                .antMatchers(HttpMethod.POST, "/orders/create").permitAll()
-                .antMatchers(HttpMethod.DELETE, "/orders/delete/{id}").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/orders/all").hasRole("ADMIN")
 
-                .antMatchers(HttpMethod.POST, "/address/create").permitAll()
+                .antMatchers(HttpMethod.POST, "/orders").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/orders/{id}").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/orders").hasRole("ADMIN")
+
+                .antMatchers(HttpMethod.POST, "/address").permitAll()
                 .antMatchers(HttpMethod.PUT, "address/{id}").permitAll()
                 .antMatchers(HttpMethod.GET, "address/{id}").permitAll()
-                .antMatchers(HttpMethod.GET, "address/all").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "address").hasRole("ADMIN")
 
                 .antMatchers(HttpMethod.POST, "/products/image-upload").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/products/image-delete").hasRole("ADMIN")
 
-                .antMatchers("/authenticated").authenticated()
+
                 .antMatchers("/authenticate").permitAll()
                 .anyRequest().permitAll()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-
     }
 
 }

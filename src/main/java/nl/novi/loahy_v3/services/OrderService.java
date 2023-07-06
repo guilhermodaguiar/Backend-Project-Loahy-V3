@@ -1,6 +1,7 @@
 package nl.novi.loahy_v3.services;
 
 import nl.novi.loahy_v3.dtos.OrderInputDto;
+import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
 import nl.novi.loahy_v3.models.Order;
 import nl.novi.loahy_v3.repositories.OrderRepository;
 import nl.novi.loahy_v3.repositories.UserRepository;
@@ -34,20 +35,21 @@ public class OrderService {
 
 
     public Order createOrder(OrderInputDto orderInputDto) {
-        Order order = new Order();
+        var order = new Order();
 
         order.setProductList(orderInputDto.getProductList());
         order.setComment(orderInputDto.getComment());
         order.setOrderDate(orderInputDto.getOrderDate());
-//        order.setUserEmail(orderInputDto.getUserEmail());
         order.setAddressId(orderInputDto.getAddressId());
         order.setUserEmail(userRepository.getReferenceById(orderInputDto.getUserEmail()));
 
         return orderRepository.save(order);
     }
 
-
-    public void deleteOrder(Integer orderId) {
+    public void deleteOrder(Long orderId) {
+        if (!orderRepository.existsById(orderId)) {
+            throw new RecordNotFoundException("Order met id bestaat niet" );
+        }
         orderRepository.deleteById(orderId);
     }
 

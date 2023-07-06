@@ -1,5 +1,7 @@
 package nl.novi.loahy_v3.dtos;
 
+import nl.novi.loahy_v3.models.ContactRemark;
+
 public class ContactRemarkDto {
 
     public String contactName;
@@ -8,7 +10,18 @@ public class ContactRemarkDto {
     public String contactOrganisation;
     public String contactRemark;
 
+    public static ContactRemarkDto fromContact(ContactRemark contactRemark) {
 
+        var contactDto = new ContactRemarkDto();
+
+        contactDto.contactName = contactRemark.getContactName();
+        contactDto.contactEmail = contactRemark.getContactEmail();
+        contactDto.contactOrganisation = contactRemark.getContactOrganisation();
+        contactDto.contactPhone = contactRemark.getContactPhone();
+        contactDto.contactRemark = contactRemark.getContactRemark();
+
+        return contactDto;
+    }
 
     public String getContactName() {
         return contactName;

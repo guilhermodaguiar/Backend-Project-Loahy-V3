@@ -33,7 +33,7 @@ public class ProductController {
         this.imageController = imageController;
     }
 
-    @GetMapping(value = "/all")
+    @GetMapping
     @Transactional
     public List<ProductDto> getAllProducts() {
         var dtos = new ArrayList<ProductDto>();
@@ -57,7 +57,7 @@ public class ProductController {
     }
 
 
-    @PostMapping(value ="/create")
+    @PostMapping
     public ProductDto createProduct(@RequestBody ProductInputDto dto) {
         var product = productService.createProduct(dto.toProduct());
 
@@ -65,7 +65,7 @@ public class ProductController {
 
     }
 
-    @PutMapping(value = "/update/{id}")
+    @PutMapping(value = "/{id}")
     public ProductDto updateProduct(@PathVariable("id") Integer productId,
                                     @RequestBody Product product) {
         productService.updateProduct(product);
@@ -73,7 +73,7 @@ public class ProductController {
         return ProductDto.transferToDto(product);
     }
 
-    @DeleteMapping(value = "/delete/{id}")
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity<Object> deleteProduct(@PathVariable("id") Integer productId) {
 
         productService.deleteProduct(productId);

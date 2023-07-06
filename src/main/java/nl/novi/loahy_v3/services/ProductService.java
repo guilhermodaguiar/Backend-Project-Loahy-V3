@@ -2,7 +2,6 @@ package nl.novi.loahy_v3.services;
 
 
 import nl.novi.loahy_v3.dtos.ProductDto;
-import nl.novi.loahy_v3.dtos.ProductInputDto;
 import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
 import nl.novi.loahy_v3.models.FileUploadResponse;
 import nl.novi.loahy_v3.models.Product;
@@ -12,11 +11,8 @@ import nl.novi.loahy_v3.repositories.WishlistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import static nl.novi.loahy_v3.dtos.ProductDto.transferToDto;
 
 @Service
 public class ProductService {
@@ -25,14 +21,12 @@ public class ProductService {
     private final ProductRepository productRepository;
     @Autowired
     private final FileUploadRepository uploadRepository;
-    @Autowired
-    private final WishlistRepository wishlistRepository;
+
 
     @Autowired
-    public ProductService(ProductRepository productRepository, FileUploadRepository uploadRepository, WishlistRepository wishlistRepository) {
+    public ProductService(ProductRepository productRepository, FileUploadRepository uploadRepository) {
         this.productRepository = productRepository;
         this.uploadRepository = uploadRepository;
-        this.wishlistRepository = wishlistRepository;
     }
 
     public List<Product> getAllProducts() {
@@ -50,6 +44,7 @@ public class ProductService {
     }
 
     public Product createProduct(Product product) {
+
 
         product.setProductId(product.getProductId());
         product.setProductName(product.getProductName());
@@ -76,12 +71,13 @@ public class ProductService {
 
             productRepository.save(product1);
 
-
         }
     }
 
     public void deleteProduct(Integer productId) {
-
+        if (!productRepository.existsById(productId)) {
+            throw new RecordNotFoundException("Product met id bestaat niet" );
+        }
         productRepository.deleteById(productId);
     }
 
@@ -97,17 +93,9 @@ public class ProductService {
             product.setImage(image);
             productRepository.save(product);
         }
-    }
-
-    public Product transferToProduct(ProductDto dto) {
-
-        var product = new Product();
-
-        product.setProductName(dto.getProductName());
-        product.setProductDescription(dto.getProductDescription());
-        product.setProductPrice(dto.getProductPrice());
-        product.setImage(dto.getImage());
-        return product;
+        else {
+            throw new RecordNotFoundException();
+        }
     }
 }
 

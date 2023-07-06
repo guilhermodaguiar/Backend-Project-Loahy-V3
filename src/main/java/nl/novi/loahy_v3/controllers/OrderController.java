@@ -25,8 +25,8 @@ public class OrderController {
     }
 
 
-    @GetMapping(value = "/all")
-    public List<OrderDto> getOrders() {
+    @GetMapping
+    public ResponseEntity<List<OrderDto>> getOrders() {
 
         var dtos = new ArrayList<OrderDto>();
 
@@ -34,22 +34,20 @@ public class OrderController {
         for (Order order : orders) {
             dtos.add(OrderDto.fromOrder(order));
         }
-        return dtos;
-    }
-
-    //voor de user een id met z'n bestelde producten???
-
-
-    @PostMapping(value = "/create")
-    public Order createOrder(@RequestBody  OrderInputDto dto){
-
-        return orderService.createOrder(dto);
+        return ResponseEntity.ok().body(dtos);
     }
 
 
+    @PostMapping
+    public ResponseEntity<Order> createOrder(@RequestBody  OrderInputDto dto){
 
-    @DeleteMapping(value = "/delete/{id}")
-    public ResponseEntity<?> deleteOrder(@PathVariable("id")Integer orderId){
+        return ResponseEntity.ok().body(orderService.createOrder(dto));
+    }
+
+
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<?> deleteOrder(@PathVariable("id")Long orderId){
         orderService.deleteOrder(orderId);
 
         return ResponseEntity.noContent().build();

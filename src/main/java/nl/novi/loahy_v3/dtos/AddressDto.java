@@ -1,14 +1,24 @@
 package nl.novi.loahy_v3.dtos;
 import nl.novi.loahy_v3.models.Address;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 public class AddressDto {
 
+
     public Long addressId;
+    @NotNull
     public String streetName;
+
+    @NotNull
     public String houseNumber;
     public String houseNumberAddition;
+    @NotNull
     public String city;
+    @NotNull
     public String zipcode;
+    @NotNull
     public Long phoneNumber;
 
 

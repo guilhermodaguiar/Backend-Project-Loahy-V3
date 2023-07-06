@@ -1,6 +1,7 @@
 package nl.novi.loahy_v3.services;
 
 import nl.novi.loahy_v3.dtos.ContactRemarkDto;
+import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
 import nl.novi.loahy_v3.models.ContactRemark;
 import nl.novi.loahy_v3.repositories.ContactRemarkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static nl.novi.loahy_v3.dtos.ContactRemarkDto.fromContact;
 
 @Service
 public class ContactRemarkService {
@@ -32,31 +35,6 @@ public class ContactRemarkService {
 
 
     public String createRemark(ContactRemarkDto contactRemarkDto) {
-        ContactRemark newContactRemark = contactRemarkRepository.save(toContact(contactRemarkDto));
-        return newContactRemark.getContactName();
-    }
-
-
-    public void deleteContact(String contactEmail) {
-        contactRemarkRepository.deleteById(contactEmail);
-    }
-
-
-    public static ContactRemarkDto fromContact(ContactRemark contactRemark) {
-
-        var contactDto = new ContactRemarkDto();
-
-        contactDto.contactName = contactRemark.getContactName();
-        contactDto.contactEmail = contactRemark.getContactEmail();
-        contactDto.contactOrganisation = contactRemark.getContactOrganisation();
-        contactDto.contactPhone = contactRemark.getContactPhone();
-        contactDto.contactRemark = contactRemark.getContactRemark();
-
-        return contactDto;
-    }
-
-    public ContactRemark toContact(ContactRemarkDto contactRemarkDto) {
-
         var contact = new ContactRemark();
 
         contact.setContactName(contactRemarkDto.getContactName());
@@ -65,6 +43,15 @@ public class ContactRemarkService {
         contact.setContactOrganisation(contactRemarkDto.getContactOrganisation());
         contact.setContactRemark(contactRemarkDto.getContactRemark());
 
-        return contact;
+        ContactRemark newContactRemark = contactRemarkRepository.save(contact);
+        return newContactRemark.getContactName();
+    }
+
+
+    public void deleteContact(String contactEmail) {
+        if (!contactRemarkRepository.existsById(contactEmail)) {
+            throw new RecordNotFoundException("opmerking van user met email bestaat niet" );
+        }
+        contactRemarkRepository.deleteById(contactEmail);
     }
 }

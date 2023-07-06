@@ -43,5 +43,4 @@ INSERT INTO authorities (user_email, authority) VALUES ('user@test.nl', 'ROLE_US
 INSERT INTO authorities (user_email, authority) VALUES ('jenfromlombok@test.nl', 'ROLE_USER');
 INSERT INTO authorities (user_email, authority) VALUES ('admin@test.nl', 'ROLE_ADMIN');
 INSERT INTO authorities (user_email, authority) VALUES ('guilfromlombok@test.nl', 'ROLE_USER');
---
--- INSERT INTO orders (order_id, product_list, comment, order_date, user_email, address_id) VALUES (72, ARRAY [["id: 1000","Brikkon - Stad","€ 64.95","qty: 3"],["id: 1001","Frame me up - Tokyo Lights","€ 15.95","qty: 2"],["id: 1002","Frame me up - Vintage","€ 15.95","qty: 1"]], 'Mijn eerste order, dank je wel', '"Wed Jun 28 2023 12:04:31 GMT+0200 (Midden-Europese zomertijd)"','user@test.nl',5001 );
+

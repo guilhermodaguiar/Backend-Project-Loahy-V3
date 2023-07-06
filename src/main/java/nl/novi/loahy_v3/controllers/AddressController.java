@@ -23,7 +23,7 @@ public class AddressController {
         this.addressService = addressService;
     }
 
-    @GetMapping(value = "/all")
+    @GetMapping
     public ResponseEntity<List<AddressDto>> getAllAddresses() {
 
         List<AddressDto> addressDtos = addressService.getAllAddresses();
@@ -42,7 +42,7 @@ public class AddressController {
     }
 
 
-    @PostMapping(value = "/create")
+    @PostMapping
     public AddressDto saveAddress(@RequestBody AddressInputDto dto) {
 
         var address = addressService.saveAddress(dto.toAddress());
@@ -50,7 +50,7 @@ public class AddressController {
         return AddressDto.transferToAddressDto(address);
     }
 
-    @PutMapping(value = "/update/{id}")
+    @PutMapping(value = "/{id}")
     public AddressDto updateAddress(@PathVariable("id") Long addressId,
                                   @RequestBody Address address) {
         addressService.updateAddress(addressId, address);

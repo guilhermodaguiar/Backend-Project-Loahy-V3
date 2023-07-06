@@ -18,20 +18,20 @@ public class UserController {
     private UserService userService;
 
 
-    @GetMapping(value = "/all")
+    @GetMapping
     public ResponseEntity<Object> getAllUsers() {
 
         return ResponseEntity.ok().body(userService.getAllUsers());
     }
 
-    @GetMapping(value = "/{email}")
-    public ResponseEntity<Object> getByUserEmail(@PathVariable("email") String username) {
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Object> getByUserEmail(@PathVariable("id") String username) {
 
         return ResponseEntity.ok().body(userService.getByUserEmail(username));
 
     }
 
-    @PostMapping(value = "/create")
+    @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user) {
 
         String newUserEmail = userService.createUser(user);
@@ -45,8 +45,8 @@ public class UserController {
                 .build();
     }
 
-    @PutMapping(value = "/{email}")
-    public ResponseEntity<Object> updateUser(@PathVariable("email") String userEmail, @RequestBody User user) {
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Object> updateUser(@PathVariable("id") String userEmail, @RequestBody User user) {
 
         userService.updateUser(userEmail, user);
 
@@ -54,8 +54,8 @@ public class UserController {
 
     }
 
-    @DeleteMapping(value = "/delete/{email}")
-    public ResponseEntity<Object> deleteUser(@PathVariable("email") String userEmail) {
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Object> deleteUser(@PathVariable("id") String userEmail) {
         userService.deleteUser(userEmail);
         return ResponseEntity.noContent().build();
     }

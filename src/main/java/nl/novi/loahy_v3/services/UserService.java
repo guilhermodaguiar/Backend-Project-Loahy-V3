@@ -1,6 +1,7 @@
 package nl.novi.loahy_v3.services;
 
 import nl.novi.loahy_v3.dtos.UserDto;
+import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
 import nl.novi.loahy_v3.exceptions.UserEmailAlreadyExistException;
 import nl.novi.loahy_v3.exceptions.UserEmailNotFoundException;
 import nl.novi.loahy_v3.models.Address;
@@ -17,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+
+import static nl.novi.loahy_v3.dtos.UserDto.fromUser;
 
 
 @Service
@@ -91,15 +94,19 @@ public class UserService {
 
 
     public void updateUser(String userEmail, User user) {
-        if (!userRepository.existsById(userEmail))
+        if (!userRepository.existsById(userEmail)) {
             throw new UserEmailNotFoundException(userEmail);
-
-        User user1 = userRepository.findById(userEmail).get();
-        user1.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user1);
+        } else {
+            User user1 = userRepository.findById(userEmail).get();
+            user1.setPassword(passwordEncoder.encode(user.getPassword()));
+            userRepository.save(user1);
+        }
     }
 
     public void deleteUser(String userEmail) {
+        if (!userRepository.existsById(userEmail)) {
+            throw new RecordNotFoundException("User met email bestaat niet" );
+        }
         userRepository.deleteById(userEmail);
     }
 
@@ -110,19 +117,5 @@ public class UserService {
         User user = userRepository.findById(userEmail).get();
         user.addAuthority(new Authority(userEmail, authority));
         userRepository.save(user);
-    }
-
-    public static UserDto fromUser(User user){
-
-        var dto = new UserDto();
-
-        dto.userEmail = user.getUserEmail();
-        dto.firstName = user.getFirstName();
-        dto.lastName = user.getLastName();
-        dto.address = user.getAddress();
-        dto.wishlist = user.getWishlist();
-        dto.authorities = user.getAuthorities();
-
-        return dto;
     }
 }

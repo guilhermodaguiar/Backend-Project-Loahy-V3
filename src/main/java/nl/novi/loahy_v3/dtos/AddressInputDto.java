@@ -3,14 +3,20 @@ package nl.novi.loahy_v3.dtos;
 
 import nl.novi.loahy_v3.models.Address;
 
+
 public class AddressInputDto {
 
     public Long addressId;
+
     public String streetName;
+
     public String houseNumber;
     public String houseNumberAddition;
+
     public String city;
+
     public String zipcode;
+
     public Long phoneNumber;
 
 

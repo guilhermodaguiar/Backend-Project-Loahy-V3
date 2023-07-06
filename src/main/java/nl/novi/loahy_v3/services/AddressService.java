@@ -42,7 +42,7 @@ public class AddressService {
         if (address.isPresent()) {
             dto = transferToAddressDto(address.get());
         } else {
-            throw new RecordNotFoundException();
+            throw new RecordNotFoundException("Address bestaat niet..");
         }
         return dto;
     }
@@ -53,11 +53,10 @@ public class AddressService {
     }
 
     public void updateAddress(Long id, Address address) {
-
         Optional<Address> optionalAddress = addressRepository.findById(id);
 
         if (optionalAddress.isEmpty()) {
-            throw new RecordNotFoundException("address bestaat niet..");
+            throw new RecordNotFoundException("Address bestaat niet..");
         } else {
 
             Address address1 = optionalAddress.get();
