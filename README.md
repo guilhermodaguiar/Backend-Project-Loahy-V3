@@ -25,6 +25,11 @@ Voor het **clonen** van de repository voor Loahy wordt verwezen naar de links in
 | HTTPS | `https://github.com/guilhermodaguiar/Backend-Project-Loahy-V3.git` |
 | SSH   | `git@github.com:guilhermodaguiar/Backend-Project-Loahy-V3.git`     |
 
+>Voordat de applicatie gebruikt kan worden dient deze eerst op een correcte manier geïnstalleerd te worden.
+>Volg de stappen en run daarna de applicatie. Voordat de applicatie gestart wordt moet de backend ook van git worden
+> geïnstalleerd. Voor een complete handleiding van de gehele applicatie wordt verwezen naar de installatiehandleiding:
+> Deze kan gevraagd worden door te mailen naar: [Contact Me](mailto:dguilhermo@gmail.com)
+>
 
 ## Map Guide
 Hieronder staan de mappen structuur van Springboot [Spring](https://spring.io) met de kort uitleg waarvoor ze gebruikt worden. 
