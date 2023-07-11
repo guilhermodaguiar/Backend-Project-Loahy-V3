@@ -7,6 +7,7 @@ import nl.novi.loahy_v3.repositories.ContactRemarkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +34,7 @@ public class ContactRemarkService {
     }
 
 
+
     public String createRemark(ContactRemarkDto contactRemarkDto) {
         var contact = new ContactRemark();
 
@@ -49,7 +51,7 @@ public class ContactRemarkService {
 
     public void deleteContact(String contactEmail) {
         if (!contactRemarkRepository.existsById(contactEmail)) {
-            throw new RecordNotFoundException("opmerking van user met email bestaat niet" );
+            throw new RecordNotFoundException("opmerking van user met email bestaat niet");
         }
         contactRemarkRepository.deleteById(contactEmail);
     }

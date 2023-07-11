@@ -6,20 +6,14 @@ import nl.novi.loahy_v3.models.Authority;
 import nl.novi.loahy_v3.models.User;
 import nl.novi.loahy_v3.models.Wishlist;
 
-
-import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 
 public class UserDto {
-
-    @NotNull
     public String userEmail;
 
-    @NotNull
     public String firstName;
 
-    @NotNull
     public String lastName;
 
     @JsonDeserialize
@@ -31,7 +25,7 @@ public class UserDto {
     @JsonDeserialize
     public Set<Authority> authorities;
 
-    public static UserDto fromUser(User user){
+    public static UserDto fromUser(User user) {
 
         var userDto = new UserDto();
 
@@ -72,6 +66,7 @@ public class UserDto {
     public Set<Authority> getAuthorities() {
         return authorities;
     }
+
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
     }

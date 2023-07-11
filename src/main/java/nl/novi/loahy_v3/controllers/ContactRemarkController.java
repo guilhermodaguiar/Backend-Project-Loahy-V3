@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -33,8 +34,7 @@ public class ContactRemarkController {
 
 
     @PostMapping
-    public ResponseEntity<ContactRemarkDto> createRemark(@RequestBody ContactRemarkDto contactRemarkDto) {
-
+    public ResponseEntity<ContactRemarkDto> createRemark(@RequestBody @Valid ContactRemarkDto contactRemarkDto) {
         final String createdContact = contactRemarkService.createRemark(contactRemarkDto);
 
         final URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{contactName}")

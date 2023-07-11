@@ -31,7 +31,7 @@ class ContactRemarkControllerTest {
 
     @Test
     @DisplayName("Should create a remark when the contact remark is valid")
-    void createContactRemarkWhenContactRemarkIsInvalid() {
+    void createContactRemarkWhenContactRemarkIsInvalid() throws Exception {
 
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));

@@ -9,10 +9,18 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.RollbackException;
+
 @RestController
 @CrossOrigin
 @ControllerAdvice
 public class ExceptionController {
+
+    @ExceptionHandler(value = RollbackException.class)
+    public ResponseEntity<Object> exception(RollbackException exception) {
+
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 
     @ExceptionHandler(value = UserEmailNotFoundException.class)
     public ResponseEntity<Object> exception(UserEmailNotFoundException exception) {
@@ -29,7 +37,7 @@ public class ExceptionController {
     @ExceptionHandler(value = BadRequestException.class)
     public ResponseEntity<Object> exception(BadRequestException exception) {
 
-        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = RecordNotFoundException.class)

@@ -3,21 +3,23 @@ package nl.novi.loahy_v3.dtos;
 import nl.novi.loahy_v3.models.ContactRemark;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class ContactRemarkDto {
 
-    @NotNull
+    @NotBlank(message = "contact name must not be blank")
     public String contactName;
 
-    @Email
+    @Email(message = "check your email adress, it must not be blank")
     public String contactEmail;
 
     @NotNull
     public Long contactPhone;
     public String contactOrganisation;
 
-    @NotNull
+    @NotEmpty(message = "remark must not be empty")
     public String contactRemark;
 
     public static ContactRemarkDto fromContact(ContactRemark contactRemark) {
