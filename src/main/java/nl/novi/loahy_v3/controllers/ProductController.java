@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +59,7 @@ public class ProductController {
 
 
     @PostMapping
-    public ProductDto createProduct(@RequestBody ProductInputDto dto) {
+    public ProductDto createProduct(@RequestBody @Valid ProductInputDto dto) {
         var product = productService.createProduct(dto.toProduct());
 
         return ProductDto.transferToDto(product);
@@ -67,7 +68,7 @@ public class ProductController {
 
     @PutMapping(value = "/{id}")
     public ProductDto updateProduct(@PathVariable("id") Integer productId,
-                                    @RequestBody Product product) {
+                                    @RequestBody @Valid Product product) {
         productService.updateProduct(product);
 
         return ProductDto.transferToDto(product);

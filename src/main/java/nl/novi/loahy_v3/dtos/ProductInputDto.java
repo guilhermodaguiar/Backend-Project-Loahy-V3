@@ -3,12 +3,19 @@ package nl.novi.loahy_v3.dtos;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.novi.loahy_v3.models.FileUploadResponse;
 import nl.novi.loahy_v3.models.Product;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class ProductInputDto {
 
+    @NotBlank(message = "product name must not be blank")
     public String productName;
 
+    @NotBlank(message = "product description must not be blank")
     public String productDescription;
 
+    @NotNull(message = "product price must not be empty")
     public Double productPrice;
 
     @JsonSerialize

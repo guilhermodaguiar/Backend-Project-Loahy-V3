@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @CrossOrigin
@@ -52,7 +53,7 @@ public class AddressController {
 
     @PutMapping(value = "/{id}")
     public AddressDto updateAddress(@PathVariable("id") Long addressId,
-                                  @RequestBody Address address) {
+                                  @RequestBody @Valid Address address) {
         addressService.updateAddress(addressId, address);
 
         return AddressDto.transferToAddressDto(address);

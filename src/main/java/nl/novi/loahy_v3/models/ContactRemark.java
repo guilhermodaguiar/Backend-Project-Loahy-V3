@@ -1,14 +1,11 @@
 package nl.novi.loahy_v3.models;
 
-import lombok.Data;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 
-@Data
 @Entity
 @Table(name = "remarks")
 public class ContactRemark {

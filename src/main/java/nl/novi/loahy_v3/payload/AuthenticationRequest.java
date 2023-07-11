@@ -1,7 +1,12 @@
 package nl.novi.loahy_v3.payload;
+
+import javax.validation.constraints.NotBlank;
+
 public class AuthenticationRequest {
-    
+
+    @NotBlank(message = "user email must not be blank")
     private String userEmail;
+    @NotBlank(message = "password must not be blank")
     private String password;
 
     public AuthenticationRequest(){

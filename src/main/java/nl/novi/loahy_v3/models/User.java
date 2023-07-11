@@ -1,8 +1,9 @@
 package nl.novi.loahy_v3.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 
@@ -12,19 +13,24 @@ public class User {
     @Id
     @Column(nullable = false,
             unique = true)
+    @Email(message = "user email not valid")
+    @NotBlank(message = "email must not be blank")
     private String userEmail;
 
     @Column(nullable = false,
             unique = true)
+    @NotBlank(message = "password must not be blank")
     private String password;
 
     @Column(nullable = false)
     private Long userId;
 
     @Column
+    @NotBlank(message = "user first name must not be blank")
     private String firstName;
 
     @Column
+    @NotBlank(message = "user last name must not be blank")
     private String lastName;
 
     @OneToOne
@@ -41,11 +47,6 @@ public class User {
             orphanRemoval = true,
             fetch = FetchType.EAGER)
     private Set<Authority> authorities = new HashSet<>();
-
-
-    @OneToMany(mappedBy = "userEmail",
-            cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    List<Order> orders;
 
 
     public String getUserEmail() {

@@ -12,10 +12,11 @@ public class ContactRemarkDto {
     @NotBlank(message = "contact name must not be blank")
     public String contactName;
 
-    @Email(message = "check your email adress, it must not be blank")
+    @Email(message = "invalid email address")
+    @NotBlank(message = "email must not be blank")
     public String contactEmail;
 
-    @NotNull
+    @NotNull(message = "contact phone must not be null")
     public Long contactPhone;
     public String contactOrganisation;
 

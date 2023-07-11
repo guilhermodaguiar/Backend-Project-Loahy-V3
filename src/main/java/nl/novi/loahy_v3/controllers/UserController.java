@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 @CrossOrigin
@@ -32,7 +33,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
+    public ResponseEntity<User> createUser(@RequestBody @Valid User user) {
 
         String newUserEmail = userService.createUser(user);
         userService.addAuthority(newUserEmail, "ROLE_USER");
@@ -46,7 +47,7 @@ public class UserController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Object> updateUser(@PathVariable("id") String userEmail, @RequestBody User user) {
+    public ResponseEntity<Object> updateUser(@PathVariable("id") String userEmail, @RequestBody @Valid User user) {
 
         userService.updateUser(userEmail, user);
 
