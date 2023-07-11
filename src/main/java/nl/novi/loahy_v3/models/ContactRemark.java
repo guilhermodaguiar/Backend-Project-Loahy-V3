@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "remarks")
@@ -15,14 +15,17 @@ public class ContactRemark {
     @Email
     private String contactEmail;
     @Column(nullable = false)
+    @NotBlank
     private String contactName;
 
     @Column(nullable = false)
     private Long contactPhone;
     @Column
+    @NotBlank
     private String contactOrganisation;
 
     @Column(columnDefinition = "TEXT", nullable = false)
+    @NotBlank
     private String contactRemark;
 
 

@@ -2,16 +2,22 @@ package nl.novi.loahy_v3.dtos;
 
 import nl.novi.loahy_v3.models.ContactRemark;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+
 public class ContactRemarkDto {
 
-
+    @NotNull
     public String contactName;
 
+    @Email
     public String contactEmail;
 
+    @NotNull
     public Long contactPhone;
     public String contactOrganisation;
 
+    @NotNull
     public String contactRemark;
 
     public static ContactRemarkDto fromContact(ContactRemark contactRemark) {

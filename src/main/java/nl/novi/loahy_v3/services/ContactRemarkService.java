@@ -1,5 +1,6 @@
 package nl.novi.loahy_v3.services;
 
+import nl.novi.loahy_v3.dtos.ContactRemarkDto;
 import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
 import nl.novi.loahy_v3.models.ContactRemark;
 import nl.novi.loahy_v3.repositories.ContactRemarkRepository;
@@ -22,8 +23,8 @@ public class ContactRemarkService {
         this.contactRemarkRepository = contactRemarkRepository;
     }
 
-    public List<nl.novi.loahy_v3.dtos.ContactRemarkDto> getAllContacts() {
-        List<nl.novi.loahy_v3.dtos.ContactRemarkDto> collection = new ArrayList<>();
+    public List<ContactRemarkDto> getAllContacts() {
+        List<ContactRemarkDto> collection = new ArrayList<>();
         List<ContactRemark> list = contactRemarkRepository.findAll();
         for (ContactRemark contactRemark : list) {
             collection.add(fromContact(contactRemark));
@@ -32,7 +33,7 @@ public class ContactRemarkService {
     }
 
 
-    public String createRemark(nl.novi.loahy_v3.dtos.ContactRemarkDto contactRemarkDto) {
+    public String createRemark(ContactRemarkDto contactRemarkDto) {
         var contact = new ContactRemark();
 
         contact.setContactName(contactRemarkDto.getContactName());
