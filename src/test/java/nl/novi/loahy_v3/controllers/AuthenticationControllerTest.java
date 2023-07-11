@@ -31,9 +31,9 @@ class AuthenticationControllerTest {
     @DisplayName("Should throw an exception when the username or password are incorrect")
     void createAuthenticationTokenWhenUsernameOrPasswordAreIncorrectThenThrowException() {
         AuthenticationRequest authenticationRequest =
-                new AuthenticationRequest("username", "password");
+                new AuthenticationRequest("e-mailadres", "password");
         when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
-                .thenThrow(new BadCredentialsException("Incorrect username or password"));
+                .thenThrow(new BadCredentialsException("Incorrect e-mailadres or password"));
 
         Exception exception =
                 assertThrows(
@@ -43,7 +43,7 @@ class AuthenticationControllerTest {
                                     authenticationRequest);
                         });
 
-        assertEquals("Incorrect username or password", exception.getMessage());
+        assertEquals("Incorrect e-mailadres or password", exception.getMessage());
     }
 
 }

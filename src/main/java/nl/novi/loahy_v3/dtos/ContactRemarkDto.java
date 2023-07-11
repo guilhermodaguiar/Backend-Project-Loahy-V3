@@ -4,10 +4,14 @@ import nl.novi.loahy_v3.models.ContactRemark;
 
 public class ContactRemarkDto {
 
+
     public String contactName;
+
     public String contactEmail;
+
     public Long contactPhone;
     public String contactOrganisation;
+
     public String contactRemark;
 
     public static ContactRemarkDto fromContact(ContactRemark contactRemark) {

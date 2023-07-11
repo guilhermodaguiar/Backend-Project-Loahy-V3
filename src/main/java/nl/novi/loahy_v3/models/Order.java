@@ -87,4 +87,10 @@ public class Order {
     public void setUserEmail(User userEmail) {
         this.userEmail = userEmail;
     }
+
+    public void setUserEmail() {
+    }
+
+    public void setUserEmail(String test) {
+    }
 }

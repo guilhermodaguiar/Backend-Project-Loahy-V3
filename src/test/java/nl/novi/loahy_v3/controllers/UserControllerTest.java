@@ -1,7 +1,6 @@
 package nl.novi.loahy_v3.controllers;
 
 import nl.novi.loahy_v3.models.User;
-import nl.novi.loahy_v3.repositories.UserRepository;
 import nl.novi.loahy_v3.services.UserService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

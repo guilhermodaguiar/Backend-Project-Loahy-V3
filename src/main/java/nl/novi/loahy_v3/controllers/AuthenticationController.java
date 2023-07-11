@@ -32,19 +32,19 @@ public class AuthenticationController {
     @PostMapping(value = "/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
 
-        String username = authenticationRequest.getUserEmail();
+        String userEmail = authenticationRequest.getUserEmail();
         String password = authenticationRequest.getPassword();
 
         try {
             authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(username, password)
+                    new UsernamePasswordAuthenticationToken(userEmail, password)
             );
         } catch (BadCredentialsException ex) {
             throw new Exception("Incorrect e-mailadres or password", ex);
         }
 
         final UserDetails userDetails = userDetailsService
-                .loadUserByUsername(username);
+                .loadUserByUsername(userEmail);
 
         final String jwt = jwtUtl.generateToken(userDetails);
 

@@ -1,49 +1,34 @@
 package nl.novi.loahy_v3.controllers;
 
-import nl.novi.loahy_v3.payload.AuthenticationRequest;
+import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class ExceptionControllerTest {
 
-    @Mock
-    private AuthenticationManager authenticationManager;
-
     @InjectMocks
-    private AuthenticationController authenticationController;
-
-
+    private ExceptionController exceptionController;
 
     @Test
-    @DisplayName("Should throw an exception when the username or password are incorrect")
-    void createAuthenticationTokenWhenUsernameOrPasswordAreIncorrectThenThrowException() {
-        AuthenticationRequest authenticationRequest =
-                new AuthenticationRequest("username", "password");
-        when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
-                .thenThrow(new BadCredentialsException("Incorrect username or password"));
+    @DisplayName(
+            "Should return a response entity with the message and status code when the exception is RecordNotFoundException")
+    void exceptionWhenRecordNotFoundExceptionThenReturnResponseEntityWithMessageAndStatusCode() {
 
-        Exception exception =
-                assertThrows(
-                        Exception.class,
-                        () -> {
-                            authenticationController.createAuthenticationToken(
-                                    authenticationRequest);
-                        });
+        String message = "Record not found";
+        RecordNotFoundException recordNotFoundException = new RecordNotFoundException(message);
 
-        assertEquals("Incorrect username or password", exception.getMessage());
+        ResponseEntity<Object> responseEntity =
+                exceptionController.exception(recordNotFoundException);
+
+        assertEquals(message, responseEntity.getBody());
+        assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
     }
-
 }

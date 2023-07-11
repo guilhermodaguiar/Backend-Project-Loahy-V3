@@ -5,22 +5,24 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "remarks")
 public class ContactRemark {
     @Id
-    @Column
+    @Column(nullable = false)
     @Email
     private String contactEmail;
-    @Column
+    @Column(nullable = false)
     private String contactName;
 
-    @Column
+    @Column(nullable = false)
     private Long contactPhone;
     @Column
     private String contactOrganisation;
-    @Column(columnDefinition = "TEXT")
+
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String contactRemark;
 
 
