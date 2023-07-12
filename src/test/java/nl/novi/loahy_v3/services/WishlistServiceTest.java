@@ -26,4 +26,9 @@ public class WishlistServiceTest {
     private WishlistService wishlistService;
 
 
+
+    //Should throw an exception when product does not exist
+
+    //Should throw an exception when wishlistId does not exist
+
 }

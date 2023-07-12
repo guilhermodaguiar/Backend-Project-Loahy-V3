@@ -67,6 +67,5 @@ public class AddressControllerTest {
         assertEquals("1111AA", result.zipcode);
         assertEquals("Utrecht", result.city);
         assertEquals(1L, result.phoneNumber);
-
     }
 }
