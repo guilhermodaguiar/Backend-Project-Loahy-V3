@@ -46,18 +46,17 @@ public class WishlistService {
     }
 
 
-
     public Wishlist assignProductToWishlist(Integer wishlistId, Integer productId) {
         Set<Product> productSet;
         if (!wishlistRepository.existsById(wishlistId)) {
-            throw new RecordNotFoundException("Wishlist met id bestaat niet" );
+            throw new RecordNotFoundException("Wishlist met id bestaat niet");
         }
         Wishlist wishlist = wishlistRepository.findById(wishlistId).get();
         if (!productRepository.existsById(productId)) {
-            throw new RecordNotFoundException("Product met id bestaat niet" );
+            throw new RecordNotFoundException("Product met id bestaat niet");
         }
         Product product = productRepository.findById(productId).get();
-        productSet =  wishlist.getProducts();
+        productSet = wishlist.getProducts();
         productSet.add(product);
         wishlist.setProducts(productSet);
         return wishlistRepository.save(wishlist);
@@ -65,11 +64,11 @@ public class WishlistService {
 
     public Wishlist removeProductFromWishlist(Integer wishlistId, Integer productId) {
         if (!wishlistRepository.existsById(wishlistId)) {
-            throw new RecordNotFoundException("Wishlist met id bestaat niet" );
+            throw new RecordNotFoundException("Wishlist met id bestaat niet");
         }
         Wishlist wishlist = wishlistRepository.findById(wishlistId).get();
         if (!productRepository.existsById(productId)) {
-            throw new RecordNotFoundException("Product met id bestaat niet" );
+            throw new RecordNotFoundException("Product met id bestaat niet");
         }
         Product product = productRepository.findById(productId).get();
 

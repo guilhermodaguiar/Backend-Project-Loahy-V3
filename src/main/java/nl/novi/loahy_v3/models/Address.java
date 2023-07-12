@@ -1,10 +1,8 @@
 package nl.novi.loahy_v3.models;
 
-
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "address")
@@ -25,21 +23,16 @@ public class Address {
     private Long addressId;
 
     @Column
-    @NotBlank(message = "streetname must not be blank")
     private String streetName;
     @Column
-    @NotBlank(message = "housenumber must not be blank")
     private String houseNumber;
     @Column
     private String houseNumberAddition;
     @Column
-    @NotBlank(message = "city must not be blank")
     private String city;
     @Column
-    @NotBlank(message = "zipcode must not be blank")
     private String zipcode;
     @Column
-    @NotBlank(message = "phone number must not be blank")
     private Long phoneNumber;
 
 

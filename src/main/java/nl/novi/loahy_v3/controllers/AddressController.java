@@ -16,8 +16,7 @@ import java.util.List;
 @RequestMapping("/address")
 public class AddressController {
     @Autowired
-    private final AddressService addressService;
-
+    private AddressService addressService;
 
     @Autowired
     public AddressController(AddressService addressService) {
@@ -53,7 +52,7 @@ public class AddressController {
 
     @PutMapping(value = "/{id}")
     public AddressDto updateAddress(@PathVariable("id") Long addressId,
-                                  @RequestBody @Valid Address address) {
+                                    @RequestBody Address address) {
         addressService.updateAddress(addressId, address);
 
         return AddressDto.transferToAddressDto(address);

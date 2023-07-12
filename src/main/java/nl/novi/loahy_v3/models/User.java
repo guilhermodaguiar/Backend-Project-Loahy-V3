@@ -6,7 +6,6 @@ import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
 
-
 @Entity
 @Table(name = "users")
 public class User {
@@ -53,8 +52,9 @@ public class User {
         return userEmail;
     }
 
-    public void setUserEmail(String userEmail) {
+    public String setUserEmail(String userEmail) {
         this.userEmail = userEmail;
+        return userEmail;
     }
 
     public String getPassword() {

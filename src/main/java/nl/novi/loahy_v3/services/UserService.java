@@ -15,7 +15,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,15 +36,6 @@ public class UserService {
     private WishlistService wishlistService;
 
 
-    @Autowired
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, WishlistService wishlistService, AddressService addressService) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.wishlistService = wishlistService;
-        this.addressService = addressService;
-    }
-
-
     public List<UserDto> getAllUsers() {
         List<User> list = userRepository.findAll();
         List<UserDto> collection = new ArrayList<>();
@@ -58,7 +48,7 @@ public class UserService {
     public UserDto getByUserEmail(String username) {
         UserDto dto = new UserDto();
         Optional<User> user = userRepository.findById(username);
-        if (user.isPresent()){
+        if (user.isPresent()) {
             dto = fromUser(user.get());
         } else {
             throw new UsernameNotFoundException(username);
@@ -94,18 +84,18 @@ public class UserService {
 
 
     public void updateUser(String userEmail, User user) {
-        if (!userRepository.existsById(userEmail)) {
-            throw new UserEmailNotFoundException(userEmail);
-        } else {
+        if (userRepository.existsById(userEmail)) {
             User user1 = userRepository.findById(userEmail).get();
             user1.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepository.save(user1);
+        } else {
+            throw new UserEmailNotFoundException(userEmail);
         }
     }
 
     public void deleteUser(String userEmail) {
         if (!userRepository.existsById(userEmail)) {
-            throw new RecordNotFoundException("User met email bestaat niet" );
+            throw new RecordNotFoundException("User met email bestaat niet");
         }
         userRepository.deleteById(userEmail);
     }

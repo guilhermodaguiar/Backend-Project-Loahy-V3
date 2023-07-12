@@ -1,11 +1,10 @@
 package nl.novi.loahy_v3.dtos;
+
 import nl.novi.loahy_v3.models.Address;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 public class AddressDto {
-
 
     public Long addressId;
     @NotNull
@@ -20,7 +19,6 @@ public class AddressDto {
     public String zipcode;
     @NotNull
     public Long phoneNumber;
-
 
 
     public static AddressDto transferToAddressDto(Address address) {

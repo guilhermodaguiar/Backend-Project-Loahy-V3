@@ -1,6 +1,8 @@
 package nl.novi.loahy_v3.controllers;
 
-import nl.novi.loahy_v3.exceptions.*;
+import nl.novi.loahy_v3.exceptions.BadRequestException;
+import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
+import nl.novi.loahy_v3.exceptions.UserEmailNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -9,18 +11,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.persistence.RollbackException;
-
 @RestController
 @CrossOrigin
 @ControllerAdvice
 public class ExceptionController {
-
-    @ExceptionHandler(value = RollbackException.class)
-    public ResponseEntity<Object> exception(RollbackException exception) {
-
-        return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
-    }
 
     @ExceptionHandler(value = UserEmailNotFoundException.class)
     public ResponseEntity<Object> exception(UserEmailNotFoundException exception) {
@@ -41,8 +35,8 @@ public class ExceptionController {
     }
 
     @ExceptionHandler(value = RecordNotFoundException.class)
-    public  ResponseEntity<Object> exception(RecordNotFoundException exception) {
+    public ResponseEntity<Object> exception(RecordNotFoundException exception) {
 
-        return  new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 }

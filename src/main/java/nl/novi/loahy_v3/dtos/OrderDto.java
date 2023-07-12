@@ -1,13 +1,11 @@
 package nl.novi.loahy_v3.dtos;
 
 import nl.novi.loahy_v3.models.Order;
-import org.hibernate.validator.constraints.NotBlank;
-
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-public class OrderDto{
+public class OrderDto {
     private Long orderId;
 
     @NotNull

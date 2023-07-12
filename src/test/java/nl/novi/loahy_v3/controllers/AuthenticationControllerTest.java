@@ -26,7 +26,6 @@ class AuthenticationControllerTest {
     private AuthenticationController authenticationController;
 
 
-
     @Test
     @DisplayName("Should throw an exception when the username or password are incorrect")
     void createAuthenticationTokenWhenUsernameOrPasswordAreIncorrectThenThrowException() {
@@ -45,5 +44,4 @@ class AuthenticationControllerTest {
 
         assertEquals("Incorrect e-mailadres or password", exception.getMessage());
     }
-
 }

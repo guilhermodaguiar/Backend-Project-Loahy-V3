@@ -18,7 +18,7 @@ import java.util.List;
 public class OrderController {
 
     @Autowired
-    private final OrderService orderService;
+    private OrderService orderService;
 
     @Autowired
     public OrderController(OrderService orderService) {
@@ -44,7 +44,6 @@ public class OrderController {
 
         return ResponseEntity.ok().body(orderService.createOrder(dto));
     }
-
 
 
     @DeleteMapping(value = "/{id}")

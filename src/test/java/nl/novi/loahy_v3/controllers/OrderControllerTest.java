@@ -1,6 +1,5 @@
 package nl.novi.loahy_v3.controllers;
 
-import nl.novi.loahy_v3.dtos.OrderDto;
 import nl.novi.loahy_v3.dtos.OrderInputDto;
 import nl.novi.loahy_v3.models.Order;
 import nl.novi.loahy_v3.repositories.OrderRepository;
@@ -10,11 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-
 import java.util.ArrayList;
 
-import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;

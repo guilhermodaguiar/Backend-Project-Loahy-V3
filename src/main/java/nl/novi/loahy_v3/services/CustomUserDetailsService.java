@@ -1,11 +1,9 @@
 package nl.novi.loahy_v3.services;
 
-
 import nl.novi.loahy_v3.dtos.UserDto;
 import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
-import nl.novi.loahy_v3.exceptions.UserEmailAlreadyExistException;
-import nl.novi.loahy_v3.models.User;
 import nl.novi.loahy_v3.models.Authority;
+import nl.novi.loahy_v3.models.User;
 import nl.novi.loahy_v3.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -33,7 +31,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String userEmail) {
         if (!userRepository.existsById(userEmail)) {
-            throw new RecordNotFoundException("User met email bestaat niet" );
+            throw new RecordNotFoundException("User met email bestaat niet");
         }
         UserDto userDto = userService.getByUserEmail(userEmail);
         Optional<User> user = userRepository.findUserByUserEmailIs(userEmail);
@@ -42,7 +40,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         Set<Authority> authorities = userDto.getAuthorities();
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        for (Authority authority: authorities) {
+        for (Authority authority : authorities) {
             grantedAuthorities.add(new SimpleGrantedAuthority(authority.getAuthority()));
         }
 

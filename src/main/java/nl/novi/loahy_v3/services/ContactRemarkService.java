@@ -7,7 +7,6 @@ import nl.novi.loahy_v3.repositories.ContactRemarkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +16,7 @@ import static nl.novi.loahy_v3.dtos.ContactRemarkDto.fromContact;
 public class ContactRemarkService {
 
     @Autowired
-    private final ContactRemarkRepository contactRemarkRepository;
+    private ContactRemarkRepository contactRemarkRepository;
 
     @Autowired
     public ContactRemarkService(ContactRemarkRepository contactRemarkRepository) {
@@ -32,7 +31,6 @@ public class ContactRemarkService {
         }
         return collection;
     }
-
 
 
     public String createRemark(ContactRemarkDto contactRemarkDto) {

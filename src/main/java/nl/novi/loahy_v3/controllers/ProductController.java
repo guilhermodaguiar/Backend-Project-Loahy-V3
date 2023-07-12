@@ -23,9 +23,9 @@ public class ProductController {
 
 
     @Autowired
-    private final ProductService productService;
+    private ProductService productService;
     @Autowired
-    private final ImageController imageController;
+    private ImageController imageController;
 
 
     @Autowired
@@ -48,7 +48,7 @@ public class ProductController {
         return dtos;
     }
 
-    @GetMapping(value="/{id}")
+    @GetMapping(value = "/{id}")
     @Transactional
     public ProductDto getProductById(@PathVariable("id") Integer productId) {
 

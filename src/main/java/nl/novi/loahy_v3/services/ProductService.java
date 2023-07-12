@@ -1,13 +1,10 @@
 package nl.novi.loahy_v3.services;
 
-
-import nl.novi.loahy_v3.dtos.ProductDto;
 import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
 import nl.novi.loahy_v3.models.FileUploadResponse;
 import nl.novi.loahy_v3.models.Product;
 import nl.novi.loahy_v3.repositories.FileUploadRepository;
 import nl.novi.loahy_v3.repositories.ProductRepository;
-import nl.novi.loahy_v3.repositories.WishlistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +30,7 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-        public Product getProduct(Integer productId) {
+    public Product getProduct(Integer productId) {
         Optional<Product> product = productRepository.findById(productId);
 
         if (product.isPresent()) {
@@ -76,7 +73,7 @@ public class ProductService {
 
     public void deleteProduct(Integer productId) {
         if (!productRepository.existsById(productId)) {
-            throw new RecordNotFoundException("Product met id bestaat niet" );
+            throw new RecordNotFoundException("Product met id bestaat niet");
         }
         productRepository.deleteById(productId);
     }
@@ -92,8 +89,7 @@ public class ProductService {
 
             product.setImage(image);
             productRepository.save(product);
-        }
-        else {
+        } else {
             throw new RecordNotFoundException();
         }
     }
