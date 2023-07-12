@@ -1,5 +1,6 @@
 package nl.novi.loahy_v3.controllers;
 
+import nl.novi.loahy_v3.dtos.UserPasswordOnlyDto;
 import nl.novi.loahy_v3.models.User;
 import nl.novi.loahy_v3.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,17 +48,17 @@ public class UserController {
     }
 
 
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<Object> updateUser(@PathVariable("id") String userEmail, @RequestBody @Valid User user) {
-
-        userService.updateUser(userEmail, user);
-
-        return ResponseEntity.noContent().build();
-    }
-
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Object> deleteUser(@PathVariable("id") String userEmail) {
         userService.deleteUser(userEmail);
         return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> partialUpdateUserPassword(@PathVariable("id") String userEmail,
+                                                       @RequestBody @Valid UserPasswordOnlyDto dto) {
+
+        userService.updatePassword(userEmail, dto);
+        return ResponseEntity.ok("password updated");
     }
 }

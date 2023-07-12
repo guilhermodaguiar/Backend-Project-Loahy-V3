@@ -1,7 +1,10 @@
 package nl.novi.loahy_v3.services;
 
 import nl.novi.loahy_v3.dtos.UserDto;
+import nl.novi.loahy_v3.dtos.UserPasswordOnlyDto;
+import nl.novi.loahy_v3.models.Address;
 import nl.novi.loahy_v3.models.User;
+import nl.novi.loahy_v3.models.Wishlist;
 import nl.novi.loahy_v3.repositories.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,9 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
@@ -46,20 +47,33 @@ public class UserServiceTest {
     }
 
 
+
+
     @Test
-    @DisplayName("Shoukd delete the user when the user exists")
-    void deleteUserWhenUserExists() {
+    @DisplayName("Should update the password when the user exists")
+    void updatePersonWhenPersonExists() {
         User user = new User();
+        user.setUserId(1L);
+        user.setUserEmail("test@test.nl");
+        user.setFirstName("test");
+        user.setLastName("test");
+        user.setPassword("test!");
+        user.setAddress(new Address());
+        user.setWishlist(new Wishlist());
 
-        user.setUserEmail("Felipe@dabest.nl");
-        user.setFirstName("Felipe");
-        user.setLastName("IsDaBest");
 
+        when(userRepository.findById("test@test.nl")).thenReturn(Optional.of(user));
 
+        UserPasswordOnlyDto dto = new UserPasswordOnlyDto();
 
-        userService.deleteUser("Felipe@dabest.nl");
+        dto.setPassword("newPassword!");
+        userService.updatePassword("test@test.nl", dto);
 
-        verify(userService, times(1)).deleteUser("Felipe@dabest.nl");
+        verify(userRepository).save(user);
+
+        assertThat(user.getUserEmail()).isEqualTo("test.test.nl");
+        assertThat(user.getPassword()).isEqualTo("newPassword!");
+
     }
 }
 
