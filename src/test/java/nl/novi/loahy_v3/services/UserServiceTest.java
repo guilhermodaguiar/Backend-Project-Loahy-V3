@@ -10,10 +10,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
@@ -41,6 +43,27 @@ public class UserServiceTest {
         UserDto userDto = userService.getByUserEmail("Felipe@dabest.nl");
 
         assertThat(userDto.userEmail).isEqualTo(user.getUserEmail());
+    }
+
+    @Test
+    @DisplayName("Should returns all users")
+    void getUsersShouldReturnsAllUsers() {
+        User user = new User();
+        user.setUserId(1L);
+        user.setUserEmail("test@test.nl");
+        user.setPassword("test!!!");
+        user.setFirstName("Test");
+        user.setLastName("Test");
+
+        when(userRepository.findAll()).thenReturn(List.of(user));
+
+        List<UserDto> users = userService.getAllUsers();
+
+        assertNotNull(users);
+        assertFalse(users.isEmpty());
+        assertEquals(1, users.size());
+
+        verify(userRepository, times(1)).findAll();
     }
 }
 
