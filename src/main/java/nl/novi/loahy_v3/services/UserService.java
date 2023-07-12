@@ -92,8 +92,6 @@ public class UserService {
             user1.setPassword(passwordEncoder.encode(user.getPassword()));
 
             userRepository.save(user1);
-        } else {
-            throw new UserEmailNotFoundException(userEmail);
         }
     }
 

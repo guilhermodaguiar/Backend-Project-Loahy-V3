@@ -1,5 +1,6 @@
 package nl.novi.loahy_v3.controllers;
 
+import nl.novi.loahy_v3.dtos.UserPasswordOnlyDto;
 import nl.novi.loahy_v3.models.User;
 import nl.novi.loahy_v3.services.UserService;
 import org.junit.jupiter.api.DisplayName;
@@ -62,5 +63,23 @@ class UserControllerTest {
         userService.deleteUser("test@test.nl");
 
         verify(userService, times(1)).deleteUser("test@test.nl");
+    }
+
+    @Test
+    @DisplayName("Should update password the user when the id is valid")
+    void PatchUserWhenIdIsValid() {
+        User user = new User();
+        user.setUserEmail("test@test.nl");
+        user.setPassword("test123!");
+
+        user.setFirstName("test");
+        user.setLastName("test");
+
+        UserPasswordOnlyDto userPasswordOnlyDto = new UserPasswordOnlyDto();
+        userPasswordOnlyDto.setPassword("newPasswordOnly!");
+
+        ResponseEntity<?> response = userController.partialUpdateUserPassword("test@test.nl", userPasswordOnlyDto);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 }
