@@ -1,6 +1,7 @@
 package nl.novi.loahy_v3.services;
 
 import nl.novi.loahy_v3.dtos.UserDto;
+import nl.novi.loahy_v3.dtos.UserPasswordOnlyDto;
 import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
 import nl.novi.loahy_v3.exceptions.UserEmailAlreadyExistException;
 import nl.novi.loahy_v3.exceptions.UserEmailNotFoundException;
@@ -93,15 +94,17 @@ public class UserService {
     }
 
 
-    public void updateUser(String userEmail, User user) {
+    public void updatePassword(String userEmail, UserPasswordOnlyDto user) {
         if (!userRepository.existsById(userEmail)) {
             throw new UserEmailNotFoundException(userEmail);
         } else {
             User user1 = userRepository.findById(userEmail).get();
             user1.setPassword(passwordEncoder.encode(user.getPassword()));
+
             userRepository.save(user1);
         }
     }
+
 
     public void deleteUser(String userEmail) {
         if (!userRepository.existsById(userEmail)) {
@@ -118,4 +121,6 @@ public class UserService {
         user.addAuthority(new Authority(userEmail, authority));
         userRepository.save(user);
     }
+
+
 }
