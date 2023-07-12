@@ -1,7 +1,6 @@
 package nl.novi.loahy_v3.models;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,8 +11,6 @@ public class User {
     @Id
     @Column(nullable = false,
             unique = true)
-    @Email(message = "user email not valid")
-    @NotBlank(message = "email must not be blank")
     private String userEmail;
 
     @Column(nullable = false,
@@ -25,11 +22,9 @@ public class User {
     private Long userId;
 
     @Column
-    @NotBlank(message = "user first name must not be blank")
     private String firstName;
 
     @Column
-    @NotBlank(message = "user last name must not be blank")
     private String lastName;
 
     @OneToOne

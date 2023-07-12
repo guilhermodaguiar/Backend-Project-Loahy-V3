@@ -46,13 +46,13 @@ public class UserController {
                 .build();
     }
 
+
     @PutMapping(value = "/{id}")
     public ResponseEntity<Object> updateUser(@PathVariable("id") String userEmail, @RequestBody @Valid User user) {
 
         userService.updateUser(userEmail, user);
 
         return ResponseEntity.noContent().build();
-
     }
 
     @DeleteMapping(value = "/{id}")
