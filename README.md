@@ -35,7 +35,7 @@ Voor het **clonen** van de repository voor Loahy wordt verwezen naar de links in
 Hieronder staan de mappen structuur van Springboot [Spring](https://spring.io) met de kort uitleg waarvoor ze gebruikt worden. 
 
 ### Advice
-In de map bevat een exception handler voor validatie van bepaalde values vanuit de frontend.
+In de map bevat een exception handler voor validatie.
 
 ### Config
 Hier bevinden zich alle configuratie van Spring Security. Versie 2.7.0 van spring-boot-starter-security wordt gekozen 
