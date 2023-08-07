@@ -1,4 +1,5 @@
 .idea
+.idea/jpa-buddy.xml
 out/
 HELP.md
 target/
