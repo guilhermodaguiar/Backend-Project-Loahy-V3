@@ -34,6 +34,9 @@ Voor het **clonen** van de repository voor Loahy wordt verwezen naar de links in
 ## Map Guide
 Hieronder staan de mappen structuur van Springboot [Spring](https://spring.io) met de kort uitleg waarvoor ze gebruikt worden. 
 
+### Advice
+In de map bevat een exception handler voor validatie van bepaalde values vanuit de frontend.
+
 ### Config
 Hier bevinden zich alle configuratie van Spring Security. Versie 2.7.0 van spring-boot-starter-security wordt gekozen 
 omdat je WebSecurityConfigurerAdapter nog kan gebruiken. Deze is in een hogere versie deprecated.
@@ -126,12 +129,11 @@ De volgende gebruikers kunnen worden gebruikt om de applicatie te testen. In de 
 
 >#### ADMIN_ROLE
 > - gebruikersnaam: admin@test.nl
-> - wachtwoord: admin123!
+> - wachtwoord: Admin123!
 >
 > #### USER_ROLE
 > - gebruikersnaam: user@test.nl
-> - wachtwoord: test123!
-> - 
+> - wachtwoord: User123!
 
 
 

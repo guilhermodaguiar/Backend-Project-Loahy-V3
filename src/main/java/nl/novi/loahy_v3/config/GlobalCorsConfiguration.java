@@ -1,4 +1,4 @@
-package nl.novi.loahy_v3.confiq;
+package nl.novi.loahy_v3.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

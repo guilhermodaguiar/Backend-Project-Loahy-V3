@@ -1,4 +1,4 @@
-package nl.novi.loahy_v3.confiq;
+package nl.novi.loahy_v3.config;
 
 import nl.novi.loahy_v3.filters.JwtRequestFilter;
 import nl.novi.loahy_v3.services.CustomUserDetailsService;
