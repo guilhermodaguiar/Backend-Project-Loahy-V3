@@ -2,7 +2,6 @@ package nl.novi.loahy_v3.controllers;
 
 
 import nl.novi.loahy_v3.dtos.ProductDto;
-import nl.novi.loahy_v3.dtos.ProductInputDto;
 import nl.novi.loahy_v3.models.FileUploadResponse;
 import nl.novi.loahy_v3.models.Product;
 import nl.novi.loahy_v3.services.ProductService;
@@ -59,7 +58,7 @@ public class ProductController {
 
 
     @PostMapping
-    public ProductDto createProduct(@RequestBody @Valid ProductInputDto dto) {
+    public ProductDto createProduct(@RequestBody @Valid ProductDto dto) {
         var product = productService.createProduct(dto.toProduct());
 
         return ProductDto.transferToDto(product);
@@ -68,10 +67,10 @@ public class ProductController {
 
     @PutMapping(value = "/{id}")
     public ProductDto updateProduct(@PathVariable("id") Integer productId,
-                                    @RequestBody @Valid Product product) {
-        productService.updateProduct(product);
+                                    @RequestBody @Valid ProductDto dto) {
+        productService.updateProduct(productId, dto);
 
-        return ProductDto.transferToDto(product);
+        return dto;
     }
 
     @DeleteMapping(value = "/{id}")

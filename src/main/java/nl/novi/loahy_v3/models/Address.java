@@ -1,9 +1,11 @@
 package nl.novi.loahy_v3.models;
 
+import lombok.Getter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
+@Getter
 @Entity
 @Table(name = "address")
 public class Address {
@@ -36,58 +38,29 @@ public class Address {
     private Long phoneNumber;
 
 
-
-    public Long getAddressId() {
-        return addressId;
-    }
-
     public void setAddressId(Long addressId) {
         this.addressId = addressId;
     }
 
 
-    public String getStreetName() {
-        return streetName;
-    }
-
     public void setStreetName(String streetName) {
         this.streetName = streetName;
-    }
-
-    public String getHouseNumber() {
-        return houseNumber;
     }
 
     public void setHouseNumber(String houseNumber) {
         this.houseNumber = houseNumber;
     }
 
-    public String getHouseNumberAddition() {
-        return houseNumberAddition;
-    }
-
     public void setHouseNumberAddition(String houseNumberAddition) {
         this.houseNumberAddition = houseNumberAddition;
-    }
-
-    public String getCity() {
-        return city;
     }
 
     public void setCity(String city) {
         this.city = city;
     }
 
-    public String getZipcode() {
-        return zipcode;
-    }
-
     public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
-    }
-
-    public Long getPhoneNumber() {
-        return phoneNumber;
     }
 
     public void setPhoneNumber(Long phoneNumber) {

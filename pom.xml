@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>nl.novi</groupId>
 	<artifactId>loahy_v3</artifactId>
-	<version>3.0.0</version>
+	<version>3.2.0</version>
 	<name>project_loahy_backend_v3</name>
 	<description>project voor Novi Hogeschool</description>
 	<properties>

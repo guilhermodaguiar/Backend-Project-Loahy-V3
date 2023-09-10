@@ -1,5 +1,6 @@
 package nl.novi.loahy_v3.services;
 
+import nl.novi.loahy_v3.dtos.ProductDto;
 import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
 import nl.novi.loahy_v3.models.FileUploadResponse;
 import nl.novi.loahy_v3.models.Product;
@@ -16,6 +17,7 @@ public class ProductService {
 
     @Autowired
     private final ProductRepository productRepository;
+
     @Autowired
     private final FileUploadRepository uploadRepository;
 
@@ -52,23 +54,20 @@ public class ProductService {
     }
 
 
-    public void updateProduct(Product product) {
+    public void updateProduct(Integer productId, ProductDto dto) {
 
-        Optional<Product> optionalProduct = productRepository.findById(product.getProductId());
-
-        if (optionalProduct.isEmpty()) {
+        if (!productRepository.existsById(productId)) {
             throw new RecordNotFoundException("product niet gevonden..");
-        } else {
-
-            Product product1 = optionalProduct.get();
-            product1.setProductId(product.getProductId());
-            product1.setProductName(product.getProductName());
-            product1.setProductDescription(product.getProductDescription());
-            product1.setProductPrice(product.getProductPrice());
-
-            productRepository.save(product1);
-
         }
+
+        Product product1 = productRepository.findById(productId).get();
+        product1.setProductId(dto.getProductId());
+        product1.setProductName(dto.getProductName());
+        product1.setProductDescription(dto.getProductDescription());
+        product1.setProductPrice(dto.getProductPrice());
+
+        productRepository.save(product1);
+
     }
 
     public void deleteProduct(Integer productId) {

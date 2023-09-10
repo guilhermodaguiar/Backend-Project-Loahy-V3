@@ -1,6 +1,7 @@
 package nl.novi.loahy_v3.services;
 
 import nl.novi.loahy_v3.dtos.AddressDto;
+import nl.novi.loahy_v3.dtos.AddressInputDto;
 import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
 import nl.novi.loahy_v3.models.Address;
 import nl.novi.loahy_v3.repositories.AddressRepository;
@@ -51,23 +52,21 @@ public class AddressService {
         return addressRepository.save(address);
     }
 
-    public void updateAddress(Long id, Address address) {
-        Optional<Address> optionalAddress = addressRepository.findById(id);
+    public void updateAddress(Long id, AddressInputDto addressDto) {
 
-        if (optionalAddress.isEmpty()) {
+        if (!addressRepository.existsById(id)) {
             throw new RecordNotFoundException("Address bestaat niet..");
         } else {
 
-            Address address1 = optionalAddress.get();
-            address1.setAddressId(address1.getAddressId());
-            address1.setStreetName(address.getStreetName());
-            address1.setHouseNumber(address.getHouseNumber());
-            address1.setHouseNumberAddition(address.getHouseNumberAddition());
-            address1.setZipcode(address.getZipcode());
-            address1.setCity(address.getCity());
-            address1.setPhoneNumber(address.getPhoneNumber());
+            Address address = addressRepository.findById(id).get();
+            address.setStreetName(addressDto.getStreetName());
+            address.setHouseNumber(addressDto.getHouseNumber());
+            address.setHouseNumberAddition(addressDto.getHouseNumberAddition());
+            address.setZipcode(addressDto.getZipcode());
+            address.setCity(addressDto.getCity());
+            address.setPhoneNumber(addressDto.getPhoneNumber());
 
-            addressRepository.save(address1);
+            addressRepository.save(address);
         }
 
     }

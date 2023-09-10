@@ -1,5 +1,6 @@
 package nl.novi.loahy_v3.dtos;
 
+import lombok.Getter;
 import nl.novi.loahy_v3.models.ContactRemark;
 
 import javax.validation.constraints.Email;
@@ -7,6 +8,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+@Getter
 public class ContactRemarkDto {
 
     @NotBlank(message = "contact name must not be blank")
@@ -36,40 +38,20 @@ public class ContactRemarkDto {
         return contactDto;
     }
 
-    public String getContactName() {
-        return contactName;
-    }
-
     public void setContactName(String contactName) {
         this.contactName = contactName;
-    }
-
-    public String getContactEmail() {
-        return contactEmail;
     }
 
     public void setContactEmail(String contactEmail) {
         this.contactEmail = contactEmail;
     }
 
-    public Long getContactPhone() {
-        return contactPhone;
-    }
-
     public void setContactPhone(Long contactPhone) {
         this.contactPhone = contactPhone;
     }
 
-    public String getContactOrganisation() {
-        return contactOrganisation;
-    }
-
     public void setContactOrganisation(String contactOrganisation) {
         this.contactOrganisation = contactOrganisation;
-    }
-
-    public String getContactRemark() {
-        return contactRemark;
     }
 
     public void setContactRemark(String contactRemark) {

@@ -1,21 +1,40 @@
 package nl.novi.loahy_v3.dtos;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.Getter;
 import nl.novi.loahy_v3.models.FileUploadResponse;
 import nl.novi.loahy_v3.models.Product;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+@Getter
 public class ProductDto {
 
     public Integer productId;
 
+    @NotBlank(message = "product name must not be blank")
     public String productName;
 
+    @NotBlank(message = "product description must not be blank")
     public String productDescription;
 
+    @NotNull(message = "product price must not be empty")
     public Double productPrice;
 
     @JsonSerialize
     FileUploadResponse image;
+
+    public Product toProduct() {
+
+        var product = new Product();
+
+        product.setProductName(productName);
+        product.setProductDescription(productDescription);
+        product.setProductPrice(productPrice);
+
+        return product;
+    }
 
     public static ProductDto transferToDto(Product product) {
 
@@ -30,45 +49,4 @@ public class ProductDto {
         return productDto;
     }
 
-
-    public FileUploadResponse getImage() {
-        return image;
-    }
-
-    public void setImage(FileUploadResponse image) {
-        this.image = image;
-    }
-
-    public Integer getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Integer productId) {
-        this.productId = productId;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public String getProductDescription() {
-        return productDescription;
-    }
-
-    public void setProductDescription(String productDescription) {
-        this.productDescription = productDescription;
-    }
-
-
-    public Double getProductPrice() {
-        return productPrice;
-    }
-
-    public void setProductPrice(Double productPrice) {
-        this.productPrice = productPrice;
-    }
 }

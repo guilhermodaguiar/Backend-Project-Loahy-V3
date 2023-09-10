@@ -1,7 +1,10 @@
 package nl.novi.loahy_v3.models;
 
+import lombok.Getter;
+
 import javax.persistence.*;
 
+@Getter
 @Entity
 @Table(name = "image")
 public class FileUploadResponse {
@@ -20,24 +23,12 @@ public class FileUploadResponse {
     public FileUploadResponse() {
     }
 
-    public String getFileName() {
-        return fileName;
-    }
-
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
 
-    public String getContentType() {
-        return contentType;
-    }
-
     public void setContentType(String contentType) {
         this.contentType = contentType;
-    }
-
-    public String getUrl() {
-        return url;
     }
 
     public void setUrl(String url) {

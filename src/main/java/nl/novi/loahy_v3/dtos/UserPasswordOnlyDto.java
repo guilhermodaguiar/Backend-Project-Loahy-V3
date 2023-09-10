@@ -1,7 +1,10 @@
 package nl.novi.loahy_v3.dtos;
 
+import lombok.Getter;
+
 import javax.validation.constraints.NotBlank;
 
+@Getter
 public class UserPasswordOnlyDto {
 
     public String userEmail;
@@ -9,16 +12,8 @@ public class UserPasswordOnlyDto {
     @NotBlank(message = "password must not be blank")
     public String password;
 
-    public String getUserEmail() {
-        return userEmail;
-    }
-
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public void setPassword(String password) {

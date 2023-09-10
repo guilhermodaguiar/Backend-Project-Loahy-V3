@@ -17,9 +17,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
+
 
     @Autowired
     private UserService userService;
@@ -27,14 +27,13 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
-
     @Override
-    public UserDetails loadUserByUsername(String userEmail) {
-        if (!userRepository.existsById(userEmail)) {
+    public UserDetails loadUserByUsername(String username) {
+        if (!userRepository.existsById(username)) {
             throw new RecordNotFoundException("User met email bestaat niet");
         }
-        UserDto userDto = userService.getByUserEmail(userEmail);
-        Optional<User> user = userRepository.findUserByUserEmailIs(userEmail);
+        UserDto userDto = userService.getByUserEmail(username);
+        Optional<User> user = userRepository.findUserByUserEmailIs(username);
 
         String password = user.get().getPassword();
 
@@ -44,7 +43,6 @@ public class CustomUserDetailsService implements UserDetailsService {
             grantedAuthorities.add(new SimpleGrantedAuthority(authority.getAuthority()));
         }
 
-        return new org.springframework.security.core.userdetails.User(userEmail, password, grantedAuthorities);
+        return new org.springframework.security.core.userdetails.User(username, password, grantedAuthorities);
     }
-
 }

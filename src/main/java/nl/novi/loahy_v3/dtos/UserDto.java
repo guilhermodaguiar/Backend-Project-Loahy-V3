@@ -1,6 +1,7 @@
 package nl.novi.loahy_v3.dtos;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import lombok.Getter;
 import nl.novi.loahy_v3.models.Address;
 import nl.novi.loahy_v3.models.Authority;
 import nl.novi.loahy_v3.models.User;
@@ -9,6 +10,7 @@ import nl.novi.loahy_v3.models.Wishlist;
 import java.util.Set;
 
 
+@Getter
 public class UserDto {
     public String userEmail;
 
@@ -39,48 +41,24 @@ public class UserDto {
         return userDto;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
     }
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
     public void setAddress(Address address) {
         this.address = address;
-    }
-
-    public Set<Authority> getAuthorities() {
-        return authorities;
     }
 
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
     }
 
-    public String getUserEmail() {
-        return userEmail;
-    }
-
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
-    }
-
-    public Wishlist getWishlist() {
-        return wishlist;
     }
 
     public void setWishlist(Wishlist wishlist) {

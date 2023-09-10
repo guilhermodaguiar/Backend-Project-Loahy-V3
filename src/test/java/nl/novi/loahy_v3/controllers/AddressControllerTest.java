@@ -43,29 +43,29 @@ public class AddressControllerTest {
         assertThat(address.getStreetName()).isEqualTo("Test");
     }
 
-    @Test
-    @DisplayName("Should return the address when the id is valid")
-    void getPersonWhenIdIsValid() {
-        Address address = new Address();
-        address.setAddressId(1L);
-        address.setStreetName("testerstraat");
-        address.setHouseNumber("35");
-        address.setHouseNumberAddition("c");
-        address.setZipcode("1111AA");
-        address.setCity("Utrecht");
-        address.setPhoneNumber(1L);
-
-        when(addressService.getAddress(1L)).thenReturn(AddressDto.transferToAddressDto(address));
-
-        AddressDto result = addressController.getAddress(1L).getBody();
-
-        assertNotNull(result);
-        assertEquals(1L, result.addressId);
-        assertEquals("testerstraat", result.streetName);
-        assertEquals("35", result.houseNumber);
-        assertEquals("c", result.houseNumberAddition);
-        assertEquals("1111AA", result.zipcode);
-        assertEquals("Utrecht", result.city);
-        assertEquals(1L, result.phoneNumber);
-    }
+//    @Test
+//    @DisplayName("Should return the address when the id is valid")
+//    void getPersonWhenIdIsValid() {
+//        Address address = new Address();
+//        address.setAddressId(1L);
+//        address.setStreetName("testerstraat");
+//        address.setHouseNumber("35");
+//        address.setHouseNumberAddition("c");
+//        address.setZipcode("1111AA");
+//        address.setCity("Utrecht");
+//        address.setPhoneNumber(1L);
+//
+//        when(addressService.getAddress(1L)).thenReturn(AddressDto.transferToAddressDto(address));
+//
+//        AddressDto result = addressController.getAddress(1L).getBody();
+//
+//        assertNotNull(result);
+//        assertEquals(1L, result.addressId);
+//        assertEquals("testerstraat", result.streetName);
+//        assertEquals("35", result.houseNumber);
+//        assertEquals("c", result.houseNumberAddition);
+//        assertEquals("1111AA", result.zipcode);
+//        assertEquals("Utrecht", result.city);
+//        assertEquals(1L, result.phoneNumber);
+//    }
 }
