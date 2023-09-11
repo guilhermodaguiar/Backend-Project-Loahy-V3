@@ -2,6 +2,7 @@ package nl.novi.loahy_v3.controllers;
 
 
 import nl.novi.loahy_v3.dtos.ProductDto;
+import nl.novi.loahy_v3.dtos.ProductInputDto;
 import nl.novi.loahy_v3.models.FileUploadResponse;
 import nl.novi.loahy_v3.models.Product;
 import nl.novi.loahy_v3.services.ProductService;
@@ -66,8 +67,8 @@ public class ProductController {
     }
 
     @PutMapping(value = "/{id}")
-    public ProductDto updateProduct(@PathVariable("id") Integer productId,
-                                    @RequestBody @Valid ProductDto dto) {
+    public ProductInputDto updateProduct(@PathVariable("id") Integer productId,
+                                    @RequestBody @Valid ProductInputDto dto) {
         productService.updateProduct(productId, dto);
 
         return dto;

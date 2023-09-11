@@ -1,6 +1,7 @@
 package nl.novi.loahy_v3.services;
 
 import nl.novi.loahy_v3.dtos.ProductDto;
+import nl.novi.loahy_v3.dtos.ProductInputDto;
 import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
 import nl.novi.loahy_v3.models.FileUploadResponse;
 import nl.novi.loahy_v3.models.Product;
@@ -44,7 +45,6 @@ public class ProductService {
 
     public Product createProduct(Product product) {
 
-
         product.setProductId(product.getProductId());
         product.setProductName(product.getProductName());
         product.setProductDescription(product.getProductDescription());
@@ -54,7 +54,7 @@ public class ProductService {
     }
 
 
-    public void updateProduct(Integer productId, ProductDto dto) {
+    public void updateProduct(Integer productId, ProductInputDto dto) {
 
         if (!productRepository.existsById(productId)) {
             throw new RecordNotFoundException("product niet gevonden..");

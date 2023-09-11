@@ -10,6 +10,7 @@ import nl.novi.loahy_v3.models.Authority;
 import nl.novi.loahy_v3.models.User;
 import nl.novi.loahy_v3.models.Wishlist;
 import nl.novi.loahy_v3.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -23,24 +24,17 @@ import static nl.novi.loahy_v3.dtos.UserDto.fromUser;
 @Service
 public class UserService {
 
+    @Autowired
+    private UserRepository userRepository;
 
-    private final UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private AddressService addressService;
 
-    private final PasswordEncoder passwordEncoder;
-
-
-    private final AddressService addressService;
-
-
-    private final WishlistService wishlistService;
-
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AddressService addressService, WishlistService wishlistService) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.addressService = addressService;
-        this.wishlistService = wishlistService;
-    }
+    @Autowired
+    private WishlistService wishlistService;
 
 
     public List<UserDto> getAllUsers() {
@@ -52,13 +46,13 @@ public class UserService {
         return collection;
     }
 
-    public UserDto getByUserEmail(String username) {
+    public UserDto getByUserEmail(String userEmail) {
         UserDto dto = new UserDto();
-        Optional<User> user = userRepository.findUserByUserEmailIs(username);
+        Optional<User> user = userRepository.findUserByUserEmailIs(userEmail);
         if (user.isPresent()) {
             dto = fromUser(user.get());
         } else {
-            throw new UsernameNotFoundException(username);
+            throw new UsernameNotFoundException(userEmail);
         }
         return dto;
     }

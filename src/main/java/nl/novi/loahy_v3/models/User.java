@@ -23,7 +23,8 @@ public class User {
     @Column(nullable = false,
             unique = true)
     @NotBlank(message = "password must not be blank")
-    @Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,15}$", message = "wachtwoord moet tussen 8 tot 15 tekens bevatten, 1 Hoofdletter en speciaal teken")
+    @Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,15}$",
+            message = "wachtwoord moet tussen 8 tot 15 tekens bevatten, 1 Hoofdletter en speciaal teken")
     private String password;
 
     @Column(nullable = false)

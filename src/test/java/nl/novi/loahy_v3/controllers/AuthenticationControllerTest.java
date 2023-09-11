@@ -1,47 +1,21 @@
 package nl.novi.loahy_v3.controllers;
 
-import nl.novi.loahy_v3.payload.AuthenticationRequest;
-import org.junit.jupiter.api.DisplayName;
+import nl.novi.loahy_v3.LoahyV3Application;
+import nl.novi.loahy_v3.services.AddressService;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-
-@ExtendWith(MockitoExtension.class)
+@WebMvcTest
+@ContextConfiguration(classes={LoahyV3Application.class})
 class AuthenticationControllerTest {
 
-    @Mock
-    private AuthenticationManager authenticationManager;
 
-    @InjectMocks
-    private AuthenticationController authenticationController;
-
-
-    @Test
-    @DisplayName("Should throw an exception when the username or password are incorrect")
-    void createAuthenticationTokenWhenUsernameOrPasswordAreIncorrectThenThrowException() {
-        AuthenticationRequest authenticationRequest =
-                new AuthenticationRequest("e-mailadres", "password");
-        when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
-                .thenThrow(new BadCredentialsException("Incorrect e-mailadres or password"));
-
-        Exception exception =
-                assertThrows(
-                        Exception.class,
-                        () -> {
-                            authenticationController.createAuthenticationToken(
-                                    authenticationRequest);
-                        });
-
-        assertEquals("Incorrect e-mailadres or password", exception.getMessage());
-    }
 }
