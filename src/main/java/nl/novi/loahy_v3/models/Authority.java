@@ -13,20 +13,20 @@ public class Authority implements Serializable {
 
     @Id
     @Column(nullable = false)
-    private String userEmail;
+    private String email;
 
     @Id
     @Column(nullable = false)
     private String authority;
 
     public Authority() {}
-    public Authority(String userEmail, String authority) {
-        this.userEmail = userEmail;
+    public Authority(String email, String authority) {
+        this.email = email;
         this.authority = authority;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setUsername(String email) {
+        this.email = email;
     }
 
     public void setAuthority(String authority) {

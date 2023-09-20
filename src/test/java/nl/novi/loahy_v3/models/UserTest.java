@@ -21,15 +21,15 @@ class UserTest {
     @Test
     @DisplayName("Should return the email of the user")
     void getEmailShouldReturnTheEmailOfTheUser() {
-        user.setUserEmail("test@test.com");
-        assertEquals("test@test.com", user.getUserEmail());
+        user.setEmail("test@test.com");
+        assertEquals("test@test.com", user.getEmail());
     }
 
     @Test
     @DisplayName("Should set the email")
     void setEmail() {
-        user.setUserEmail("test@test.nl");
-        assertEquals("test@test.nl", user.getUserEmail());
+        user.setEmail("test@test.nl");
+        assertEquals("test@test.nl", user.getEmail());
     }
 
     @Test
@@ -57,7 +57,7 @@ class UserTest {
     @Test
     @DisplayName("Should return the authorities of the user")
     void getAuthoritiesShouldReturnAuthoritiesOfUser() {
-        Authority authority = new Authority("userEmail", "authority");
+        Authority authority = new Authority("email", "authority");
         user.addAuthority(authority);
         assertEquals(user.getAuthorities(), Set.of(authority));
     }
@@ -65,7 +65,7 @@ class UserTest {
     @Test
     @DisplayName("Should add the authority to the authorities set")
     void addAuthorityShouldAddTheAuthorityToTheAuthoritiesSet() {
-        Authority authority = new Authority("username", "authority");
+        Authority authority = new Authority("email", "authority");
         user.addAuthority(authority);
         assertTrue(user.getAuthorities().contains(authority));
     }
@@ -73,7 +73,7 @@ class UserTest {
     @Test
     @DisplayName("Should remove the authority from the user")
     void removeAuthorityShouldRemovesTheAuthorityFromTheUser() {
-        Authority authority = new Authority("username", "authority");
+        Authority authority = new Authority("email", "authority");
         user.addAuthority(authority);
         user.removeAuthority(authority);
         assertFalse(user.getAuthorities().contains(authority));

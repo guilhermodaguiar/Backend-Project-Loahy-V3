@@ -39,7 +39,7 @@ public class Order {
 
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.PERSIST)
-    private User userEmail;
+    private User email;
 
     public void setOrderId(Long orderId) {
         this.orderId = orderId;
@@ -62,13 +62,13 @@ public class Order {
         this.addressId = addressId;
     }
 
-    public void setUserEmail(User userEmail) {
-        this.userEmail = userEmail;
+    public void setEmail(User email) {
+        this.email = email;
     }
 
-    public void setUserEmail() {
+    public void setEmail() {
     }
 
-    public void setUserEmail(String test) {
+    public void setEmail(String email) {
     }
 }

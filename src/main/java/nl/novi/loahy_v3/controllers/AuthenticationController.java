@@ -9,13 +9,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @CrossOrigin
 @RestController
@@ -30,24 +29,28 @@ public class AuthenticationController {
     @Autowired
     JwtUtil jwtUtl;
 
+    @GetMapping(value = "/authenticated")
+    public ResponseEntity<Object> authenticated(Authentication authentication, Principal principal) {
+        return ResponseEntity.ok().body(principal);
+    }
 
     @PostMapping(value = "/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody @Valid AuthenticationRequest authenticationRequest)
             throws Exception {
 
-        String username = authenticationRequest.getUserEmail();
+        String email = authenticationRequest.getEmail();
         String password = authenticationRequest.getPassword();
 
         try {
             authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(username, password)
+                    new UsernamePasswordAuthenticationToken(email, password)
             );
         } catch (BadCredentialsException ex) {
             throw new Exception("Incorrect e-mailadres or password", ex);
         }
 
         final UserDetails userDetails = userDetailsService
-                .loadUserByUsername(username);
+                .loadUserByUsername(email);
 
         final String jwt = jwtUtl.generateToken(userDetails);
 

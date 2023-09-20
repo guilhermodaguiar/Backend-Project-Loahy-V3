@@ -16,7 +16,6 @@ import java.util.List;
 @RequestMapping(value = "/contact-remarks")
 public class ContactRemarkController {
 
-    @Autowired
     private final ContactRemarkService contactRemarkService;
 
     @Autowired

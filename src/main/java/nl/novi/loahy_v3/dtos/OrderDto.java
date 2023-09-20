@@ -1,10 +1,12 @@
 package nl.novi.loahy_v3.dtos;
 
+import lombok.Getter;
 import nl.novi.loahy_v3.models.Order;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
+@Getter
 public class OrderDto {
     private Long orderId;
 
@@ -15,7 +17,7 @@ public class OrderDto {
     @NotNull
     private String orderDate;
 
-    private UserDto userEmail;
+    private UserDto email;
 
     @NotNull
     private Long addressId;
@@ -29,14 +31,10 @@ public class OrderDto {
         dto.setProductList(order.getProductList());
         dto.setComment(order.getComment());
         dto.setOrderDate(order.getOrderDate());
-        dto.setUserEmail(UserDto.fromUser(order.getUserEmail()));
+        dto.setEmail(UserDto.fromUser(order.getEmail()));
         dto.setAddressId(order.getAddressId());
 
         return dto;
-    }
-
-    public Long getOrderId() {
-        return orderId;
     }
 
     public void setOrderId(Long orderId) {
@@ -44,40 +42,20 @@ public class OrderDto {
     }
 
 
-    public String getComment() {
-        return comment;
-    }
-
     public void setComment(String comment) {
         this.comment = comment;
-    }
-
-    public String getOrderDate() {
-        return orderDate;
     }
 
     public void setOrderDate(String orderDate) {
         this.orderDate = orderDate;
     }
 
-    public UserDto getUserEmail() {
-        return userEmail;
-    }
-
-    public void setUserEmail(UserDto userEmail) {
-        this.userEmail = userEmail;
-    }
-
-    public List<Object> getProductList() {
-        return productList;
+    public void setEmail(UserDto email) {
+        this.email = email;
     }
 
     public void setProductList(List<Object> productList) {
         this.productList = productList;
-    }
-
-    public Long getAddressId() {
-        return addressId;
     }
 
     public void setAddressId(Long addressId) {

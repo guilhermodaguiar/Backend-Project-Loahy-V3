@@ -68,8 +68,8 @@ Hier zijn alle gebruikte controller layers:
 ### Exceptions
 - BadRequestException
 - RecordNotFoundException
-- UserEmailNotFoundException
-- UserEmailAlreadyExistException
+- UsernameNotFoundException
+- UsernameAlreadyExistException
 
 
 ### Filter

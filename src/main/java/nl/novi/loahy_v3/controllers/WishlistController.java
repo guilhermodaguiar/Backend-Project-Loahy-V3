@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping(value = "/wishlists")
 public class WishlistController {
 
-    @Autowired
+
     private final WishlistService wishlistService;
 
     @Autowired

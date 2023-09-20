@@ -41,7 +41,7 @@ public class OrderService {
         order.setComment(orderInputDto.getComment());
         order.setOrderDate(orderInputDto.getOrderDate());
         order.setAddressId(orderInputDto.getAddressId());
-        order.setUserEmail(userRepository.getReferenceById(orderInputDto.getUserEmail()));
+        order.setEmail(String.valueOf(userRepository.getReferenceById(orderInputDto.getEmail())));
 
         return orderRepository.save(order);
     }

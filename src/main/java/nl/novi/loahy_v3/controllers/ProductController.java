@@ -22,10 +22,10 @@ import java.util.List;
 public class ProductController {
 
 
-    @Autowired
-    private ProductService productService;
-    @Autowired
-    private ImageController imageController;
+
+    private final ProductService productService;
+
+    private final ImageController imageController;
 
 
     @Autowired

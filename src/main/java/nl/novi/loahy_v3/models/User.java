@@ -1,41 +1,38 @@
 package nl.novi.loahy_v3.models;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 import java.util.HashSet;
 import java.util.Set;
+
 
 @Getter
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
-    @Column(nullable = false,
-            unique = true)
-    @NotBlank(message = "email must not be blank")
-    @Email
-    private String userEmail;
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable = false)
+    private boolean enabled = true;
 
     @Column(nullable = false,
             unique = true)
-    @NotBlank(message = "password must not be blank")
-    @Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,15}$",
-            message = "wachtwoord moet tussen 8 tot 15 tekens bevatten, 1 Hoofdletter en speciaal teken")
     private String password;
+
+    public String apikey;
 
     @Column(nullable = false)
     private Long userId;
 
     @Column
-    @NotBlank(message = "firstname must not be blank")
     private String firstName;
 
     @Column
-    @NotBlank(message = "lastname must not be blank")
     private String lastName;
 
     @OneToOne
@@ -47,16 +44,15 @@ public class User {
 
     @OneToMany(
             targetEntity = Authority.class,
-            mappedBy = "userEmail",
+            mappedBy = "email",
             cascade = CascadeType.ALL,
             orphanRemoval = true,
             fetch = FetchType.EAGER)
     private Set<Authority> authorities = new HashSet<>();
 
 
-    public String setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-        return userEmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setPassword(String password) {
@@ -77,7 +73,6 @@ public class User {
     }
 
 
-
     public void addAuthority(Authority authority) {
         this.authorities.add(authority);
     }
@@ -96,6 +91,14 @@ public class User {
 
     public void setWishlist(Wishlist wishlist) {
         this.wishlist = wishlist;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public void setApikey(String apikey) {
+        this.apikey = apikey;
     }
 }
 

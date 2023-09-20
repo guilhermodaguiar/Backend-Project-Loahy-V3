@@ -10,6 +10,7 @@ import nl.novi.loahy_v3.models.Authority;
 import nl.novi.loahy_v3.models.User;
 import nl.novi.loahy_v3.models.Wishlist;
 import nl.novi.loahy_v3.repositories.UserRepository;
+import nl.novi.loahy_v3.utils.RandomStringGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,20 +22,23 @@ import java.util.Optional;
 
 import static nl.novi.loahy_v3.dtos.UserDto.fromUser;
 
+
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final AddressService addressService;
+    private final WishlistService wishlistService;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private AddressService addressService;
-
-    @Autowired
-    private WishlistService wishlistService;
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AddressService addressService, WishlistService wishlistService) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.addressService = addressService;
+        this.wishlistService = wishlistService;
+    }
 
 
     public List<UserDto> getAllUsers() {
@@ -46,49 +50,40 @@ public class UserService {
         return collection;
     }
 
-    public UserDto getByUserEmail(String userEmail) {
+    public UserDto getUser(String email) {
         UserDto dto = new UserDto();
-        Optional<User> user = userRepository.findUserByUserEmailIs(userEmail);
+        Optional<User> user = userRepository.findById(email);
         if (user.isPresent()) {
             dto = fromUser(user.get());
         } else {
-            throw new UsernameNotFoundException(userEmail);
+            throw new UsernameNotFoundException(email);
         }
         return dto;
     }
 
-
-    public boolean userExist(String userEmail) {
-        return userRepository.existsById(userEmail);
+    public boolean userExist(String email) {
+        return userRepository.existsById(email);
     }
 
 
-    public String createUser(User user) {
+    public String createUser(UserDto dto) {
 
-        if (userExist(user.getUserEmail())) {
+        if (userExist(dto.getEmail())) {
             throw new UserEmailAlreadyExistException("Email is al in gebruik!");
         }
 
-        user.setUserId((long) ((getAllUsers().size()) + 1));
-        user.setUserEmail(user.getUserEmail());
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setFirstName(user.getFirstName());
-        user.setLastName(user.getLastName());
-
-        user.setAddress(addressService.saveAddress(new Address()));
-        user.setWishlist(wishlistService.saveWishlist(new Wishlist()));
-
-        User newUser = userRepository.save(user);
-        userRepository.save(newUser);
-        return newUser.getUserEmail();
+        String randomString = RandomStringGenerator.generateAlphaNumeric(20);
+        dto.setApikey(randomString);
+        User newUser = userRepository.save(toUser(dto));
+        return newUser.getEmail();
     }
 
 
-    public void updatePassword(String userEmail, UserPasswordOnlyDto user) {
-        if (!userRepository.existsById(userEmail)) {
-            throw new UserEmailNotFoundException(userEmail);
+    public void updatePassword(String email, UserPasswordOnlyDto user) {
+        if (!userRepository.existsById(email)) {
+            throw new UserEmailNotFoundException(email);
         } else {
-            User user1 = userRepository.findById(userEmail).get();
+            User user1 = userRepository.findById(email).get();
             user1.setPassword(passwordEncoder.encode(user.getPassword()));
 
             userRepository.save(user1);
@@ -96,20 +91,37 @@ public class UserService {
     }
 
 
-    public void deleteUser(String userEmail) {
-        if (!userRepository.existsById(userEmail)) {
+    public void deleteUser(String email) {
+        if (!userRepository.existsById(email)) {
             throw new RecordNotFoundException("User met email bestaat niet");
         }
-        userRepository.deleteById(userEmail);
+        userRepository.deleteById(email);
     }
 
 
-    public void addAuthority(String userEmail, String authority) {
+    public void addAuthority(String email, String authority) {
 
-        if (!userRepository.existsById(userEmail)) throw new UserEmailNotFoundException(userEmail);
-        User user = userRepository.findById(userEmail).get();
-        user.addAuthority(new Authority(userEmail, authority));
+        if (!userRepository.existsById(email)) throw new UserEmailNotFoundException(email);
+        User user = userRepository.findById(email).get();
+        user.addAuthority(new Authority(email, authority));
         userRepository.save(user);
+    }
+
+    public User toUser(UserDto dto) {
+
+        var user = new User();
+
+        user.setEmail(dto.getEmail());
+        user.setPassword(dto.getPassword());
+        user.setEnabled(dto.getEnabled());
+        user.setApikey(dto.getApikey());
+        user.setApikey(dto.getApikey());
+        user.setUserId((long) ((getAllUsers().size()) + 1));
+
+        user.setAddress(addressService.saveAddress(new Address()));
+        user.setWishlist(wishlistService.saveWishlist(new Wishlist()));
+
+        return user;
     }
 
 }

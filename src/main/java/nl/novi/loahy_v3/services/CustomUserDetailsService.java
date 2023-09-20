@@ -1,7 +1,6 @@
 package nl.novi.loahy_v3.services;
 
 import nl.novi.loahy_v3.dtos.UserDto;
-import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
 import nl.novi.loahy_v3.models.Authority;
 import nl.novi.loahy_v3.models.User;
 import nl.novi.loahy_v3.repositories.UserRepository;
@@ -20,20 +19,19 @@ import java.util.Set;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-
     @Autowired
-    private UserService userService;
+    private  UserService userService;
 
     @Autowired
     private UserRepository userRepository;
 
+
     @Override
-    public UserDetails loadUserByUsername(String username) {
-        if (!userRepository.existsById(username)) {
-            throw new RecordNotFoundException("User met email bestaat niet");
-        }
-        UserDto userDto = userService.getByUserEmail(username);
-        Optional<User> user = userRepository.findUserByUserEmailIs(username);
+    public UserDetails loadUserByUsername(String email) {
+
+        UserDto userDto = userService.getUser(email);
+
+        Optional<User> user = userRepository.findById(email);
 
         String password = user.get().getPassword();
 
@@ -43,6 +41,6 @@ public class CustomUserDetailsService implements UserDetailsService {
             grantedAuthorities.add(new SimpleGrantedAuthority(authority.getAuthority()));
         }
 
-        return new org.springframework.security.core.userdetails.User(username, password, grantedAuthorities);
+        return new org.springframework.security.core.userdetails.User(email, password, grantedAuthorities);
     }
 }

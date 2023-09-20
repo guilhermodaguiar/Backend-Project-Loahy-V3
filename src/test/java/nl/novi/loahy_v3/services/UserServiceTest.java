@@ -34,15 +34,15 @@ public class UserServiceTest {
 
         user.setFirstName("Felipe");
         user.setLastName("IsDaBest");
-        user.setUserEmail("Felipe@dabest.nl");
+        user.setEmail("Felipe@dabest.nl");
         user.setPassword("oldPassword!!");
         user.setUserId(1L);
 
         when(userRepository.findById("Felipe@dabest.nl")).thenReturn(Optional.of(user));
 
-        UserDto userDto = userService.getByUserEmail("Felipe@dabest.nl");
+        UserDto userDto = userService.getUser("Felipe@dabest.nl");
 
-        assertThat(userDto.userEmail).isEqualTo(user.getUserEmail());
+        assertThat(userDto.email).isEqualTo(user.getEmail());
     }
 
     @Test
@@ -50,7 +50,7 @@ public class UserServiceTest {
     void getUsersShouldReturnsAllUsers() {
         User user = new User();
         user.setUserId(1L);
-        user.setUserEmail("test@test.nl");
+        user.setEmail("test@test.nl");
         user.setPassword("test!!!");
         user.setFirstName("Test");
         user.setLastName("Test");

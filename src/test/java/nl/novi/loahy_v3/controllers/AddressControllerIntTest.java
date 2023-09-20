@@ -20,7 +20,8 @@ class AddressControllerIntTest {
     private MockMvc mvc;
 
     @MockBean
-    private AddressService addressService;
+    AddressService addressService;
+
 
     @Test
     void shouldRetrieveCorrectAddress() throws Exception {

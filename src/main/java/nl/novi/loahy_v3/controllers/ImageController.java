@@ -20,7 +20,6 @@ import java.util.Objects;
 @RequestMapping(value = "images")
 public class ImageController {
 
-    @Autowired
     private final ImageService imageService;
 
     @Autowired

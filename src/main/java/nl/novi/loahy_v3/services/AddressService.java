@@ -19,12 +19,8 @@ import static nl.novi.loahy_v3.dtos.AddressDto.transferToAddressDto;
 public class AddressService {
 
     @Autowired
-    private final AddressRepository addressRepository;
+    private AddressRepository addressRepository;
 
-    @Autowired
-    public AddressService(AddressRepository addressRepository) {
-        this.addressRepository = addressRepository;
-    }
 
     public List<AddressDto> getAllAddresses() {
         List<AddressDto> collection = new ArrayList<>();
@@ -54,11 +50,12 @@ public class AddressService {
 
     public void updateAddress(Long id, AddressInputDto addressDto) {
 
-        if (!addressRepository.existsById(id)) {
-            throw new RecordNotFoundException("Address bestaat niet..");
-        } else {
+//        if (!addressRepository.existsById(id)) {
+//            throw new RecordNotFoundException("Address bestaat niet..");
+//        } else {
 
             Address address = addressRepository.findById(id).get();
+
             address.setStreetName(addressDto.getStreetName());
             address.setHouseNumber(addressDto.getHouseNumber());
             address.setHouseNumberAddition(addressDto.getHouseNumberAddition());
@@ -67,7 +64,7 @@ public class AddressService {
             address.setPhoneNumber(addressDto.getPhoneNumber());
 
             addressRepository.save(address);
-        }
+//        }
 
     }
 }

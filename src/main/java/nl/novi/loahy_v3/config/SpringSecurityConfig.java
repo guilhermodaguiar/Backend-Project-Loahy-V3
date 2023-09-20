@@ -26,9 +26,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(customUserDetailsService);
+    @Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+                .userDetailsService(customUserDetailsService);
     }
 
     @Override
@@ -50,8 +51,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/users").permitAll()
-                .antMatchers(HttpMethod.GET, "/users/{id}").hasRole("USER")
-                .antMatchers(HttpMethod.PATCH, "/users/{id}").hasRole("USER")
+                .antMatchers(HttpMethod.GET, "/users/{id}").hasAnyRole("USER", "ADMIN")
+                .antMatchers(HttpMethod.PATCH, "/users/{id}").hasAnyRole("USER","ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/users/delete/{id}").hasRole("ADMIN")
 
                 .antMatchers(HttpMethod.POST, "/contact-remarks").permitAll()
@@ -69,7 +70,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.DELETE, "/products/{id}").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/products/{id}/image").hasRole("ADMIN")
 
-
                 .antMatchers(HttpMethod.POST, "/orders").hasRole("USER")
                 .antMatchers(HttpMethod.DELETE, "/orders/{id}").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/orders").hasRole("ADMIN")
@@ -82,7 +82,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/products/image-upload").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/products/image-delete").hasRole("ADMIN")
 
-
+                .antMatchers("/authenticated").authenticated()
                 .antMatchers("/authenticate").permitAll()
                 .and()
                 .sessionManagement()

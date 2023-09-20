@@ -1,5 +1,6 @@
 package nl.novi.loahy_v3.controllers;
 
+import nl.novi.loahy_v3.dtos.UserDto;
 import nl.novi.loahy_v3.dtos.UserPasswordOnlyDto;
 import nl.novi.loahy_v3.models.User;
 import nl.novi.loahy_v3.services.UserService;
@@ -36,7 +37,7 @@ class UserControllerTest {
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
 
-        User user = new User();
+        UserDto user = new UserDto();
         user.setUserEmail("test@test.nl");
         user.setPassword("test123!");
 
@@ -44,7 +45,7 @@ class UserControllerTest {
         user.setLastName("test");
 
 
-        ResponseEntity<User> response = userController.createUser(user);
+        ResponseEntity<UserDto> response = userController.createUser(user);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
     }
@@ -53,7 +54,7 @@ class UserControllerTest {
     @DisplayName("Should delete the user when the id is valid")
     void deleteUserWhenIdIsValid() {
         User user = new User();
-        user.setUserEmail("test@test.nl");
+        user.setEmail("test@test.nl");
         user.setPassword("test123!");
 
         user.setFirstName("test");
@@ -69,7 +70,7 @@ class UserControllerTest {
     @DisplayName("Should update password the user when the id is valid")
     void PatchUserWhenIdIsValid() {
         User user = new User();
-        user.setUserEmail("test@test.nl");
+        user.setEmail("test@test.nl");
         user.setPassword("test123!");
 
         user.setFirstName("test");

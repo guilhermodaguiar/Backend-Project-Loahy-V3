@@ -2,27 +2,24 @@ package nl.novi.loahy_v3.payload;
 
 import lombok.Getter;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 @Getter
 public class AuthenticationRequest {
 
     @NotBlank(message = "user email must not be blank")
-    @Email
-    private String userEmail;
+    private String email;
     @NotBlank(message = "password must not be blank")
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,15}$",
-            message = "wachtwoord moet tussen 8 tot 15 tekens bevatten, 1 Hoofdletter en speciaal teken")
+            message = "wachtwoord moet tussen 8 tot 15 tekens bevatten, 1 Hoofdletter, 1 cijfer en speciaal teken")
     private String password;
 
     public AuthenticationRequest(){
     }
 
-    public AuthenticationRequest(String userEmail, String password) {
-        this.userEmail = userEmail;
+    public AuthenticationRequest(String email, String password) {
+        this.email = email;
         this.password = password;
     }
 
@@ -31,7 +28,7 @@ public class AuthenticationRequest {
         this.password = password;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
