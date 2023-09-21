@@ -4,6 +4,7 @@ import nl.novi.loahy_v3.dtos.UserDto;
 import nl.novi.loahy_v3.models.Authority;
 import nl.novi.loahy_v3.models.User;
 import nl.novi.loahy_v3.repositories.UserRepository;
+import nl.novi.loahy_v3.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,7 +21,7 @@ import java.util.Set;
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private  UserService userService;
+    private UserService userService;
 
     @Autowired
     private UserRepository userRepository;

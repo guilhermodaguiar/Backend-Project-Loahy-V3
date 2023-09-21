@@ -1,7 +1,7 @@
 package nl.novi.loahy_v3.filters;
 
 import nl.novi.loahy_v3.services.CustomUserDetailsService;
-import nl.novi.loahy_v3.utils.JwtUtil;
+import nl.novi.loahy_v3.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,7 +21,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Autowired
     private CustomUserDetailsService userDetailsService;
-
 
     @Autowired
     private JwtUtil jwtUtil;

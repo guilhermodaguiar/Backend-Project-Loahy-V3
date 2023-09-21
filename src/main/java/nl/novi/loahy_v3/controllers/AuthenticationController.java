@@ -3,7 +3,7 @@ package nl.novi.loahy_v3.controllers;
 import nl.novi.loahy_v3.payload.AuthenticationRequest;
 import nl.novi.loahy_v3.payload.AuthenticationResponse;
 import nl.novi.loahy_v3.services.CustomUserDetailsService;
-import nl.novi.loahy_v3.utils.JwtUtil;
+import nl.novi.loahy_v3.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -1,4 +1,4 @@
-package nl.novi.loahy_v3.utils;
+package nl.novi.loahy_v3;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
