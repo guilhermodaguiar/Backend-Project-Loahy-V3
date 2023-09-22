@@ -2,7 +2,9 @@ package nl.novi.loahy_v3.services;
 
 import nl.novi.loahy_v3.dtos.ContactRemarkDto;
 import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
+import nl.novi.loahy_v3.models.Address;
 import nl.novi.loahy_v3.models.ContactRemark;
+import nl.novi.loahy_v3.repositories.AddressRepository;
 import nl.novi.loahy_v3.repositories.ContactRemarkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +33,10 @@ public class ContactRemarkService {
         }
         return collection;
     }
+
+//    public ContactRemarkDto getContactRemarkByEmail(String contactEmail) {
+//
+//    }
 
 
     public String createRemark(ContactRemarkDto contactRemarkDto) {

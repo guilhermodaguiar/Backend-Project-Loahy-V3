@@ -52,11 +52,20 @@ public class AddressController {
     }
 
     @PutMapping(value = "/{id}")
-    public AddressInputDto updateAddress(@PathVariable("id") Long id,
+    public ResponseEntity<Object> updateAddress(@PathVariable("id") Long id,
                                     @Valid @RequestBody AddressInputDto addressDto) {
         addressService.updateAddress(id, addressDto);
 
-        return addressDto;
+        return ResponseEntity.ok().body(addressDto);
+    }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteAddress(@PathVariable Long id) {
+
+        addressService.deleteAddress(id);
+
+        return ResponseEntity.noContent().build();
     }
 }
 

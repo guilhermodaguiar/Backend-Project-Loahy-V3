@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -39,7 +40,7 @@ public class OrderService {
 
         order.setProductList(orderInputDto.getProductList());
         order.setComment(orderInputDto.getComment());
-        order.setOrderDate(orderInputDto.getOrderDate());
+        order.setOrderDate(LocalDate.parse(orderInputDto.getOrderDate()));
         order.setAddressId(orderInputDto.getAddressId());
         order.setEmail(String.valueOf(userRepository.getReferenceById(orderInputDto.getEmail())));
 

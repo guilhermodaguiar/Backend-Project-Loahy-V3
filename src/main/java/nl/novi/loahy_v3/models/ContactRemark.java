@@ -15,6 +15,7 @@ public class ContactRemark {
     @Id
     @Column(nullable = false)
     private String contactEmail;
+
     @Column(nullable = false)
     private String contactName;
 

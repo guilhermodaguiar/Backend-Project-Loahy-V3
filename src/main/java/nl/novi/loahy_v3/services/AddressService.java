@@ -7,6 +7,7 @@ import nl.novi.loahy_v3.models.Address;
 import nl.novi.loahy_v3.repositories.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,9 +51,9 @@ public class AddressService {
 
     public void updateAddress(Long id, AddressInputDto addressDto) {
 
-//        if (!addressRepository.existsById(id)) {
-//            throw new RecordNotFoundException("Address bestaat niet..");
-//        } else {
+        if (!addressRepository.existsById(id)) {
+            throw new RecordNotFoundException("Address bestaat niet..");
+        } else {
 
             Address address = addressRepository.findById(id).get();
 
@@ -64,9 +65,17 @@ public class AddressService {
             address.setPhoneNumber(addressDto.getPhoneNumber());
 
             addressRepository.save(address);
-//        }
+        }
+    }
 
+    public void deleteAddress(@RequestBody Long id) {
+        if (!addressRepository.existsById(id)) {
+            throw new RecordNotFoundException("Address bestaat niet..");
+        } else {
+            addressRepository.deleteById(id);
+        }
     }
 }
+
 
 

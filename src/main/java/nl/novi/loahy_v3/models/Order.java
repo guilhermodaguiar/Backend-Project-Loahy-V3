@@ -6,6 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -35,7 +36,7 @@ public class Order {
     @Column
     public Long addressId;
     @Column
-    public String orderDate;
+    public LocalDate orderDate;
 
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.PERSIST)
@@ -53,10 +54,9 @@ public class Order {
         this.comment = comment;
     }
 
-    public void setOrderDate(String orderDate) {
+    public void setOrderDate(LocalDate orderDate) {
         this.orderDate = orderDate;
     }
-
 
     public void setAddressId(Long addressId) {
         this.addressId = addressId;

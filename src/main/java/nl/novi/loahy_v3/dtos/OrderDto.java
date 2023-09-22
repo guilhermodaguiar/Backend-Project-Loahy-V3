@@ -30,7 +30,7 @@ public class OrderDto {
         dto.setOrderId(order.getOrderId());
         dto.setProductList(order.getProductList());
         dto.setComment(order.getComment());
-        dto.setOrderDate(order.getOrderDate());
+        dto.setOrderDate(String.valueOf(order.getOrderDate()));
         dto.setEmail(UserDto.fromUser(order.getEmail()));
         dto.setAddressId(order.getAddressId());
 
