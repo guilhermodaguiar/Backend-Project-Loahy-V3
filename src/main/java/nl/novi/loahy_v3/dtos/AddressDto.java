@@ -9,14 +9,10 @@ public class AddressDto {
 
     public Long addressId;
     public String streetName;
-
     public String houseNumber;
     public String houseNumberAddition;
-
     public String city;
-
     public String zipcode;
-
     public Long phoneNumber;
 
 

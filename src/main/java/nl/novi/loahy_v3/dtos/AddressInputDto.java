@@ -1,6 +1,7 @@
 package nl.novi.loahy_v3.dtos;
 
 import lombok.Getter;
+import nl.novi.loahy_v3.models.Address;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

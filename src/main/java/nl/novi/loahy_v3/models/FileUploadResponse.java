@@ -3,6 +3,7 @@ package nl.novi.loahy_v3.models;
 import lombok.Getter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Entity

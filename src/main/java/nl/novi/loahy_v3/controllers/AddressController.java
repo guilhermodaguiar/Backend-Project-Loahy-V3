@@ -26,45 +26,36 @@ public class AddressController {
 
     @GetMapping
     public ResponseEntity<List<AddressDto>> getAllAddresses() {
-
         List<AddressDto> addressDtos = addressService.getAllAddresses();
-
         return ResponseEntity.ok().body(addressDtos);
     }
 
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<AddressDto> getAddress(@PathVariable("id") Long addressId) {
-
         AddressDto optionalAddress = addressService.getAddress(addressId);
-
-
         return ResponseEntity.ok().body(optionalAddress);
     }
 
 
     @PostMapping
-    public AddressDto saveAddress(@RequestBody Address dto) {
-
+    public ResponseEntity<AddressDto> saveAddress(@RequestBody Address dto) {
         var address = addressService.saveAddress(dto);
-
-        return AddressDto.transferToAddressDto(address);
+        return ResponseEntity.created(null).body(AddressDto.transferToAddressDto(address));
     }
+
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<Object> updateAddress(@PathVariable("id") Long id,
                                     @Valid @RequestBody AddressInputDto addressDto) {
         addressService.updateAddress(id, addressDto);
-
         return ResponseEntity.ok().body(addressDto);
     }
 
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteAddress(@PathVariable Long id) {
-
         addressService.deleteAddress(id);
-
         return ResponseEntity.noContent().build();
     }
 }

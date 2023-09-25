@@ -23,10 +23,7 @@ import java.util.Objects;
 public class ImageService {
     @Value("${my.upload_location}")
     private Path fileStoragePath;
-
     private final String fileStorageLocation;
-
-    @Autowired
     private final FileUploadRepository fileUploadRepository;
 
     public ImageService(@Value("${my.upload_location}") String fileStorageLocation, FileUploadRepository fileUploadRepository) {
@@ -72,7 +69,7 @@ public class ImageService {
             throw new RuntimeException("Issue in reading the file", e);
         }
 
-        if(resource.exists()&& resource.isReadable()) {
+        if (resource.exists() && resource.isReadable()) {
             return resource;
         } else {
             throw new RuntimeException("the file doesn't exist or not readable");
@@ -81,7 +78,7 @@ public class ImageService {
 
     public void deleteImage(String fileName) {
         if (!fileUploadRepository.existsById(fileName)) {
-            throw new RecordNotFoundException("Image met naam bestaat niet" );
+            throw new RecordNotFoundException("Image met naam " + fileName + " bestaat niet");
         }
         fileUploadRepository.deleteById(fileName);
     }

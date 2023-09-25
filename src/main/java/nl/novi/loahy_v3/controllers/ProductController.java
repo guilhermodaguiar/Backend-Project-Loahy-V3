@@ -21,10 +21,7 @@ import java.util.List;
 @RequestMapping(value = "/products")
 public class ProductController {
 
-
-
     private final ProductService productService;
-
     private final ImageController imageController;
 
 
@@ -36,7 +33,7 @@ public class ProductController {
 
     @GetMapping
     @Transactional
-    public List<ProductDto> getAllProducts() {
+    public ResponseEntity<List<ProductDto>> getAllProducts() {
         var dtos = new ArrayList<ProductDto>();
         List<Product> productList;
 
@@ -45,33 +42,33 @@ public class ProductController {
             dtos.add(ProductDto.transferToDto(product));
         }
 
-        return dtos;
+        return ResponseEntity.ok().body(dtos);
     }
 
     @GetMapping(value = "/{id}")
     @Transactional
-    public ProductDto getProductById(@PathVariable("id") Integer productId) {
+    public ResponseEntity<ProductDto> getProductById(@PathVariable("id") Integer productId) {
 
         var product = productService.getProduct(productId);
 
-        return ProductDto.transferToDto(product);
+        return ResponseEntity.ok().body(ProductDto.transferToDto(product));
     }
 
 
     @PostMapping
-    public ProductDto createProduct(@RequestBody @Valid ProductDto dto) {
+    public ResponseEntity<ProductDto> createProduct(@RequestBody @Valid ProductDto dto) {
         var product = productService.createProduct(dto.toProduct());
 
-        return ProductDto.transferToDto(product);
-
+        return ResponseEntity.created(null).body(ProductDto.transferToDto(product));
     }
 
+
     @PutMapping(value = "/{id}")
-    public ProductInputDto updateProduct(@PathVariable("id") Integer productId,
+    public ResponseEntity<ProductInputDto> updateProduct(@PathVariable("id") Integer productId,
                                     @RequestBody @Valid ProductInputDto dto) {
         productService.updateProduct(productId, dto);
 
-        return dto;
+        return ResponseEntity.ok().body(dto);
     }
 
     @DeleteMapping(value = "/{id}")
@@ -85,7 +82,7 @@ public class ProductController {
 
     @PostMapping(value = "/{id}/image")
     public void assignImageToProduct(@PathVariable("id") Integer productId,
-                                     @RequestBody MultipartFile file) {
+                                     @Valid @RequestBody MultipartFile file) {
 
         FileUploadResponse productImage = imageController.singleFileUpload(file);
 

@@ -14,12 +14,10 @@ import java.util.Set;
 
 @Service
 public class WishlistService {
-    @Autowired
+
     private final WishlistRepository wishlistRepository;
 
-    @Autowired
     private final ProductRepository productRepository;
-
 
     @Autowired
     public WishlistService(WishlistRepository wishlistRepository, ProductRepository productRepository) {
@@ -37,7 +35,7 @@ public class WishlistService {
         if (wishlistOptional.isPresent()) {
             return wishlistOptional.get();
         } else {
-            throw new RecordNotFoundException("wishlist met id niet gevonden");
+            throw new RecordNotFoundException("wishlist met id " + wishlistId+ "niet gevonden");
         }
     }
 
@@ -49,11 +47,11 @@ public class WishlistService {
     public Wishlist assignProductToWishlist(Integer wishlistId, Integer productId) {
         Set<Product> productSet;
         if (!wishlistRepository.existsById(wishlistId)) {
-            throw new RecordNotFoundException("Wishlist met id bestaat niet");
+            throw new RecordNotFoundException("wishlist met id " + wishlistId+ " bestaat niet");
         }
         Wishlist wishlist = wishlistRepository.findById(wishlistId).get();
         if (!productRepository.existsById(productId)) {
-            throw new RecordNotFoundException("Product met id bestaat niet");
+            throw new RecordNotFoundException("product met id  "+productId+ " bestaat niet");
         }
         Product product = productRepository.findById(productId).get();
         productSet = wishlist.getProducts();
@@ -64,11 +62,11 @@ public class WishlistService {
 
     public Wishlist removeProductFromWishlist(Integer wishlistId, Integer productId) {
         if (!wishlistRepository.existsById(wishlistId)) {
-            throw new RecordNotFoundException("Wishlist met id bestaat niet");
+            throw new RecordNotFoundException("Wishlist met id " + wishlistId+" bestaat niet");
         }
         Wishlist wishlist = wishlistRepository.findById(wishlistId).get();
         if (!productRepository.existsById(productId)) {
-            throw new RecordNotFoundException("Product met id bestaat niet");
+            throw new RecordNotFoundException("product met id  "+productId+ " bestaat niet");
         }
         Product product = productRepository.findById(productId).get();
 

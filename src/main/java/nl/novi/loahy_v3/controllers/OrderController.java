@@ -37,18 +37,23 @@ public class OrderController {
         return ResponseEntity.ok().body(dtos);
     }
 
+    //Moet nog testen
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<OrderDto> getOrder(@PathVariable("id") Long orderId){
+        OrderDto optionalOrder = orderService.getOrder(orderId);
+        return ResponseEntity.ok().body(optionalOrder);
+    }
+
 
     @PostMapping
     public ResponseEntity<Order> createOrder(@RequestBody @Valid OrderInputDto dto){
-
-        return ResponseEntity.ok().body(orderService.createOrder(dto));
+        return ResponseEntity.created(null).body(orderService.createOrder(dto));
     }
 
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Order> deleteOrder(@PathVariable("id")Long orderId){
         orderService.deleteOrder(orderId);
-
         return ResponseEntity.noContent().build();
     }
 

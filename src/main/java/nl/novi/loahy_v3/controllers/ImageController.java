@@ -58,7 +58,7 @@ public class ImageController {
         return ResponseEntity.ok().contentType(MediaType.parseMediaType(mimeType)).header(HttpHeaders.CONTENT_DISPOSITION, "inline;fileName=" + resource.getFilename()).body(resource);
     }
 
-    @DeleteMapping("/delete/")
+    @DeleteMapping("/delete/{fileName}")
     ResponseEntity<Objects> deletePicture(@PathVariable String fileName){
         imageService.deleteImage(fileName);
 

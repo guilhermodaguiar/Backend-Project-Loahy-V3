@@ -16,12 +16,8 @@ import java.util.Optional;
 @Service
 public class ProductService {
 
-    @Autowired
     private final ProductRepository productRepository;
-
-    @Autowired
     private final FileUploadRepository uploadRepository;
-
 
     @Autowired
     public ProductService(ProductRepository productRepository, FileUploadRepository uploadRepository) {
@@ -89,7 +85,7 @@ public class ProductService {
             product.setImage(image);
             productRepository.save(product);
         } else {
-            throw new RecordNotFoundException();
+            throw new RecordNotFoundException("product met id " + productId + " niet gevonden");
         }
     }
 }

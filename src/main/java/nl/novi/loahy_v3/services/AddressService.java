@@ -19,8 +19,12 @@ import static nl.novi.loahy_v3.dtos.AddressDto.transferToAddressDto;
 @Service
 public class AddressService {
 
+    private final AddressRepository addressRepository;
+
     @Autowired
-    private AddressRepository addressRepository;
+    public AddressService(AddressRepository addressRepository) {
+        this.addressRepository = addressRepository;
+    }
 
 
     public List<AddressDto> getAllAddresses() {
@@ -48,6 +52,7 @@ public class AddressService {
     public Address saveAddress(Address address) {
         return addressRepository.save(address);
     }
+
 
     public void updateAddress(Long id, AddressInputDto addressDto) {
 

@@ -1,5 +1,6 @@
 package nl.novi.loahy_v3.services;
 
+import nl.novi.loahy_v3.dtos.AddressInputDto;
 import nl.novi.loahy_v3.dtos.UserDto;
 import nl.novi.loahy_v3.dtos.UserPasswordOnlyDto;
 import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
@@ -12,9 +13,16 @@ import nl.novi.loahy_v3.models.Wishlist;
 import nl.novi.loahy_v3.repositories.UserRepository;
 import nl.novi.loahy_v3.utils.RandomStringGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +33,6 @@ import static nl.novi.loahy_v3.dtos.UserDto.fromUser;
 
 @Service
 public class UserService {
-
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -50,16 +57,27 @@ public class UserService {
         return collection;
     }
 
+
     public UserDto getUser(String email) {
         UserDto dto = new UserDto();
         Optional<User> user = userRepository.findById(email);
         if (user.isPresent()) {
             dto = fromUser(user.get());
         } else {
-            throw new UsernameNotFoundException(email);
+            throw new UsernameNotFoundException("user met id "+ email + " niet gevonden");
         }
         return dto;
     }
+
+//    @GetMapping("/{id}")
+//    public ResponseEntity<Note> findById(@PathVariable int id)
+//    {
+//        User user=(User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        Note note=noteService.findById(id);
+//        if(note.getUser().getId()==user.getId())
+//            return new ResponseEntity<>(note,HttpStatus.OK);
+//        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+//    }
 
     public boolean userExist(String email) {
         return userRepository.existsById(email);
@@ -93,7 +111,7 @@ public class UserService {
 
     public void deleteUser(String email) {
         if (!userRepository.existsById(email)) {
-            throw new RecordNotFoundException("User met email bestaat niet");
+            throw new RecordNotFoundException("User met email "+ email + " bestaat niet");
         }
         userRepository.deleteById(email);
     }
@@ -112,9 +130,7 @@ public class UserService {
         var user = new User();
 
         user.setEmail(dto.getEmail());
-        user.setPassword(dto.getPassword());
-        user.setEnabled(dto.getEnabled());
-        user.setApikey(dto.getApikey());
+        user.setPassword(passwordEncoder.encode(dto.getPassword()));
         user.setApikey(dto.getApikey());
         user.setUserId((long) ((getAllUsers().size()) + 1));
 

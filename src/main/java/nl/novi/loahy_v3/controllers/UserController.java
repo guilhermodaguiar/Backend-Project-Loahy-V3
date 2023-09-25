@@ -3,7 +3,9 @@ package nl.novi.loahy_v3.controllers;
 import nl.novi.loahy_v3.dtos.UserDto;
 import nl.novi.loahy_v3.dtos.UserPasswordOnlyDto;
 import nl.novi.loahy_v3.services.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -33,6 +35,14 @@ public class UserController {
 
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> partialUpdateUserPassword(@PathVariable("id") String email,
+                                                       @RequestBody @Valid UserPasswordOnlyDto dto) {
+
+        userService.updatePassword(email, dto);
+        return ResponseEntity.ok("password updated");
+    }
+
 
     @PostMapping
     public ResponseEntity<UserDto> createUser(@RequestBody @Valid UserDto dto) {
@@ -53,13 +63,5 @@ public class UserController {
     public ResponseEntity<Object> deleteUser(@PathVariable("id") String email) {
         userService.deleteUser(email);
         return ResponseEntity.noContent().build();
-    }
-
-    @PatchMapping("/{id}")
-    public ResponseEntity<?> partialUpdateUserPassword(@PathVariable("id") String email,
-                                                       @RequestBody @Valid UserPasswordOnlyDto dto) {
-
-        userService.updatePassword(email, dto);
-        return ResponseEntity.ok("password updated");
     }
 }

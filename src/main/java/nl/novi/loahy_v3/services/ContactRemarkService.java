@@ -1,16 +1,19 @@
 package nl.novi.loahy_v3.services;
 
 import nl.novi.loahy_v3.dtos.ContactRemarkDto;
+import nl.novi.loahy_v3.dtos.UserDto;
 import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
 import nl.novi.loahy_v3.models.Address;
 import nl.novi.loahy_v3.models.ContactRemark;
 import nl.novi.loahy_v3.repositories.AddressRepository;
 import nl.novi.loahy_v3.repositories.ContactRemarkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static nl.novi.loahy_v3.dtos.ContactRemarkDto.fromContact;
 
@@ -34,10 +37,16 @@ public class ContactRemarkService {
         return collection;
     }
 
-//    public ContactRemarkDto getContactRemarkByEmail(String contactEmail) {
-//
-//    }
-
+    public ContactRemarkDto getContactRemarkByEmail(String contactEmail) {
+        ContactRemarkDto dto = new ContactRemarkDto();
+        Optional<ContactRemark> remark = contactRemarkRepository.findById(contactEmail);
+        if (remark.isPresent()) {
+            dto = fromContact(remark.get());
+        } else {
+            throw new RecordNotFoundException(contactEmail);
+        }
+        return dto;
+    }
 
     public String createRemark(ContactRemarkDto contactRemarkDto) {
         var contact = new ContactRemark();

@@ -17,9 +17,6 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)
-    private boolean enabled = true;
-
     @Column(nullable = false,
             unique = true)
     private String password;
@@ -93,9 +90,6 @@ public class User {
         this.wishlist = wishlist;
     }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
 
     public void setApikey(String apikey) {
         this.apikey = apikey;

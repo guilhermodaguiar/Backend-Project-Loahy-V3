@@ -34,7 +34,7 @@ public class WishlistControllerTest {
 
         when(wishlistService.getWishlistById(1)).thenReturn(wishlist);
 
-        Wishlist result = wishlistController.findWishlistById(1);
+        Wishlist result = wishlistController.findWishlistById(1).getBody();
 
         assertNotNull(result);
         assertEquals(1, result.getWishlistId());

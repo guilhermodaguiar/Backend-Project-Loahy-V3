@@ -31,8 +31,6 @@ public class UserDto {
     @NotBlank(message = "firstname must not be blank")
     public String firstName;
 
-    public Boolean enabled;
-
     @NotBlank(message = "lastname must not be blank")
     public String lastName;
 
@@ -95,9 +93,6 @@ public class UserDto {
         this.wishlist = wishlist;
     }
 
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
 
     public void setApikey(String apikey) {
         this.apikey = apikey;
