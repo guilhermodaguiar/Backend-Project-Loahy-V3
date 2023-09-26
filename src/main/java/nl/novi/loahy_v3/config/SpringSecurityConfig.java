@@ -20,7 +20,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
-
     private final CustomUserDetailsService customUserDetailsService;
 
     private final JwtRequestFilter jwtRequestFilter;
@@ -58,18 +57,16 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/users").permitAll()
                 .antMatchers(HttpMethod.GET,"/users/admin@test.nl").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "users/{id}").hasRole("USER")
-                .antMatchers(HttpMethod.GET, "/users/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PATCH, "/users/**").hasAnyRole("USER","ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
 
                 .antMatchers(HttpMethod.POST, "/contact-remarks").permitAll()
-                .antMatchers(HttpMethod.GET, "/contact-remarks").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/contact-remarks/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/contact-remarks/**").hasRole("ADMIN")
 
-                .antMatchers(HttpMethod.GET, "images/download/{id}").hasRole("ADMIN")
-                .antMatchers(HttpMethod.POST, "images/upload").hasRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "images/delete").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "images/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "images/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "images/**").hasRole("ADMIN")
 
                 .antMatchers(HttpMethod.GET, "/products").permitAll()
                 .antMatchers(HttpMethod.GET, "/products/{id}").permitAll()
@@ -90,9 +87,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/address/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/address/post").hasRole("USER")
 
-
-                .antMatchers(HttpMethod.POST, "/products/image-upload").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/products/image-delete").hasRole("ADMIN")
 
                 .antMatchers("/authenticated").authenticated()
                 .antMatchers("/authenticate").permitAll()

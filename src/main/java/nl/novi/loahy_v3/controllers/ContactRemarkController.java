@@ -39,10 +39,8 @@ public class ContactRemarkController {
     @PostMapping
     public ResponseEntity<ContactRemarkDto> createRemark(@RequestBody @Valid ContactRemarkDto contactRemarkDto) {
         final String createdContact = contactRemarkService.createRemark(contactRemarkDto);
-
         final URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{contactName}")
                 .buildAndExpand(createdContact).toUri();
-
         return ResponseEntity.created(location).build();
     }
 
@@ -52,5 +50,4 @@ public class ContactRemarkController {
         contactRemarkService.deleteContact(contactEmail);
         return ResponseEntity.noContent().build();
     }
-
 }

@@ -22,12 +22,7 @@ import static nl.novi.loahy_v3.dtos.OrderDto.fromOrder;
 @Service
 @CrossOrigin
 public class OrderService {
-
-
-    @Autowired
     private final OrderRepository orderRepository;
-
-    @Autowired
     private final UserRepository userRepository;
 
     @Autowired
@@ -60,9 +55,9 @@ public class OrderService {
 
         order.setProductList(orderInputDto.getProductList());
         order.setComment(orderInputDto.getComment());
-        order.setOrderDate(LocalDate.parse(orderInputDto.getOrderDate()));
+        order.setOrderDate(orderInputDto.getOrderDate());
         order.setAddressId(orderInputDto.getAddressId());
-        order.setEmail(String.valueOf(userRepository.getReferenceById(orderInputDto.getEmail())));
+        order.setEmail(userRepository.getReferenceById(orderInputDto.getEmail()));
 
         return orderRepository.save(order);
     }

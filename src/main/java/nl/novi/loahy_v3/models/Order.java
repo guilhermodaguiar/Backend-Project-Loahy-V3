@@ -2,6 +2,7 @@ package nl.novi.loahy_v3.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Getter
+@Setter
 @Entity
 @Table(name = "orders")
 public class Order {
@@ -36,7 +38,7 @@ public class Order {
     @Column
     public Long addressId;
     @Column
-    public LocalDate orderDate;
+    public String orderDate;
 
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.PERSIST)
@@ -54,21 +56,15 @@ public class Order {
         this.comment = comment;
     }
 
-    public void setOrderDate(LocalDate orderDate) {
-        this.orderDate = orderDate;
-    }
-
     public void setAddressId(Long addressId) {
         this.addressId = addressId;
     }
 
+    public void setOrderDate(String orderDate) {
+        this.orderDate = orderDate;
+    }
+
     public void setEmail(User email) {
         this.email = email;
-    }
-
-    public void setEmail() {
-    }
-
-    public void setEmail(String email) {
     }
 }

@@ -36,21 +36,17 @@ public class ProductController {
     public ResponseEntity<List<ProductDto>> getAllProducts() {
         var dtos = new ArrayList<ProductDto>();
         List<Product> productList;
-
         var products = productService.getAllProducts();
         for (Product product : products) {
             dtos.add(ProductDto.transferToDto(product));
         }
-
         return ResponseEntity.ok().body(dtos);
     }
 
     @GetMapping(value = "/{id}")
     @Transactional
     public ResponseEntity<ProductDto> getProductById(@PathVariable("id") Integer productId) {
-
         var product = productService.getProduct(productId);
-
         return ResponseEntity.ok().body(ProductDto.transferToDto(product));
     }
 
@@ -58,7 +54,6 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<ProductDto> createProduct(@RequestBody @Valid ProductDto dto) {
         var product = productService.createProduct(dto.toProduct());
-
         return ResponseEntity.created(null).body(ProductDto.transferToDto(product));
     }
 
@@ -67,15 +62,12 @@ public class ProductController {
     public ResponseEntity<ProductInputDto> updateProduct(@PathVariable("id") Integer productId,
                                     @RequestBody @Valid ProductInputDto dto) {
         productService.updateProduct(productId, dto);
-
         return ResponseEntity.ok().body(dto);
     }
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Object> deleteProduct(@PathVariable("id") Integer productId) {
-
         productService.deleteProduct(productId);
-
         return ResponseEntity.noContent().build();
     }
 
@@ -83,9 +75,7 @@ public class ProductController {
     @PostMapping(value = "/{id}/image")
     public void assignImageToProduct(@PathVariable("id") Integer productId,
                                      @Valid @RequestBody MultipartFile file) {
-
         FileUploadResponse productImage = imageController.singleFileUpload(file);
-
         productService.assignImageToProduct(productImage.getFileName(), productId);
     }
 }

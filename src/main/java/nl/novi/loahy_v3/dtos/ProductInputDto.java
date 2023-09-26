@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 public class ProductInputDto {
+
     public Integer productId;
 
     @NotBlank(message = "product name must not be blank")

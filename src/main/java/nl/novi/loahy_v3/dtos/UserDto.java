@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Getter;
+import lombok.Setter;
 import nl.novi.loahy_v3.models.Address;
 import nl.novi.loahy_v3.models.Authority;
 import nl.novi.loahy_v3.models.User;
@@ -16,6 +17,7 @@ import java.util.Set;
 
 
 @Getter
+@Setter
 public class UserDto {
 
     @NotBlank(message = "email must not be blank")
@@ -59,43 +61,6 @@ public class UserDto {
         userDto.wishlist = (user.getWishlist());
 
         return userDto;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    public void setAuthorities(Set<Authority> authorities) {
-        this.authorities = authorities;
-    }
-
-    public void setUserEmail(String email) {
-        this.email = email;
-    }
-
-    public void setWishlist(Wishlist wishlist) {
-        this.wishlist = wishlist;
-    }
-
-
-    public void setApikey(String apikey) {
-        this.apikey = apikey;
     }
 
     @JsonIgnore

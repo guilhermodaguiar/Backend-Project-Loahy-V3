@@ -1,13 +1,16 @@
 package nl.novi.loahy_v3.dtos;
 
 import lombok.Getter;
+import lombok.Setter;
 import nl.novi.loahy_v3.models.Order;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Getter
+@Setter
 public class OrderDto {
+
     private Long orderId;
 
     @NotNull
@@ -18,7 +21,6 @@ public class OrderDto {
     private String orderDate;
 
     private UserDto email;
-
     @NotNull
     private Long addressId;
 
@@ -35,30 +37,5 @@ public class OrderDto {
         dto.setAddressId(order.getAddressId());
 
         return dto;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public void setOrderDate(String orderDate) {
-        this.orderDate = orderDate;
-    }
-
-    public void setEmail(UserDto email) {
-        this.email = email;
-    }
-
-    public void setProductList(List<Object> productList) {
-        this.productList = productList;
-    }
-
-    public void setAddressId(Long addressId) {
-        this.addressId = addressId;
     }
 }

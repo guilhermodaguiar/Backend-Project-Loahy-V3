@@ -3,6 +3,7 @@ package nl.novi.loahy_v3.dtos;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -11,6 +12,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Getter
+@Setter
 @Data
 public class OrderInputDto implements Serializable {
 
@@ -27,22 +29,4 @@ public class OrderInputDto implements Serializable {
 
     @NotNull(message = "address must not be null")
     private Long addressId;
-
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public void setOrderDate(String orderDate) {
-        this.orderDate = orderDate;
-    }
-
-    public void setUserEmail(String email) {
-        this.email = email;
-    }
-
-    public void setProductList(List<Object> productList) {
-        this.productList = productList;
-    }
-
 }
