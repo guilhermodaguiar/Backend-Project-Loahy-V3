@@ -1,10 +1,8 @@
 package nl.novi.loahy_v3.services;
 
-import nl.novi.loahy_v3.dtos.AddressDto;
 import nl.novi.loahy_v3.dtos.OrderDto;
 import nl.novi.loahy_v3.dtos.OrderInputDto;
 import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
-import nl.novi.loahy_v3.models.Address;
 import nl.novi.loahy_v3.models.Order;
 import nl.novi.loahy_v3.repositories.OrderRepository;
 import nl.novi.loahy_v3.repositories.UserRepository;
@@ -12,11 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import static nl.novi.loahy_v3.dtos.AddressDto.transferToAddressDto;
 import static nl.novi.loahy_v3.dtos.OrderDto.fromOrder;
 
 @Service
