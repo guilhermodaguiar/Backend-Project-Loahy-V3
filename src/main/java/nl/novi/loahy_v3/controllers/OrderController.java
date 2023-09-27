@@ -37,7 +37,7 @@ public class OrderController {
         return ResponseEntity.ok().body(dtos);
     }
 
-    //Moet nog testen
+
     @GetMapping(value = "/{id}")
     public ResponseEntity<OrderDto> getOrder(@PathVariable("id") Long orderId){
         OrderDto optionalOrder = orderService.getOrder(orderId);

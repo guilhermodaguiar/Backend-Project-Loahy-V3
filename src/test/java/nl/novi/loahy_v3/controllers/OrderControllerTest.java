@@ -48,7 +48,7 @@ class OrderControllerTest {
         orderInputDto.setProductList(new ArrayList<>());
         orderInputDto.setComment("");
         orderInputDto.setOrderDate("");
-        orderInputDto.setUserEmail("");
+        orderInputDto.setEmail("");
 
         assertThrows(
                 NullPointerException.class,

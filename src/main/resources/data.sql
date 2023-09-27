@@ -44,5 +44,9 @@ INSERT INTO authorities (email, authority) VALUES ('jenfromlomok@test.nl', 'ROLE
 INSERT INTO authorities (email, authority) VALUES ('admin@test.nl', 'ROLE_ADMIN');
 INSERT INTO authorities (email, authority) VALUES ('guilfromlombok@test.nl', 'ROLE_USER');
 
--- INSERT INTO orders () VALUES ()
+INSERT INTO orders (order_id, product_list, comment, address_id, order_date, email_email) VALUES (50, '["id: 1000","Brikkon - Stad","€ 64.9","qty: 1"]', 'this is an order test', 5001,  'dinsdag 26-09-2023 22:53:56', 'user@test.nl' );
+INSERT INTO orders (order_id, product_list, comment, address_id, order_date, email_email) VALUES (51, '[["id: 1000","Brikkon - Stad","€ 64.95","qty: 3"],["id: 1002","Frame me up - Vintage","€ 15.95","qty: 4"],["id: 1003","Brikkon - Huis","€ 24.95","qty: 2"]]', 'this is an order test', 5003,  'woensdag 27-09-2023 21:53:56', 'jenfromlomok@test.nl' );
+INSERT INTO orders (order_id, product_list, comment, address_id, order_date, email_email) VALUES (52, '[["id: 1000","Brikkon - Stad","€ 64.9","qty: 1"], ["id: 1001","Frame me up - Tokyo Lights","€ 15.95","qty: 2"]]', 'this is an order test', 5001,  'donderdag 28-09-2023 19:53:56', 'user@test.nl' );
+INSERT INTO orders (order_id, product_list, comment, address_id, order_date, email_email) VALUES (53, '[["id: 1001","Frame me up - Tokyo Lights","€ 15.95","qty: 5"],["id: 1002","Frame me up - Vintage","€ 15.95","qty: 1"]]', 'this is an order test', 5001,  'vrijdag 29-09-2023 14:56:56', 'user@test.nl' );
+
 
