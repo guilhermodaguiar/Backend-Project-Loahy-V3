@@ -70,7 +70,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers(HttpMethod.GET, "/products").permitAll()
                 .antMatchers(HttpMethod.GET, "/products/{id}").permitAll()
-                .antMatchers(HttpMethod.POST, "/products").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/products/").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PUT, "/products/{id}").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/products/{id}").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/products/{id}/image").hasRole("ADMIN")
@@ -79,12 +79,16 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.DELETE, "/orders/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/orders").hasRole("ADMIN")
 
-
-                .antMatchers(HttpMethod.POST, "/address").hasRole("USER")
+                .antMatchers(HttpMethod.POST, "/address/").hasRole("USER")
                 .antMatchers(HttpMethod.PUT, "/address/{id}").hasRole("USER")
                 .antMatchers(HttpMethod.GET, "/address/{id}").hasRole("USER")
                 .antMatchers(HttpMethod.GET, "/address/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/address/post").hasRole("USER")
+
+                .antMatchers(HttpMethod.GET, "/wishlists/").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/wishlists/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers(HttpMethod.PUT, "/{wishlistId}/{productId}").hasRole("USER")
+                .antMatchers(HttpMethod.DELETE, "/{wishlistId}/{productId}").hasRole("USER")
 
 
                 .antMatchers("/authenticated").authenticated()

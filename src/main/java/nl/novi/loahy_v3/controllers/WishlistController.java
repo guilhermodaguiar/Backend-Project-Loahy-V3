@@ -21,13 +21,13 @@ public class WishlistController {
     }
 
 
-    @GetMapping(value = "/products")
+    @GetMapping()
     public ResponseEntity<List<Wishlist>> findALlWishlists() {
         return ResponseEntity.ok().body(wishlistService.getAllWishlists());
     }
 
 
-    @GetMapping(value = "/products/{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<Wishlist> findWishlistById(@PathVariable("id") Integer wishlistId) {
         return ResponseEntity.ok().body(wishlistService.getWishlistById(wishlistId));
     }
