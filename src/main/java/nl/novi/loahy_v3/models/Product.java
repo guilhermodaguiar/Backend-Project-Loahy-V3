@@ -79,9 +79,5 @@ public class Product {
     public void setImage(FileUploadResponse image) {
         this.image = image;
     }
-
-    public void setImage() {
-    }
-
 }
 

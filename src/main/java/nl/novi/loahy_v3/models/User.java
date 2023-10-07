@@ -1,7 +1,6 @@
 package nl.novi.loahy_v3.models;
 
 import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -68,10 +67,6 @@ public class User {
         this.lastName = lastName;
     }
 
-
-    public void setAuthorities(Set<Authority> authorities) {
-        this.authorities = authorities;
-    }
 
     public void setOrder(List<Order> order) {
         this.order = order;

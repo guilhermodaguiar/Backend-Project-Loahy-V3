@@ -31,20 +31,4 @@ public class FileUploadResponse {
 
     public FileUploadResponse() {
     }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
-    public void setContentType(String contentType) {
-        this.contentType = contentType;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-
-    public void remove(FileUploadResponse image) {
-    }
 }

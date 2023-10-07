@@ -2,7 +2,6 @@ package nl.novi.loahy_v3.controllers;
 
 import nl.novi.loahy_v3.dtos.AddressDto;
 import nl.novi.loahy_v3.dtos.AddressInputDto;
-import nl.novi.loahy_v3.models.Address;
 import nl.novi.loahy_v3.services.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
