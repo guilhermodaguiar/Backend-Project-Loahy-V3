@@ -38,13 +38,6 @@ public class AddressController {
     }
 
 
-    @PostMapping
-    public ResponseEntity<AddressDto> saveAddress(@RequestBody Address dto) {
-        var address = addressService.saveAddress(dto);
-        return ResponseEntity.created(null).body(AddressDto.transferToAddressDto(address));
-    }
-
-
     @PutMapping(value = "/{id}")
     public ResponseEntity<Object> updateAddress(@PathVariable("id") Long id,
                                     @Valid @RequestBody AddressInputDto addressDto) {

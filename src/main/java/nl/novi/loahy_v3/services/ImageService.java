@@ -1,9 +1,7 @@
 package nl.novi.loahy_v3.services;
 
-import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
 import nl.novi.loahy_v3.models.FileUploadResponse;
 import nl.novi.loahy_v3.repositories.FileUploadRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -76,12 +74,12 @@ public class ImageService {
         }
     }
 
-    public void deleteImage(String fileName) {
-        if (!fileUploadRepository.existsById(fileName)) {
-            throw new RecordNotFoundException("Image met naam " + fileName + " bestaat niet");
-        }
-        fileUploadRepository.deleteById(fileName);
-    }
+//    public void deleteImage(String fileName) {
+//        if (!fileUploadRepository.existsById(fileName)) {
+//            throw new RecordNotFoundException("Image met naam bestaat niet" );
+//        }
+//        fileUploadRepository.deleteById(fileName);
+//    }
 }
 
 

@@ -1,6 +1,5 @@
 package nl.novi.loahy_v3.services;
 
-import nl.novi.loahy_v3.dtos.ProductDto;
 import nl.novi.loahy_v3.dtos.ProductInputDto;
 import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
 import nl.novi.loahy_v3.models.FileUploadResponse;

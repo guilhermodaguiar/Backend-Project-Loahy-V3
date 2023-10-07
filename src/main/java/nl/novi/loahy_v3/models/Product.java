@@ -42,18 +42,15 @@ public class Product {
 
     public Integer productId;
 
-    @Getter
     public String productName;
-    @Getter
+
     @Column(columnDefinition = "TEXT")
     @Size(max = 200)
     public String productDescription;
 
-    @Getter
     public Double productPrice;
 
-    @Getter
-    @OneToOne
+    @OneToOne()
     FileUploadResponse image;
 
     @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
@@ -85,5 +82,6 @@ public class Product {
 
     public void setImage() {
     }
+
 }
 

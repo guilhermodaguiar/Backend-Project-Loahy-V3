@@ -60,7 +60,7 @@ public class ProductController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<ProductInputDto> updateProduct(@PathVariable("id") Integer productId,
-                                    @RequestBody @Valid ProductInputDto dto) {
+                                                         @RequestBody @Valid ProductInputDto dto) {
         productService.updateProduct(productId, dto);
         return ResponseEntity.ok().body(dto);
     }
@@ -70,7 +70,6 @@ public class ProductController {
         productService.deleteProduct(productId);
         return ResponseEntity.noContent().build();
     }
-
 
     @PostMapping(value = "/{id}/image")
     public void assignImageToProduct(@PathVariable("id") Integer productId,

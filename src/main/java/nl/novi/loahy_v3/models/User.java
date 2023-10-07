@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -38,6 +39,9 @@ public class User {
     @OneToOne
     Wishlist wishlist;
 
+    @OneToMany(mappedBy = "email")
+    private List<Order> order;
+
 
     @OneToMany(
             targetEntity = Authority.class,
@@ -69,6 +73,9 @@ public class User {
         this.authorities = authorities;
     }
 
+    public void setOrder(List<Order> order) {
+        this.order = order;
+    }
 
     public void addAuthority(Authority authority) {
         this.authorities.add(authority);
@@ -89,7 +96,6 @@ public class User {
     public void setWishlist(Wishlist wishlist) {
         this.wishlist = wishlist;
     }
-
 
     public void setApikey(String apikey) {
         this.apikey = apikey;
