@@ -1,8 +1,6 @@
 package nl.novi.loahy_v3.services;
 
 import nl.novi.loahy_v3.dtos.UserDto;
-import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
-import nl.novi.loahy_v3.exceptions.UserEmailNotFoundException;
 import nl.novi.loahy_v3.models.User;
 import nl.novi.loahy_v3.repositories.UserRepository;
 import org.junit.jupiter.api.DisplayName;
