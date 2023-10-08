@@ -1,5 +1,6 @@
-package nl.novi.loahy_v3.controllers;
+package nl.novi.loahy_v3.controllers.itegrationTests;
 
+import nl.novi.loahy_v3.controllers.WishlistController;
 import nl.novi.loahy_v3.services.WishlistService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

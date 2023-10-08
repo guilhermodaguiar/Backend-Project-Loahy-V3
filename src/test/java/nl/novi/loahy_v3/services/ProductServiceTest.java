@@ -13,9 +13,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -74,7 +71,6 @@ class ProductServiceTest {
     }
 
 
-
     @Test
     @DisplayName("Should delete the product when the product exists")
     void deleteProductWhenProductExists() {
@@ -90,42 +86,16 @@ class ProductServiceTest {
 
     }
 
-//    @Test
-//    @DisplayName("Should update the product when the product exists")
-//    void updateProductWhenProductExists() {
-//        Product product1 = new Product();
-//        product1.setProductId(1);
-//        product1.setProductName("test");
-//        product1.setProductDescription("test");
-//        product1.setProductPrice(20.00);
-//        when(productRepository.findById(200)).thenReturn(Optional.of(product1));
-//
-//        product1.setProductName("Best Product");
-//        productService.updateProduct(product1);
-//
-//        verify(productRepository).save(product1);
-//
-//        assertThat(product1.getProductId()).isEqualTo(200);
-//        assertThat(product1.getProductName()).isEqualTo("Best Product");
-//    }
-//
-//    @Test
-//    @DisplayName("Should throw an exception when the product does not exist")
-//    void updateProductWhenProductDoesNotExistThenThrowException() {
-//        Product product = new Product();
-//        product.setProductId(200);
-//        product.setProductName("test");
-//        product.setProductDescription("test");
-//        product.setProductPrice(1.00);
-//
-//        when(productRepository.findById(200)).thenReturn(null);
-//
-//        assertThrows(
-//                NullPointerException.class,
-//                () -> {
-//                    productService.updateProduct(product);
-//                });
-//    }
+    @Test
+    @DisplayName("Should throw an exception when the product does not exist")
+    void updateProductWhenProductDoesNotExistThenThrowException() {
+
+        when(productRepository.findById(100)).thenReturn(Optional.empty());
+
+        assertThrows(RecordNotFoundException.class, () -> productService.getProduct(100));
+
+        verify(productRepository, times(1)).findById(100);
+    }
 
     @Test
     @DisplayName("Should create a product when the product is valid")

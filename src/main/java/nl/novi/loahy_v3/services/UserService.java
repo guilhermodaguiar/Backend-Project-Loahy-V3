@@ -1,6 +1,5 @@
 package nl.novi.loahy_v3.services;
 
-import nl.novi.loahy_v3.dtos.AddressInputDto;
 import nl.novi.loahy_v3.dtos.UserDto;
 import nl.novi.loahy_v3.dtos.UserPasswordOnlyDto;
 import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
@@ -13,16 +12,9 @@ import nl.novi.loahy_v3.models.Wishlist;
 import nl.novi.loahy_v3.repositories.UserRepository;
 import nl.novi.loahy_v3.utils.RandomStringGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PostAuthorize;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,7 +81,6 @@ public class UserService {
         if (userExist(dto.getEmail())) {
             throw new UserEmailAlreadyExistException("Email is al in gebruik!");
         }
-
         String randomString = RandomStringGenerator.generateAlphaNumeric(20);
         dto.setApikey(randomString);
         User newUser = userRepository.save(toUser(dto));

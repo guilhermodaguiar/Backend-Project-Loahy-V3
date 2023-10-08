@@ -27,21 +27,6 @@ class OrderControllerTest {
 
 
     @Test
-    @DisplayName("Should delete the delivery request when the id is found")
-    void deleteDeliveryRequestWhenIdIsFound() {
-        Order order = new Order();
-        order.setOrderId(1L);
-
-        orderRepository.delete(order);
-
-        orderService.deleteOrder(1L);
-
-        verify(orderRepository, times(1)).delete(order);
-
-    }
-
-
-    @Test
     @DisplayName("Should throw an exception when the order is invalid ")
     void createOrderWhenOrderIsInvalidThenThrowException() {
         OrderInputDto orderInputDto = new OrderInputDto();

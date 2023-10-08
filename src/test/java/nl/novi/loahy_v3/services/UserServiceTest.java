@@ -1,6 +1,8 @@
 package nl.novi.loahy_v3.services;
 
 import nl.novi.loahy_v3.dtos.UserDto;
+import nl.novi.loahy_v3.exceptions.RecordNotFoundException;
+import nl.novi.loahy_v3.exceptions.UserEmailNotFoundException;
 import nl.novi.loahy_v3.models.User;
 import nl.novi.loahy_v3.repositories.UserRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -9,6 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
@@ -64,6 +67,16 @@ public class UserServiceTest {
         assertEquals(1, users.size());
 
         verify(userRepository, times(1)).findAll();
+    }
+
+    @Test
+    @DisplayName("Should throw an exception when the user does not exist")
+    void getUserWhenUserDoesNotExistThenThrowException() {
+        when(userRepository.findById("100")).thenReturn(Optional.empty());
+
+        assertThrows(UsernameNotFoundException.class, () -> userService.getUser("100"));
+
+        verify(userRepository, times(1)).findById("100");
     }
 }
 

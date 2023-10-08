@@ -48,6 +48,7 @@ public class UserDto {
     @JsonDeserialize
     public Set<Authority> authorities;
 
+
     public static UserDto fromUser(User user) {
 
         var userDto = new UserDto();

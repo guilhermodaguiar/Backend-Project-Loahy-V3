@@ -45,29 +45,7 @@ public class AddressServiceTest {
         assertEquals(address, savedAddress);
     }
 
-//    @Test
-//    @DisplayName("Should update the address when the address exists")
-//    void updateAddressWhenAddressExists() {
-//        Address address1 = new Address();
-//        address1.setAddressId(1L);
-//        address1.setStreetName("test");
-//        address1.setHouseNumber("test");
-//        address1.setHouseNumberAddition("test");
-//        address1.setZipcode("test");
-//        address1.setCity("test");
-//        address1.setPhoneNumber(1L);
-//
-//        when(addressRepository.findById(1L)).thenReturn(Optional.of(address1));
-//
-//        address1.setCity("Amsterdam");
-//        addressService.updateAddress(1L, address1);
-//
-//        verify(addressRepository).save(address1);
-//
-//        assertThat(address1.getAddressId()).isEqualTo(1);
-//        assertThat(address1.getCity()).isEqualTo("Amsterdam");
-//    }
-//
+
 //    @Test
 //    @DisplayName("Should throw an exception when the address does not exist")
 //    void updateAddressWhenAddressDoesNotExistThenThrowException() {
