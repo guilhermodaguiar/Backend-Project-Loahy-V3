@@ -1,28 +1,28 @@
-INSERT INTO image (file_name, content_type, url) VALUES ('Brikkon_stad.jpg', 'image/jpg', 'http://localhost:8080/images/download/Brikkon_stad.jpg');
-INSERT INTO image (file_name, content_type, url) VALUES ('Clementoni_Frame_Me_Up_Tokyo.jpg', 'image/jpeg', 'http://localhost:8080/images/download/Clementoni_Frame_Me_Up_Tokyo.jpg');
-INSERT INTO image (file_name, content_type, url) VALUES ('Clementoni_Vintage.jpg', 'image/jpg', 'http://localhost:8080/images/download/Clementoni_Vintage.jpg');
-INSERT INTO image (file_name, content_type, url) VALUES ('Brikkon_huis.jpg', 'image/jpg', 'http://localhost:8080/images/download/Brikkon_huis.jpg');
-INSERT INTO image (file_name, content_type, url) VALUES ('superpetit_castle.jpeg', 'image/jpeg', 'http://localhost:8080/images/download/superpetit_castle.jpeg');
-INSERT INTO image (file_name, content_type, url) VALUES ('clementoni_Frame_Me_Up_Foosball.jpg', 'image/jpg', 'http://localhost:8080/images/download/clementoni_Frame_Me_Up_Foosball.jpg');
+INSERT INTO image (id, file_name, content_type, url) VALUES (20, 'Brikkon_stad.jpg', 'image/jpg', 'http://localhost:8080/images/download/Brikkon_stad.jpg');
+INSERT INTO image (id, file_name, content_type, url) VALUES (21, 'Clementoni_Frame_Me_Up_Tokyo.jpg', 'image/jpeg', 'http://localhost:8080/images/download/Clementoni_Frame_Me_Up_Tokyo.jpg');
+INSERT INTO image (id, file_name, content_type, url) VALUES (22, 'Clementoni_Vintage.jpg', 'image/jpg', 'http://localhost:8080/images/download/Clementoni_Vintage.jpg');
+INSERT INTO image (id, file_name, content_type, url) VALUES (23, 'Brikkon_huis.jpg', 'image/jpg', 'http://localhost:8080/images/download/Brikkon_huis.jpg');
+INSERT INTO image (id, file_name, content_type, url) VALUES (24, 'superpetit_castle.jpeg', 'image/jpeg', 'http://localhost:8080/images/download/superpetit_castle.jpeg');
+INSERT INTO image (id, file_name, content_type, url) VALUES (25, 'clementoni_Frame_Me_Up_Foosball.jpg', 'image/jpg', 'http://localhost:8080/images/download/clementoni_Frame_Me_Up_Foosball.jpg');
 
 
-INSERT INTO address (address_id, street_name, house_number, house_number_addition, city, zipcode, phone_number) VALUES (5001,'Userstraat', '45', 'bis', 'Amsterdam', '1234AB', 0644355490);
-INSERT INTO address (address_id, street_name, house_number, house_number_addition, city, zipcode, phone_number) VALUES (5002, 'Userstraat', '54', 'A', 'Amsterdam', '2222AZ', 0644355490);
-INSERT INTO address (address_id, street_name, house_number, house_number_addition, city, zipcode, phone_number) VALUES (5003, 'Lombokstraat', '400', 'bis', 'Utrecht', '1453PX', 0644355490);
-INSERT INTO address (address_id, street_name, house_number, house_number_addition, city, zipcode, phone_number) VALUES (5004, 'Balitraat', '200', 'bis', 'Utrecht', '1244DD', 0644355490);
+INSERT INTO address (id, street_name, house_number, house_number_addition, city, zipcode, phone_number) VALUES (5001,'Userstraat', '45', 'bis', 'Amsterdam', '1234AB', 0644355490);
+INSERT INTO address (id, street_name, house_number, house_number_addition, city, zipcode, phone_number) VALUES (5002, 'Userstraat', '54', 'A', 'Amsterdam', '2222AZ', 0644355490);
+INSERT INTO address (id, street_name, house_number, house_number_addition, city, zipcode, phone_number) VALUES (5003, 'Lombokstraat', '400', 'bis', 'Utrecht', '1453PX', 0644355490);
+INSERT INTO address (id, street_name, house_number, house_number_addition, city, zipcode, phone_number) VALUES (5004, 'Balitraat', '200', 'bis', 'Utrecht', '1244DD', 0644355490);
 
 
-INSERT INTO products (product_id, product_name, product_description, product_price, image_file_name) VALUES (1000, 'Brikkon - Stad', 'Met de Brikkon World stad bouw je een prachtige stad van hout.', 64.95, 'Brikkon_stad.jpg');
-INSERT INTO products (product_id, product_name, product_description, product_price, image_file_name) VALUES (1001, 'Frame me up - Tokyo Lights', 'Puzzel de stad Tokyo en frame het op', 15.95, 'Clementoni_Frame_Me_Up_Tokyo.jpg');
-INSERT INTO products (product_id, product_name, product_description, product_price, image_file_name) VALUES (1002, 'Frame me up - Vintage', 'Puzzel een vintage kamer en frame het op', 15.95, 'Clementoni_Vintage.jpg');
-INSERT INTO products (product_id, product_name, product_description, product_price, image_file_name) VALUES (1003, 'Brikkon - Huis', 'Met Brikkon Huis heb je een toffe huis voor de kleintjes', 24.95, 'Brikkon_huis.jpg');
-INSERT INTO products (product_id, product_name, product_description, product_price, image_file_name) VALUES (1004, 'Superpetit Artiste Placemat Kasteel', 'Een placemat voor de creatieve painter thuis', 24.95, 'superpetit_castle.jpeg');
-INSERT INTO products (product_id, product_name, product_description, product_price, image_file_name) VALUES (1005, 'Frame me up - Foosball','Puzzel een foosball tafel voor de foosball liefhebber', 15.95, 'clementoni_Frame_Me_Up_Foosball.jpg');
+INSERT INTO products (id, product_name, product_description, product_price, image_file_name) VALUES (1000, 'Brikkon - Stad', 'Met de Brikkon World stad bouw je een prachtige stad van hout.', 64.95, 'Brikkon_stad.jpg');
+INSERT INTO products (id, product_name, product_description, product_price, image_file_name) VALUES (1001, 'Frame me up - Tokyo Lights', 'Puzzel de stad Tokyo en frame het op', 15.95, 'Clementoni_Frame_Me_Up_Tokyo.jpg');
+INSERT INTO products (id, product_name, product_description, product_price, image_file_name) VALUES (1002, 'Frame me up - Vintage', 'Puzzel een vintage kamer en frame het op', 15.95, 'Clementoni_Vintage.jpg');
+INSERT INTO products (id, product_name, product_description, product_price, image_file_name) VALUES (1003, 'Brikkon - Huis', 'Met Brikkon Huis heb je een toffe huis voor de kleintjes', 24.95, 'Brikkon_huis.jpg');
+INSERT INTO products (id, product_name, product_description, product_price, image_file_name) VALUES (1004, 'Superpetit Artiste Placemat Kasteel', 'Een placemat voor de creatieve painter thuis', 24.95, 'superpetit_castle.jpeg');
+INSERT INTO products (id, product_name, product_description, product_price, image_file_name) VALUES (1005, 'Frame me up - Foosball','Puzzel een foosball tafel voor de foosball liefhebber', 15.95, 'clementoni_Frame_Me_Up_Foosball.jpg');
 
-INSERT INTO wishlists(wishlist_id) VALUES (200);
-INSERT INTO wishlists(wishlist_id) VALUES (201);
-INSERT INTO wishlists(wishlist_id) VALUES (202);
-INSERT INTO wishlists(wishlist_id) VALUES (203);
+INSERT INTO wishlists(id) VALUES (200);
+INSERT INTO wishlists(id) VALUES (201);
+INSERT INTO wishlists(id) VALUES (202);
+INSERT INTO wishlists(id) VALUES (203);
 
 INSERT INTO wishlist_product_table(wishlist_id, product_id) VALUES (200, 1001);
 INSERT INTO wishlist_product_table(wishlist_id, product_id) VALUES (200, 1002);
