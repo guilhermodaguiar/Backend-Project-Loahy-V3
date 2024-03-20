@@ -1,5 +1,6 @@
 package nl.novi.loahy_v3.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 
 import javax.persistence.*;
