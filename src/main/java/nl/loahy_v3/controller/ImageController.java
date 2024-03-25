@@ -18,7 +18,7 @@ import java.util.Objects;
 @RestController
 @CrossOrigin
 @AllArgsConstructor
-@RequestMapping(value = "images")
+@RequestMapping(value = "image")
 public class ImageController {
 
     private final ImageService imageService;

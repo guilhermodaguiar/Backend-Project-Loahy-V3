@@ -17,9 +17,9 @@ import javax.persistence.*;
 public class Address {
 
     @Id
-    @GeneratedValue(generator = "sequence-generator")
+    @GeneratedValue(generator = "sequence_generator")
     @GenericGenerator(
-            name = "sequence-generator",
+            name = "sequence_generator1",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
                     @org.hibernate.annotations.Parameter(name = "sequence_name", value = "address_sequence"),
@@ -27,7 +27,7 @@ public class Address {
                     @org.hibernate.annotations.Parameter(name = "increment_size", value = "1")
             }
     )
-    private Long id;
+    private Long addressId;
     private String streetName;
     private String houseNumber;
     private String houseNumberAddition;

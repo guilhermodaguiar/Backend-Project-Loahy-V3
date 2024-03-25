@@ -1,12 +1,9 @@
 package nl.loahy_v3.model;
 
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
+import javax.persistence.*;
 
 @Setter
 @Getter
@@ -18,7 +15,17 @@ import javax.persistence.Table;
 public class ContactRemark {
 
     @Id
-    private Long id;
+    @GeneratedValue(generator = "sequence_generator")
+    @GenericGenerator(
+            name = "sequence_generator2",
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "remark_sequence"),
+                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "45"),
+                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "1")
+            }
+    )
+    private Long contactId;
     private String contactEmail;
     private String contactName;
     private Long contactPhone;

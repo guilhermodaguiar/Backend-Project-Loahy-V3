@@ -30,9 +30,15 @@ public class AddressController {
         return ResponseEntity.ok().body(optionalAddress);
     }
 
+    @GetMapping(value = "/zipcode")
+    public ResponseEntity<List<AddressDto>> getAddressByZipcode(@RequestParam String zipcode) {
+        List<AddressDto> dto = addressService.getAddressByZipcode(zipcode);
+        return ResponseEntity.ok().body(dto);
+    }
+
     @PutMapping(value = "/{id}")
     public ResponseEntity<Object> updateAddress(@PathVariable("id") Long id,
-                                    @Valid @RequestBody AddressInputDto addressDto) {
+                                                @Valid @RequestBody AddressInputDto addressDto) {
         addressService.updateAddress(id, addressDto);
         return ResponseEntity.ok().body(addressDto);
     }

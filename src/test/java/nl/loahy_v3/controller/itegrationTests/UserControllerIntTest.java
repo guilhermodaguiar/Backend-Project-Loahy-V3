@@ -36,7 +36,7 @@ public class UserControllerIntTest {
     @Test
     void shouldRetrieveCorrectUser() throws Exception {
         this.mvc
-                .perform(MockMvcRequestBuilders.get("/users/{id}", "mvc@test.nl")
+                .perform(MockMvcRequestBuilders.get("/user/{id}", "mvc@test.nl")
                         .content("{\"email\":\"email@email.com\",\"password\":\"Dit44goed!\",\"userId\":10,\"firstName\":1,\"lastName\":2}")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -47,7 +47,7 @@ public class UserControllerIntTest {
     @Test
     void shouldUpdateCorrectUsersPassword() throws Exception {
         this.mvc
-                .perform(MockMvcRequestBuilders.patch("/users/200")
+                .perform(MockMvcRequestBuilders.patch("/user/200")
                         .content("{\"email\":1,\"password\":\"Dit44goed!\"}")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -60,7 +60,7 @@ public class UserControllerIntTest {
     @Test
     void shouldCreateCorrectUser() throws Exception {
         this.mvc
-                .perform(MockMvcRequestBuilders.post("/users")
+                .perform(MockMvcRequestBuilders.post("/user")
                         .content("{\"email\":\"email@email.com\",\"password\":\"Dit44goed!\",\"userId\":10,\"firstName\":1,\"lastName\":2}")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -73,7 +73,7 @@ public class UserControllerIntTest {
     void shouldDeleteUser() throws Exception {
 
         this.mvc
-                .perform(MockMvcRequestBuilders.delete("/users/{id}", "test@test.nl"))
+                .perform(MockMvcRequestBuilders.delete("/user/{id}", "test@test.nl"))
                 .andDo((MockMvcResultHandlers.print()))
                 .andExpect(MockMvcResultMatchers.status().isNoContent());
     }

@@ -4,7 +4,7 @@ import lombok.Builder;
 
 @Builder
 public record ContactRemarkRequest(
-        Long id,
+        Long contactId,
         String contactName,
         String contactEmail,
         Long contactPhone,

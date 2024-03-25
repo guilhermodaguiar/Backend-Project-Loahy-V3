@@ -1,10 +1,10 @@
 package nl.loahy_v3.service;
 
-import lombok.AllArgsConstructor;
-import nl.loahy_v3.repository.UserRepository;
 import nl.loahy_v3.dto.UserDto;
 import nl.loahy_v3.model.Authority;
 import nl.loahy_v3.model.User;
+import nl.loahy_v3.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,12 +17,12 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
-@AllArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 
+    @Autowired
     private UserService userService;
+    @Autowired
     private UserRepository userRepository;
-
 
     @Override
     public UserDetails loadUserByUsername(String email) {

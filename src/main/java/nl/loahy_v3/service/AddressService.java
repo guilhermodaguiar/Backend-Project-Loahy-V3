@@ -3,6 +3,7 @@ package nl.loahy_v3.service;
 import lombok.AllArgsConstructor;
 import nl.loahy_v3.dto.AddressDto;
 import nl.loahy_v3.dto.AddressInputDto;
+import nl.loahy_v3.exceptions.NoEntityIdFoundException;
 import nl.loahy_v3.exceptions.RecordNotFoundException;
 import nl.loahy_v3.mapper.AddressMapper;
 import nl.loahy_v3.model.Address;
@@ -35,7 +36,7 @@ public class AddressService {
         if (address.isPresent()) {
             return fromAddress(address.get());
         } else {
-            throw new RecordNotFoundException("Address bestaat niet..");
+            throw new NoEntityIdFoundException("Address bestaat niet..");
         }
     }
 
@@ -45,29 +46,33 @@ public class AddressService {
 
 
     public void updateAddress(Long id, AddressInputDto addressDto) {
-
         if (!addressRepository.existsById(id)) {
-            throw new RecordNotFoundException("Address bestaat niet..");
+            throw new NoEntityIdFoundException("Address bestaat niet..");
         } else {
-
             Address address = addressRepository.findById(id).get();
-
             address.setStreetName(addressDto.getStreetName());
             address.setHouseNumber(addressDto.getHouseNumber());
             address.setHouseNumberAddition(addressDto.getHouseNumberAddition());
             address.setZipcode(addressDto.getZipcode());
             address.setCity(addressDto.getCity());
             address.setPhoneNumber(addressDto.getPhoneNumber());
-
             addressRepository.save(address);
         }
     }
 
     public void deleteAddress(@RequestBody Long id) {
         if (!addressRepository.existsById(id)) {
-            throw new RecordNotFoundException("Address bestaat niet..");
+            throw new NoEntityIdFoundException("Address bestaat niet..");
         }
         addressRepository.deleteById(id);
+    }
+
+    public List<AddressDto> getAddressByZipcode(String zipcode) {
+        return addressRepository.findAll()
+                .stream()
+                .filter(address -> address.getZipcode().equals(zipcode))
+                .map(AddressMapper::fromAddress)
+                .toList();
     }
 }
 

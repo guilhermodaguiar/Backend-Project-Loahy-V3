@@ -11,7 +11,7 @@ public class ProductTest {
     @DisplayName("Should set the product id")
     void setProductId() {
         Product product = new Product();
-        product.setProductId(100);
+        product.setProductId(100L);
         assertEquals(100, product.getProductId());
     }
 
@@ -90,7 +90,7 @@ public class ProductTest {
     @DisplayName("Should return the id of the product")
     void getIdShouldReturnTheIdOfTheProduct() {
         Product product = new Product();
-        product.setProductId(100);
+        product.setProductId(100L);
         assertEquals(100, product.getProductId());
     }
 

@@ -31,7 +31,7 @@ public class ContactRemarkControllerIntTest {
     void shouldRetrieveCorrectContactRemark() throws Exception {
 
         this.mvc
-                .perform(MockMvcRequestBuilders.get("/contact-remarks/mvc@test.nl")
+                .perform(MockMvcRequestBuilders.get("/remark/mvc@test.nl")
                         .content("{\"remarkId\":1,\"streetName\":\"Test\",\"houseNumber\":42,\"houseNumberAddition\":\"B\",\"city\":\"Almere\",\"zipcode\":\"3431PD\",\"phoneNumber\":\"0764537\"}")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -43,7 +43,7 @@ public class ContactRemarkControllerIntTest {
     void shouldCreateContactRemark() throws Exception {
 
         this.mvc
-                .perform(MockMvcRequestBuilders.post("/contact-remarks")
+                .perform(MockMvcRequestBuilders.post("/remark")
                         .content("{\"contactName\":\"name\",\"contactEmail\":\"email@email.com\",\"contactPhone\":42,\"=contactOrganisation\":\"B\",\"contactRemark\":\"Almere\"}")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -55,7 +55,7 @@ public class ContactRemarkControllerIntTest {
     void shouldDeleteUser() throws Exception {
 
         this.mvc
-                .perform(MockMvcRequestBuilders.delete("/contact-remarks/{id}", "test@test.nl"))
+                .perform(MockMvcRequestBuilders.delete("/remark/{id}", "test@test.nl"))
                 .andDo((MockMvcResultHandlers.print()))
                 .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
     }

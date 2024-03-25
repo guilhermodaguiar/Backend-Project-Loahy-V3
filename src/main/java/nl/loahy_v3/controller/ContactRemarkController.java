@@ -24,9 +24,9 @@ public class ContactRemarkController {
         return ResponseEntity.ok().body(contactRemarkDtos);
     }
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<ContactRemarkDto> getRemarkFromContact(@PathVariable("id") String contactEmail) {
-        ContactRemarkDto dto = contactRemarkService.getContactRemarkByEmail(contactEmail);
+    @GetMapping(value = "/{email}")
+    public ResponseEntity<List<ContactRemarkDto>> getRemarkFromContact(@PathVariable("email") String contactEmail) {
+        List<ContactRemarkDto> dto = contactRemarkService.getContactRemarkByEmail(contactEmail);
         return ResponseEntity.ok().body(dto);
     }
 
@@ -40,7 +40,7 @@ public class ContactRemarkController {
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<ContactRemarkDto> deleteContact(@PathVariable("id") Long id) {
-        contactRemarkService.deleteContact(id);
+        contactRemarkService.deleteContactRemark(id);
         return ResponseEntity.noContent().build();
     }
 }

@@ -11,7 +11,7 @@ public class WishlistTest {
     @DisplayName("should set the wishlist id")
     void setWishlistId() {
         Wishlist wishlist = new Wishlist();
-        wishlist.setWishlistId(100);
+        wishlist.setWishlistId(100L);
         assertEquals(100, wishlist.getWishlistId());
     }
 }

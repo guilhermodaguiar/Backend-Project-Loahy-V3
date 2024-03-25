@@ -3,13 +3,14 @@ package nl.loahy_v3.controller;
 import nl.loahy_v3.exceptions.BadRequestException;
 import nl.loahy_v3.exceptions.RecordNotFoundException;
 import nl.loahy_v3.exceptions.UserEmailNotFoundException;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @CrossOrigin

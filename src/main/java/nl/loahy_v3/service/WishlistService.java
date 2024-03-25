@@ -22,7 +22,7 @@ public class WishlistService {
         return wishlistRepository.findAll();
     }
 
-    public Wishlist getWishlistById(Integer wishlistId) {
+    public Wishlist getWishlistById(Long wishlistId) {
         Optional<Wishlist> wishlistOptional = wishlistRepository.findById(wishlistId);
         if (wishlistOptional.isPresent()) {
             return wishlistOptional.get();
@@ -36,7 +36,7 @@ public class WishlistService {
     }
 
 
-    public Wishlist assignProductToWishlist(Integer wishlistId, Integer productId) {
+    public Wishlist assignProductToWishlist(Long wishlistId, Long productId) {
         Set<Product> productSet;
         if (!wishlistRepository.existsById(wishlistId)) {
             throw new RecordNotFoundException("wishlist met id " + wishlistId+ " bestaat niet");
@@ -52,7 +52,7 @@ public class WishlistService {
         return wishlistRepository.save(wishlist);
     }
 
-    public void removeProductFromWishlist(Integer wishlistId, Integer productId) {
+    public void removeProductFromWishlist(Long wishlistId, Long productId) {
         if (!wishlistRepository.existsById(wishlistId)) {
             throw new RecordNotFoundException("Wishlist met id " + wishlistId+" bestaat niet");
         }

@@ -1,6 +1,7 @@
 package nl.loahy_v3.model;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;

@@ -1,4 +1,12 @@
 package nl.loahy_v3.record;
 
-public record ImageRequest() {
+import lombok.Builder;
+
+@Builder
+public record ImageRequest(
+        Long id,
+        String fileName,
+        String contentType,
+        String url
+) {
 }

@@ -1,8 +1,6 @@
 package nl.loahy_v3.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -13,21 +11,28 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 @Table(name = "users")
 public class User {
 
+    @Setter
     @Id
     @Column(nullable = false, unique = true)
     private String email;
+
+    @Setter
     @Column(nullable = false,
             unique = true)
     private String password;
+
     public String apikey;
+
     @Column(nullable = false)
     private Long userId;
+
+    @Column
     private String firstName;
+
+    @Column
     private String lastName;
 
     @OneToOne
@@ -38,6 +43,7 @@ public class User {
 
     @OneToMany(mappedBy = "email")
     private List<Order> order;
+
 
     @OneToMany(
             targetEntity = Authority.class,
@@ -50,5 +56,8 @@ public class User {
     public void addAuthority(Authority authority) {
         this.authorities.add(authority);
     }
-}
 
+    public void removeAuthority(Authority authority) {
+        this.authorities.remove(authority);
+    }
+}

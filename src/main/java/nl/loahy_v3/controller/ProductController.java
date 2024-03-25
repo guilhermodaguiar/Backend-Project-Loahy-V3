@@ -20,7 +20,7 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @AllArgsConstructor
-@RequestMapping(value = "/products")
+@RequestMapping(value = "/product")
 public class ProductController {
 
     private final ProductService productService;

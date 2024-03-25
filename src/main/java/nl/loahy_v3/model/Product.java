@@ -30,9 +30,9 @@ public class Product {
     @Setter
     @Getter
     @Id
-    @GeneratedValue(generator = "sequence-generator")
+    @GeneratedValue(generator = "sequence_generator")
     @GenericGenerator(
-            name = "sequence-generator",
+            name = "sequence_generator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
                     @org.hibernate.annotations.Parameter(name = "sequence_name", value = "product_sequence"),
@@ -40,16 +40,16 @@ public class Product {
                     @org.hibernate.annotations.Parameter(name = "increment_size", value = "1")
             }
     )
-
-    public Long productId;
-    public String productName;
+    private Long productId;
+    private String productName;
     @Column(columnDefinition = "TEXT")
     @Size(max = 200)
-    public String productDescription;
-    public Double productPrice;
+    private String productDescription;
+    private Double productPrice;
 
     @OneToOne()
     FileUploadResponse image;
+
     @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonBackReference

@@ -30,7 +30,7 @@ public class ProductControllerIntTest {
     @Test
     void shouldRetrieveAllProducts() throws Exception {
         this.mvc
-                .perform(MockMvcRequestBuilders.get("/products"))
+                .perform(MockMvcRequestBuilders.get("/product"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
@@ -38,7 +38,7 @@ public class ProductControllerIntTest {
     @Test
     void shouldRetrieveCorrectProduct() throws Exception {
         this.mvc
-                .perform(MockMvcRequestBuilders.get("/products/200"))
+                .perform(MockMvcRequestBuilders.get("/product/200"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
@@ -46,7 +46,7 @@ public class ProductControllerIntTest {
     @Test
     void shouldCreateProduct() throws Exception {
         this.mvc
-                .perform(MockMvcRequestBuilders.post("/products")
+                .perform(MockMvcRequestBuilders.post("/product")
                         .content("{\"productId\":1,\"productName\":\"Dit\",\"productDescription\":\"Dit is " +
                                 "een heel mooi product\",\"productPrice\":1}")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -58,7 +58,7 @@ public class ProductControllerIntTest {
     @Test
     void shouldUpdateProduct() throws Exception {
         this.mvc
-                .perform(MockMvcRequestBuilders.put("/products/200")
+                .perform(MockMvcRequestBuilders.put("/product/200")
                         .content("{\"productId\":1,\"productName\":\"Dit\",\"productDescription\":\"Dit is " +
                                 "een heel mooi product\",\"productPrice\":1}")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -70,7 +70,7 @@ public class ProductControllerIntTest {
     @Test
     void shouldDeleteCorrectProduct() throws Exception {
         this.mvc
-                .perform(MockMvcRequestBuilders.delete("/products/{id}", 200))
+                .perform(MockMvcRequestBuilders.delete("/product/{id}", 200))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
     }

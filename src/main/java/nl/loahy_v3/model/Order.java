@@ -9,16 +9,15 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.util.List;
 
-
 @Getter
 @Setter
 @Entity
 @Table(name = "orders")
 public class Order {
     @Id
-    @GeneratedValue(generator = "sequence-generator")
+    @GeneratedValue(generator = "sequence_generator")
     @GenericGenerator(
-            name = "sequence-generator",
+            name = "sequence_generator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
                     @org.hibernate.annotations.Parameter(name = "sequence_name", value = "order_sequence"),
@@ -36,5 +35,4 @@ public class Order {
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.PERSIST)
     private User email;
-
 }

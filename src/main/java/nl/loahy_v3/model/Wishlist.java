@@ -25,9 +25,9 @@ import java.util.Set;
 public class Wishlist {
 
     @Id
-    @GeneratedValue(generator = "sequence-generator")
+    @GeneratedValue(generator = "sequence_generator")
     @GenericGenerator(
-            name = "sequence-generator",
+            name = "sequence_generator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
                     @org.hibernate.annotations.Parameter(name = "sequence_name", value = "wishlist_sequence"),
@@ -36,7 +36,7 @@ public class Wishlist {
             }
     )
     @Column(unique = true)
-    private Integer wishlistId;
+    private Long wishlistId;
 
 
    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})

@@ -30,7 +30,7 @@ WishlistControllerIntTest {
     @Test
     void shouldRetrieveAllWishlists() throws Exception {
         this.mvc
-                .perform(MockMvcRequestBuilders.get("/wishlists"))
+                .perform(MockMvcRequestBuilders.get("/wishlist"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
@@ -38,7 +38,7 @@ WishlistControllerIntTest {
     @Test
     void shouldRetrieveCorrectWishlist() throws Exception {
         this.mvc
-                .perform(MockMvcRequestBuilders.get("/wishlists/1001"))
+                .perform(MockMvcRequestBuilders.get("/wishlist/1001"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
@@ -47,7 +47,7 @@ WishlistControllerIntTest {
     @Test
     void shouldAssignProductToWishlist() throws Exception {
         this.mvc
-                .perform(MockMvcRequestBuilders.put("/wishlists/1000/200"))
+                .perform(MockMvcRequestBuilders.put("/wishlist/1000/200"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
@@ -55,7 +55,7 @@ WishlistControllerIntTest {
     @Test
     void shouldDeleteProductFromWishlist() throws Exception {
         this.mvc
-                .perform(MockMvcRequestBuilders.delete("/wishlists/1001/200/"))
+                .perform(MockMvcRequestBuilders.delete("/wishlist/1001/200/"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
     }

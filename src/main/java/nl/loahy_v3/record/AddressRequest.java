@@ -4,7 +4,7 @@ import lombok.Builder;
 
 @Builder
 public record AddressRequest(
-        Long id,
+        Long addressId,
         String streetName,
         String houseNumber,
         String houseNumberAddition,

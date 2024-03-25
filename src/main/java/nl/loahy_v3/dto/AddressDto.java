@@ -11,7 +11,7 @@ import nl.loahy_v3.model.Address;
 @NoArgsConstructor
 public class AddressDto {
 
-    public Long id;
+    public Long addressId;
     public String streetName;
     public String houseNumber;
     public String houseNumberAddition;
@@ -25,7 +25,7 @@ public class AddressDto {
 
         var dto = new AddressDto();
 
-        dto.id = address.getId();
+        dto.addressId = address.getAddressId();
         dto.streetName = address.getStreetName();
         dto.houseNumber = address.getHouseNumber();
         dto.houseNumberAddition = address.getHouseNumberAddition();
@@ -37,7 +37,7 @@ public class AddressDto {
     }
 
     public AddressDto (Address address) {
-        this.id = address.getId();
+        this.addressId = address.getAddressId();
         this.streetName = address.getStreetName();
         this.houseNumber = address.getHouseNumber();
         this.houseNumberAddition = address.getHouseNumberAddition();

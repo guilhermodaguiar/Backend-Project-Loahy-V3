@@ -1,10 +1,12 @@
 package nl.loahy_v3.payload;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
+@Setter
 @Getter
 public class AuthenticationRequest {
 
@@ -21,14 +23,5 @@ public class AuthenticationRequest {
     public AuthenticationRequest(String email, String password) {
         this.email = email;
         this.password = password;
-    }
-
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 }

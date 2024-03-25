@@ -16,16 +16,16 @@ import javax.persistence.*;
 public class FileUploadResponse {
 
     @Id
-    @GeneratedValue(generator = "sequence-generator")
+    @GeneratedValue(generator = "sequence_generator")
     @GenericGenerator(
-            name = "sequence-generator",
+            name = "sequence_generator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
                     @org.hibernate.annotations.Parameter(name = "sequence_name", value = "image_sequence"),
                     @org.hibernate.annotations.Parameter(name = "initial_value", value = "26"),
                     @org.hibernate.annotations.Parameter(name = "increment_size", value = "1")
             })
-    Long id;
+    Long imageId;
     String fileName;
     String contentType;
     String url;

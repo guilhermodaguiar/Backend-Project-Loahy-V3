@@ -108,15 +108,15 @@ public class AddressTest {
     @DisplayName("Should set the address id")
     void setIdShouldSetTheAddressId() {
         Address address = new Address();
-        address.setId(1L);
-        assertEquals(1L, address.getId());
+        address.setAddressId(1L);
+        assertEquals(1L, address.getAddressId());
     }
 
     @Test
     @DisplayName("Should return the address id")
     void getAddressIdShouldReturnTheIdOfTheAddress() {
         Address address = new Address();
-        address.setId(1L);
-        assertEquals(1L, address.getId());
+        address.setAddressId(1L);
+        assertEquals(1L, address.getAddressId());
     }
 }

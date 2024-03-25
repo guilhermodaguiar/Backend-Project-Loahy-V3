@@ -8,6 +8,4 @@ import java.util.Optional;
 
 @Repository
 public interface ContactRemarkRepository extends JpaRepository<ContactRemark, Long> {
-
-    Optional<ContactRemark> findAllByEmail(String contactEmail);
 }

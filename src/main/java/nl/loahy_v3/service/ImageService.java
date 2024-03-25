@@ -35,7 +35,6 @@ public class ImageService {
         } catch (IOException e) {
             throw new RuntimeException("Issue in creating file directory");
         }
-
     }
 
     public String storeFile(MultipartFile file, String url) {
@@ -43,8 +42,8 @@ public class ImageService {
         Path filePath = Paths.get(fileStoragePath + "/" + fileName);
         try {
             Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException e) {
-            throw new RuntimeException("Issue in storing the file", e);
+        } catch (IOException exception) {
+            throw new RuntimeException("Issue in storing the file", exception);
         }
         fileUploadRepository.save(new FileUploadResponse(fileName, file.getContentType(), url));
         return fileName;
@@ -55,10 +54,9 @@ public class ImageService {
         Resource resource;
         try {
             resource = new UrlResource(path.toUri());
-        } catch (MalformedURLException e) {
-            throw new RuntimeException("Issue in reading the file", e);
+        } catch (MalformedURLException exception) {
+            throw new RuntimeException("Issue in reading the file", exception);
         }
-
         if (resource.exists() && resource.isReadable()) {
             return resource;
         } else {

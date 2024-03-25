@@ -29,12 +29,12 @@ public class WishlistControllerTest {
     @DisplayName("Should return the wishlist when the id is valid")
     void getWishlistWhenIdIsValid() {
         Wishlist wishlist = new Wishlist();
-        wishlist.setWishlistId((1));
+        wishlist.setWishlistId((1L));
         wishlist.setProducts(new HashSet<>());
 
-        when(wishlistService.getWishlistById(1)).thenReturn(wishlist);
+        when(wishlistService.getWishlistById(1L)).thenReturn(wishlist);
 
-        Wishlist result = wishlistController.findWishlistById(1).getBody();
+        Wishlist result = wishlistController.findWishlistById(1L).getBody();
 
         assertNotNull(result);
         assertEquals(1, result.getWishlistId());

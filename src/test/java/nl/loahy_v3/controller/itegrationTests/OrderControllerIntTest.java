@@ -32,7 +32,7 @@ class OrderControllerIntTest {
     @Test
     void shouldRetrieveAllOrders() throws Exception {
         this.mvc
-                .perform(MockMvcRequestBuilders.get("/orders"))
+                .perform(MockMvcRequestBuilders.get("/order"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
@@ -40,7 +40,7 @@ class OrderControllerIntTest {
     @Test
     void shouldRetrieveCorrectOrder() throws Exception {
         this.mvc
-                .perform(MockMvcRequestBuilders.get("/orders/{id}", 123))
+                .perform(MockMvcRequestBuilders.get("/order/{id}", 123))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
@@ -49,7 +49,7 @@ class OrderControllerIntTest {
     void shouldCreateOrder() throws Exception {
 
         this.mvc
-                .perform(MockMvcRequestBuilders.post("/orders")
+                .perform(MockMvcRequestBuilders.post("/order")
                         .content("{\"orderId\":1,\"productList\":\"Test\",\"comment\":true,\"addressId\":5000,\"orderDate\":24091983}")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -61,7 +61,7 @@ class OrderControllerIntTest {
     void shouldDeleteOrder() throws Exception {
 
         this.mvc
-                .perform(MockMvcRequestBuilders.delete("/orders/{id}", 200))
+                .perform(MockMvcRequestBuilders.delete("/order/{id}", 200))
                 .andDo((MockMvcResultHandlers.print()))
                 .andExpect(MockMvcResultMatchers.status().isNoContent());
     }
